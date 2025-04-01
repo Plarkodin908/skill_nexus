@@ -8,11 +8,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import RatingButtons from '@/components/profile/RatingButtons';
 import GenderSelection from '@/components/profile/GenderSelection';
 import EnhancedNavbar from '@/components/EnhancedNavbar';
+import ProfileTheme from '@/components/profile/ProfileTheme';
 
 const Profile = () => {
   const [showSocialLinks, setShowSocialLinks] = useState(false);
   const [selectedGender, setSelectedGender] = useState('');
   const [showGenderSelection, setShowGenderSelection] = useState(false);
+  const [useNewTheme, setUseNewTheme] = useState(false);
 
   const courses = [
     {
@@ -47,19 +49,39 @@ const Profile = () => {
       <div className="container mx-auto py-20 px-4">
         <div className="flex flex-col md:flex-row gap-8">
           <div className="w-full md:w-1/3">
-            {/* Profile Card with enhanced animations */}
-            <div className="group before:hover:scale-95 before:hover:h-72 before:hover:rounded-b-2xl before:transition-all before:duration-500 before:content-[''] before:w-80 before:h-24 before:rounded-t-2xl before:bg-gradient-to-bl from-primary-purple via-secondary-purple to-tertiary-purple before:absolute before:top-0 w-80 h-72 relative bg-dark-purple flex flex-col items-center justify-center gap-2 text-center rounded-2xl overflow-hidden hover:shadow-lg hover:shadow-primary-purple/20 transition-all duration-300">
-              <div className="w-28 h-28 bg-primary-purple mt-8 rounded-full border-4 border-dark-purple z-10 group-hover:scale-150 group-hover:-translate-x-24 group-hover:-translate-y-20 transition-all duration-500 animate-float">
-                <Avatar className="w-full h-full" />
+            <Button 
+              onClick={() => setUseNewTheme(!useNewTheme)}
+              className="mb-4 bg-primary-purple hover:bg-secondary-purple transition-colors duration-300"
+            >
+              {useNewTheme ? "Use Classic Theme" : "Use New Theme"}
+            </Button>
+            
+            {useNewTheme ? (
+              <ProfileTheme 
+                name="George Johnson" 
+                role={selectedGender ? `Gender: ${selectedGender}` : 'Learning Enthusiast'}
+                customStyles={{
+                  gradientFrom: "primary-purple",
+                  gradientVia: "secondary-purple",
+                  gradientTo: "tertiary-purple",
+                  buttonColor: "primary-purple",
+                  buttonHoverColor: "secondary-purple"
+                }}
+              />
+            ) : (
+              <div className="group before:hover:scale-95 before:hover:h-72 before:hover:rounded-b-2xl before:transition-all before:duration-500 before:content-[''] before:w-80 before:h-24 before:rounded-t-2xl before:bg-gradient-to-bl from-primary-purple via-secondary-purple to-tertiary-purple before:absolute before:top-0 w-80 h-72 relative bg-dark-purple flex flex-col items-center justify-center gap-2 text-center rounded-2xl overflow-hidden hover:shadow-lg hover:shadow-primary-purple/20 transition-all duration-300">
+                <div className="w-28 h-28 bg-primary-purple mt-8 rounded-full border-4 border-dark-purple z-10 group-hover:scale-150 group-hover:-translate-x-24 group-hover:-translate-y-20 transition-all duration-500 animate-float">
+                  <Avatar className="w-full h-full" />
+                </div>
+                <div className="z-10 group-hover:-translate-y-10 transition-all duration-500">
+                  <span className="text-2xl font-semibold text-white">George Johnson</span>
+                  <p className="text-gray-300">{selectedGender ? `Gender: ${selectedGender}` : 'Learning Enthusiast'}</p>
+                </div>
+                <Button className="bg-primary-purple px-4 py-1 text-white rounded-md z-10 hover:scale-125 transition-all duration-500 hover:bg-secondary-purple animate-breathe">
+                  Follow
+                </Button>
               </div>
-              <div className="z-10 group-hover:-translate-y-10 transition-all duration-500">
-                <span className="text-2xl font-semibold">George Johnson</span>
-                <p className="text-gray-300">{selectedGender ? `Gender: ${selectedGender}` : 'Learning Enthusiast'}</p>
-              </div>
-              <Button className="bg-primary-purple px-4 py-1 text-white rounded-md z-10 hover:scale-125 transition-all duration-500 hover:bg-secondary-purple animate-breathe">
-                Follow
-              </Button>
-            </div>
+            )}
 
             {/* Gender Selection */}
             <div className="mt-6">
