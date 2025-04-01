@@ -40,3 +40,10 @@
 .read-the-docs {
   color: #888;
 }
+
+.glass-nav {
+  background: rgba(30, 10, 60, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(156, 39, 176, 0.3);
+}
