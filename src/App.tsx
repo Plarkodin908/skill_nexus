@@ -35,8 +35,10 @@ function App() {
         <Toaster />
         <SchemaMarkup 
           type="website"
-          name="Skill Swap"
-          description="Connect with other learners, share skills, and grow together" 
+          data={{
+            name: "Skill Nexus",
+            description: "Connect with other learners, share skills, and grow together"
+          }}
         />
         <Routes>
           <Route path="/" element={<Index />} />

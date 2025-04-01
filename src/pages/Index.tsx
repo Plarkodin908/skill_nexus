@@ -13,28 +13,28 @@ const Index = () => {
   return (
     <main className="min-h-screen">
       <Helmet>
-        <title>SkillSwap - Community-Driven Learning Platform</title>
+        <title>Skill Nexus - Community-Driven Learning Platform</title>
         <meta name="description" content="Share knowledge, build skills, and grow together on our community-driven learning platform. Connect with experts and learn new skills today." />
         <meta name="keywords" content="learning platform, skill sharing, online courses, education, community learning, skill development, online education, mentorship" />
-        <link rel="canonical" href="https://skillswap.example.com" />
+        <link rel="canonical" href="https://skillnexus.example.com" />
         
         {/* Additional SEO Tags */}
-        <meta name="author" content="SkillSwap Team" />
+        <meta name="author" content="Skill Nexus Team" />
         <meta name="robots" content="index, follow" />
         
         {/* Open Graph */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="SkillSwap - Learn and Share Skills" />
+        <meta property="og:title" content="Skill Nexus - Learn and Share Skills" />
         <meta property="og:description" content="Community-driven learning platform where you can share knowledge and build skills." />
-        <meta property="og:image" content="https://skillswap.example.com/og-image.svg" />
-        <meta property="og:url" content="https://skillswap.example.com" />
-        <meta property="og:site_name" content="SkillSwap" />
+        <meta property="og:image" content="https://skillnexus.example.com/og-image.svg" />
+        <meta property="og:url" content="https://skillnexus.example.com" />
+        <meta property="og:site_name" content="Skill Nexus" />
         
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="SkillSwap - Learn and Share Skills" />
+        <meta name="twitter:title" content="Skill Nexus - Learn and Share Skills" />
         <meta name="twitter:description" content="Community-driven learning platform for skill development and knowledge sharing." />
-        <meta name="twitter:image" content="https://skillswap.example.com/og-image.svg" />
+        <meta name="twitter:image" content="https://skillnexus.example.com/og-image.svg" />
         
         {/* Mobile Specifics */}
         <meta name="apple-mobile-web-app-capable" content="yes" />

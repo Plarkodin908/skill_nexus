@@ -14,23 +14,23 @@ const SchemaMarkup = ({ type, data = {} }: SchemaMarkupProps) => {
     website: {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "SkillSwap - Connect, Learn, Grow",
-      "url": "https://skillswap.example.com/",
+      "name": "Skill Nexus - Connect, Learn, Grow",
+      "url": "https://skillnexus.example.com/",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://skillswap.example.com/search?q={search_term_string}",
+        "target": "https://skillnexus.example.com/search?q={search_term_string}",
         "query-input": "required name=search_term_string"
       }
     },
     organization: {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "SkillSwap",
-      "url": "https://skillswap.example.com/",
-      "logo": "https://skillswap.example.com/logo.png",
+      "name": "Skill Nexus",
+      "url": "https://skillnexus.example.com/",
+      "logo": "https://skillnexus.example.com/logo.png",
       "sameAs": [
-        "https://twitter.com/skillswap",
-        "https://www.linkedin.com/company/skillswap"
+        "https://twitter.com/skillnexus",
+        "https://www.linkedin.com/company/skillnexus"
       ]
     },
     course: {
@@ -40,8 +40,8 @@ const SchemaMarkup = ({ type, data = {} }: SchemaMarkupProps) => {
       "description": "Learn web development from basics to advanced concepts",
       "provider": {
         "@type": "Organization",
-        "name": "SkillSwap",
-        "sameAs": "https://skillswap.example.com/"
+        "name": "Skill Nexus",
+        "sameAs": "https://skillnexus.example.com/"
       }
     },
     article: {
@@ -54,10 +54,10 @@ const SchemaMarkup = ({ type, data = {} }: SchemaMarkupProps) => {
       },
       "publisher": {
         "@type": "Organization",
-        "name": "SkillSwap",
+        "name": "Skill Nexus",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://skillswap.example.com/logo.png"
+          "url": "https://skillnexus.example.com/logo.png"
         }
       },
       "datePublished": "2023-06-12",
@@ -82,7 +82,7 @@ const SchemaMarkup = ({ type, data = {} }: SchemaMarkupProps) => {
       "datePublished": "2023-07-20",
       "author": {
         "@type": "Person",
-        "name": "SkillSwap Team"
+        "name": "Skill Nexus Team"
       }
     }
   };

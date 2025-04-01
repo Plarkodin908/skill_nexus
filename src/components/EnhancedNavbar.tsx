@@ -20,11 +20,11 @@ const EnhancedNavbar = () => {
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
           <img 
-            src="/lovable-uploads/971a0525-9509-4c96-9f90-66e481b188bc.png" 
-            alt="SKILL SWAP Logo" 
+            src="/lovable-uploads/aaa9c8ad-47c0-4ec1-b299-8b47f30da290.png" 
+            alt="SKILL NEXUS Logo" 
             className="h-10 w-auto animate-fade-in"
           />
-          <span className="text-2xl font-bold text-white">SKILL SWAP</span>
+          <span className="text-2xl font-bold text-white">SKILL NEXUS</span>
         </Link>
         
         <div className="hidden md:flex flex-col justify-center items-center relative transition-all duration-450 ease-in-out">
@@ -74,7 +74,7 @@ const EnhancedNavbar = () => {
         </div>
 
         <Link to="/marketplace">
-          <button className="bg-mint hover:bg-mint/90 text-forest font-medium hover-scale px-4 py-2 rounded-md transition-all duration-300 animate-breathe">
+          <button className="bg-primary-purple hover:bg-primary-purple/90 text-white font-medium hover-scale px-4 py-2 rounded-md transition-all duration-300 animate-breathe">
             Explore Courses
           </button>
         </Link>
