@@ -1,3 +1,4 @@
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -46,4 +47,198 @@
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(156, 39, 176, 0.3);
+}
+
+/* GitHub style navigation menu */
+.input {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  background-color: #0D1117;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.value {
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+  color: white;
+  display: flex;
+  position: relative;
+  gap: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+  align-items: center;
+  text-align: left;
+}
+
+.value:not(:active):hover,
+.value:focus {
+  background-color: #21262C;
+}
+
+.value:focus,
+.value:active {
+  background-color: #1A1F24;
+  outline: none;
+}
+
+.value::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: -10px;
+  width: 5px;
+  height: 80%;
+  background-color: #2F81F7;
+  border-radius: 5px;
+  opacity: 0;
+}
+
+.value:focus::before,
+.value:active::before {
+  opacity: 1;
+}
+
+.value svg {
+  width: 15px;
+}
+
+/* Bottom navigation bar styles */
+.button-container {
+  display: flex;
+  background-color: black;
+  width: 300px;
+  height: 70px;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 5px;
+  margin: 0 auto;
+}
+
+.button {
+  outline: 0 !important;
+  border: 0 !important;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: all ease-in-out 0.1s;
+  cursor: pointer;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+}
+
+.icon {
+  font-size: 25px;
+}
+
+/* Rain background effect */
+.container-rain {
+  position: relative;
+  width: 100%;
+  min-height: 300px;
+  --c: #09f;
+  background-color: #000;
+  background-image: radial-gradient(4px 100px at 0px 235px, var(--c), #0000),
+    radial-gradient(4px 100px at 300px 235px, var(--c), #0000),
+    radial-gradient(1.5px 1.5px at 150px 117.5px, var(--c) 100%, #0000 150%);
+  background-size:
+    300px 235px,
+    300px 235px,
+    300px 235px;
+  animation: rain-animation 150s linear infinite;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 20px 0;
+}
+
+.container-rain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image: radial-gradient(
+    circle at 50% 50%,
+    #0000 0,
+    #0000 2px,
+    hsl(0 0 4%) 2px
+  );
+  background-size: 8px 8px;
+  --f: blur(1em) brightness(6);
+  animation: hue-rotate 10s linear infinite;
+}
+
+@keyframes hue-rotate {
+  0% {
+    backdrop-filter: var(--f) hue-rotate(0deg);
+  }
+  to {
+    backdrop-filter: var(--f) hue-rotate(360deg);
+  }
+}
+
+@keyframes rain-animation {
+  0% {
+    background-position:
+      0px 220px,
+      3px 220px,
+      151.5px 337.5px;
+  }
+  to {
+    background-position:
+      0px 6800px,
+      3px 6800px,
+      151.5px 6917.5px;
+  }
+}
+
+/* Dark form style */
+.dark-form {
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+}
+
+.dark-form input,
+.dark-form select,
+.dark-form textarea {
+  background-color: #2d2d2d;
+  border: 1px solid #444;
+  color: white;
+  border-radius: 5px;
+  padding: 8px 12px;
+  margin-bottom: 10px;
+}
+
+.dark-form input:focus,
+.dark-form select:focus,
+.dark-form textarea:focus {
+  outline: none;
+  border-color: #2F81F7;
+  box-shadow: 0 0 0 2px rgba(47, 129, 247, 0.3);
+}
+
+.dark-form button {
+  background: linear-gradient(to right, #4f46e5, #2563eb);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.dark-form button:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
 }

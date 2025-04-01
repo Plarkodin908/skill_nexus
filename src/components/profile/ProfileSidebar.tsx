@@ -1,9 +1,11 @@
 
 import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import RatingButtons from '@/components/profile/RatingButtons';
-import GenderSelection from '@/components/profile/GenderSelection';
-import ProfileTheme from '@/components/profile/ProfileTheme';
+import ProfileCard from './ProfileCard';
+import GenderSelection from './GenderSelection';
+import SocialLinksBadges from './SocialLinksBadges';
+import RatingButtons from './RatingButtons';
+import ProfileTheme from './ProfileTheme';
+import { Card } from '@/components/ui/card';
 
 interface ProfileSidebarProps {
   selectedGender: string;
@@ -11,104 +13,53 @@ interface ProfileSidebarProps {
 }
 
 const ProfileSidebar = ({ selectedGender, onGenderChange }: ProfileSidebarProps) => {
-  const [showSocialLinks, setShowSocialLinks] = useState(false);
-  const [showGenderSelection, setShowGenderSelection] = useState(false);
-  const [useNewTheme, setUseNewTheme] = useState(false);
-
   return (
-    <div className="w-full md:w-1/3">
-      <Button 
-        onClick={() => setUseNewTheme(!useNewTheme)}
-        className="mb-4 bg-primary-purple hover:bg-secondary-purple transition-colors duration-300"
-      >
-        {useNewTheme ? "Use Classic Theme" : "Use New Theme"}
-      </Button>
-      
-      {useNewTheme ? (
-        <ProfileTheme 
-          name="George Johnson" 
-          role={selectedGender ? `Gender: ${selectedGender}` : 'Learning Enthusiast'}
-          customStyles={{
-            gradientFrom: "primary-purple",
-            gradientVia: "secondary-purple",
-            gradientTo: "tertiary-purple",
-            buttonColor: "primary-purple",
-            buttonHoverColor: "secondary-purple"
-          }}
-        />
-      ) : (
-        <div className="group before:hover:scale-95 before:hover:h-72 before:hover:rounded-b-2xl before:transition-all before:duration-500 before:content-[''] before:w-80 before:h-24 before:rounded-t-2xl before:bg-gradient-to-bl from-primary-purple via-secondary-purple to-tertiary-purple before:absolute before:top-0 w-80 h-72 relative bg-dark-purple flex flex-col items-center justify-center gap-2 text-center rounded-2xl overflow-hidden hover:shadow-lg hover:shadow-primary-purple/20 transition-all duration-300">
-          <div className="w-28 h-28 bg-primary-purple mt-8 rounded-full border-4 border-dark-purple z-10 group-hover:scale-150 group-hover:-translate-x-24 group-hover:-translate-y-20 transition-all duration-500 animate-float">
-            <div className="w-full h-full rounded-full bg-cover bg-center" style={{ backgroundImage: `url('/lovable-uploads/aaa9c8ad-47c0-4ec1-b299-8b47f30da290.png')` }}></div>
-          </div>
-          <div className="z-10 group-hover:-translate-y-10 transition-all duration-500">
-            <span className="text-2xl font-semibold text-white">George Johnson</span>
-            <p className="text-gray-300">{selectedGender ? `Gender: ${selectedGender}` : 'Learning Enthusiast'}</p>
-          </div>
-          <Button className="bg-primary-purple px-4 py-1 text-white rounded-md z-10 hover:scale-125 transition-all duration-500 hover:bg-secondary-purple animate-breathe">
-            Follow
-          </Button>
-        </div>
-      )}
-
-      {/* Gender Selection */}
-      <div className="mt-6">
-        {!showGenderSelection ? (
-          <Button 
-            onClick={() => setShowGenderSelection(true)} 
-            className="w-full bg-mint text-forest hover:bg-mint/90 border border-mint/30 animate-glow"
-          >
-            Set Gender Preference
-          </Button>
-        ) : (
-          <GenderSelection 
-            selectedGender={selectedGender} 
-            onChange={onGenderChange} 
+    <div className="w-full md:w-1/3 space-y-6">
+      <div className="container-rain">
+        <div className="relative z-10 p-4">
+          <ProfileCard
+            name="John Doe"
+            title="Frontend Developer"
+            location="New York, USA"
+            joinDate="Joined January 2023"
+            avatarUrl="/lovable-uploads/971a0525-9509-4c96-9f90-66e481b188bc.png"
           />
-        )}
-      </div>
-
-      {/* Social Links */}
-      {!showSocialLinks ? (
-        <Button 
-          onClick={() => setShowSocialLinks(true)}
-          className="mt-4 w-full bg-dark-purple text-primary-purple border border-primary-purple hover:bg-primary-purple/10"
-        >
-          Add Social Links
-        </Button>
-      ) : (
-        <div className="mt-4 p-4 flex items-center justify-center gap-4 bg-dark-purple border border-primary-purple/30 rounded-lg animate-slide-in">
-          <a href="#" className="socialContainer containerOne hover:animate-pulse">
-            <svg className="socialSvg" viewBox="0 0 16 16"> 
-              <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"></path>
-            </svg>
-          </a>
-          
-          <a href="#" className="socialContainer containerTwo hover:animate-pulse">
-            <svg className="socialSvg" viewBox="0 0 16 16">
-              <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"></path>
-            </svg>
-          </a>
-          
-          <a href="#" className="socialContainer containerThree hover:animate-pulse">
-            <svg className="socialSvg" viewBox="0 0 448 512">
-              <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path>
-            </svg>
-          </a>
-          
-          <a href="#" className="socialContainer containerFour hover:animate-pulse">
-            <svg className="socialSvg" viewBox="0 0 16 16">
-              <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"></path>
-            </svg>
-          </a>
         </div>
-      )}
-
-      {/* Rating Buttons */}
-      <div className="mt-6">
-        <h3 className="text-xl font-semibold mb-4">Rate this profile</h3>
-        <RatingButtons />
       </div>
+
+      <Card className="p-4 bg-dark-purple border border-primary-purple/30">
+        <div className="input w-full bg-[#0D1117] mb-4">
+          <button className="value">
+            <svg data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+              <path d="m1.5 13v1a.5.5 0 0 0 .3379.4731 18.9718 18.9718 0 0 0 6.1621 1.0269 18.9629 18.9629 0 0 0 6.1621-1.0269.5.5 0 0 0 .3379-.4731v-1a6.5083 6.5083 0 0 0 -4.461-6.1676 3.5 3.5 0 1 0 -4.078 0 6.5083 6.5083 0 0 0 -4.461 6.1676zm4-9a2.5 2.5 0 1 1 2.5 2.5 2.5026 2.5026 0 0 1 -2.5-2.5zm2.5 3.5a5.5066 5.5066 0 0 1 5.5 5.5v.6392a18.08 18.08 0 0 1 -11 0v-.6392a5.5066 5.5066 0 0 1 5.5-5.5z" fill="#7D8590"></path>
+            </svg>
+            Personal Profile
+          </button>
+          <button className="value">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="Line">
+              <path d="m17.074 30h-2.148c-1.038 0-1.914-.811-1.994-1.846l-.125-1.635c-.687-.208-1.351-.484-1.985-.824l-1.246 1.067c-.788.677-1.98.631-2.715-.104l-1.52-1.52c-.734-.734-.78-1.927-.104-2.715l1.067-1.246c-.34-.635-.616-1.299-.824-1.985l-1.634-.125c-1.035-.079-1.846-.955-1.846-1.993v-2.148c0-1.038.811-1.914 1.846-1.994l1.635-.125c.208-.687.484-1.351.824-1.985l-1.068-1.247c-.676-.788-.631-1.98.104-2.715l1.52-1.52c.734-.734 1.927-.779 2.715-.104l1.246 1.067c.635-.34 1.299-.616 1.985-.824l.125-1.634c.08-1.034.956-1.845 1.994-1.845h2.148c1.038 0 1.914.811 1.994 1.846l.125 1.635c.687.208 1.351.484 1.985.824l1.246-1.067c.787-.676 1.98-.631 2.715.104l1.52 1.52c.734.734.78 1.927.104 2.715l-1.067 1.246c.34.635.616 1.299.824 1.985l1.634.125c1.035.079 1.846.955 1.846 1.993v2.148c0 1.038-.811 1.914-1.846 1.994l-1.635.125c-.208.687-.484 1.351-.824 1.985l1.067 1.246c.677.788.631 1.98-.104 2.715l-1.52 1.52c-.734.734-1.928.78-2.715.104l-1.246-1.067c-.635.34-1.299.616-1.985.824l-.125 1.634c-.079 1.035-.955 1.846-1.993 1.846zm-5.835-6.373c.848.53 1.768.912 2.734 1.135.426.099.739.462.772.898l.18 2.341 2.149-.001.18-2.34c.033-.437.347-.8.772-.898.967-.223 1.887-.604 2.734-1.135.371-.232.849-.197 1.181.089l1.784 1.529 1.52-1.52-1.529-1.784c-.285-.332-.321-.811-.089-1.181.53-.848.912-1.768 1.135-2.734.099-.426.462-.739.898-.772l2.341-.18h-.001v-2.148l-2.34-.18c-.437-.033-.8-.347-.898-.772-.223-.967-.604-1.887-1.135-2.734-.232-.37-.196-.849.089-1.181l1.529-1.784-1.52-1.52-1.784 1.529c-.332.286-.81.321-1.181.089-.848-.53-1.768-.912-2.734-1.135-.426-.099-.739-.462-.772-.898l-.18-2.341-2.148.001-.18 2.34c-.033.437-.347.8-.772.898-.967.223-1.887.604-2.734 1.135-.37.232-.849.197-1.181-.089l-1.785-1.529-1.52 1.52 1.529 1.784c.285.332.321.811.089 1.181-.53.848-.912 1.768-1.135 2.734-.099.426-.462.739-.898.772l-2.341.18.002 2.148 2.34.18c.437.033.8.347.898.772.223.967.604 1.887 1.135 2.734.232.37.196.849-.089 1.181l-1.529 1.784 1.52 1.52 1.784-1.529c.332-.287.813-.32 1.18-.089z" id="XMLID_1646_" fill="#7D8590"></path>
+              <path d="m16 23c-3.859 0-7-3.141-7-7s3.141-7 7-7 7 3.141 7 7-3.141 7-7 7zm0-12c-2.757 0-5 2.243-5 5s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5z" fill="#7D8590" id="XMLID_1645_"></path>
+            </svg>
+            Settings
+          </button>
+          <button className="value">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+              <path d="m109.9 20.63a6.232 6.232 0 0 0 -8.588-.22l-57.463 51.843c-.012.011-.02.024-.031.035s-.023.017-.034.027l-4.721 4.722a1.749 1.749 0 0 0 0 2.475l.341.342-3.16 3.16a8 8 0 0 0 -1.424 1.967 11.382 11.382 0 0 0 -12.055 10.609c-.006.036-.011.074-.015.111a5.763 5.763 0 0 1 -4.928 5.41 1.75 1.75 0 0 0 -.844 3.14c4.844 3.619 9.4 4.915 13.338 4.915a17.14 17.14 0 0 0 11.738-4.545l.182-.167a11.354 11.354 0 0 0 3.348-8.081c0-.225-.02-.445-.032-.667a8.041 8.041 0 0 0 1.962-1.421l3.16-3.161.342.342a1.749 1.749 0 0 0 2.475 0l4.722-4.722c.011-.011.018-.025.029-.036s.023-.018.033-.029l51.844-57.46a6.236 6.236 0 0 0 -.219-8.589zm-70.1 81.311-.122.111c-.808.787-7.667 6.974-17.826 1.221a9.166 9.166 0 0 0 4.36-7.036 1.758 1.758 0 0 0 .036-.273 7.892 7.892 0 0 1 9.122-7.414c.017.005.031.014.048.019a1.717 1.717 0 0 0 .379.055 7.918 7.918 0 0 1 4 13.317zm5.239-10.131c-.093.093-.194.176-.293.26a11.459 11.459 0 0 0 -6.289-6.286c.084-.1.167-.2.261-.3l3.161-3.161 6.321 6.326zm7.214-4.057-9.479-9.479 2.247-2.247 9.479 9.479zm55.267-60.879-50.61 56.092-9.348-9.348 56.092-50.61a2.737 2.737 0 0 1 3.866 3.866z" fill="#7D8590"></path>
+            </svg>
+            Appearance
+          </button>
+        </div>
+
+        <h3 className="text-lg font-semibold text-white mb-3">Gender</h3>
+        <GenderSelection
+          selectedGender={selectedGender}
+          onGenderChange={onGenderChange}
+        />
+      </Card>
+
+      <SocialLinksBadges />
+
+      <RatingButtons />
     </div>
   );
 };
