@@ -5,9 +5,15 @@ import "./App.css";
 import "./styles/SkillExchangeTheme.css";
 import { Toaster } from "./components/ui/toaster";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { AuthProvider } from "./contexts/AuthContext";
+import MobileNavBar from "./components/MobileNavBar";
 
 // Import the Index page directly since it's the first page users see
 import Index from "./pages/Index";
+
+// Auth pages
+import SignIn from "./pages/auth/SignIn";
+import SignUp from "./pages/auth/SignUp";
 
 // Lazy load all other pages for better performance
 const Dashboard = lazy(() => import("./pages/Dashboard"));
@@ -52,34 +58,43 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
-        <div className="skill-exchange-theme">
-          <Toaster />
-          <Suspense fallback={<PageLoading />}>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/marketplace" element={<Marketplace />} />
-              <Route path="/community" element={<Community />} />
-              <Route path="/messages" element={<Messages />} />
-              <Route path="/matches" element={<Matches />} />
-              <Route path="/matches/:action" element={<MatchActionPage />} />
-              <Route path="/tutorials" element={<Tutorials />} />
-              <Route path="/pricing" element={<Pricing />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/settings" element={<Settings />} />
-              <Route path="/calendar" element={<CalendarPage />} />
-              <Route path="/achievements" element={<Achievements />} />
-              <Route path="/activity" element={<Activity />} />
-              <Route path="/company" element={<Company />} />
-              <Route path="/features" element={<Features />} />
-              <Route path="/legal" element={<Legal />} />
-              <Route path="/payment" element={<PaymentPage />} />
-              <Route path="/plan-details" element={<PlanDetails />} />
-              <Route path="/add-course" element={<AddCourse />} />
-              <Route path="/import-content" element={<ImportContent />} />
-            </Routes>
-          </Suspense>
-        </div>
+        <AuthProvider>
+          <div className="skill-exchange-theme">
+            <Toaster />
+            <Suspense fallback={<PageLoading />}>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                
+                {/* Auth routes */}
+                <Route path="/auth/sign-in" element={<SignIn />} />
+                <Route path="/auth/sign-up" element={<SignUp />} />
+                
+                {/* Main routes */}
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/marketplace" element={<Marketplace />} />
+                <Route path="/community" element={<Community />} />
+                <Route path="/messages" element={<Messages />} />
+                <Route path="/matches" element={<Matches />} />
+                <Route path="/matches/:action" element={<MatchActionPage />} />
+                <Route path="/tutorials" element={<Tutorials />} />
+                <Route path="/pricing" element={<Pricing />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="/calendar" element={<CalendarPage />} />
+                <Route path="/achievements" element={<Achievements />} />
+                <Route path="/activity" element={<Activity />} />
+                <Route path="/company" element={<Company />} />
+                <Route path="/features" element={<Features />} />
+                <Route path="/legal" element={<Legal />} />
+                <Route path="/payment" element={<PaymentPage />} />
+                <Route path="/plan-details" element={<PlanDetails />} />
+                <Route path="/add-course" element={<AddCourse />} />
+                <Route path="/import-content" element={<ImportContent />} />
+              </Routes>
+            </Suspense>
+            <MobileNavBar />
+          </div>
+        </AuthProvider>
       </Router>
     </QueryClientProvider>
   );

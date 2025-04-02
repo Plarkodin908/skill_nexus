@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
@@ -5,8 +6,11 @@ import { Star, ArrowRight } from "lucide-react";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEO/SEOHead";
 import SchemaMarkup from "@/components/SEO/SchemaMarkup";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Index = () => {
+  const { user } = useAuth();
+  
   return (
     <div className="skill-exchange-theme min-h-screen">
       <SEOHead 
@@ -49,10 +53,21 @@ const Index = () => {
               with ease using our innovative learning marketplace.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button className="primary-button flex items-center gap-2 py-6">
-                <span>Start Free</span>
-                <ArrowRight className="h-4 w-4" />
-              </Button>
+              {user ? (
+                <Link to="/dashboard">
+                  <Button className="primary-button flex items-center gap-2 py-6">
+                    <span>Dashboard</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+              ) : (
+                <Link to="/auth/sign-up">
+                  <Button className="primary-button flex items-center gap-2 py-6">
+                    <span>Start Free</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+              )}
               <Link to="/tutorials">
                 <Button variant="outline" className="outline-button py-6">
                   Learn More
