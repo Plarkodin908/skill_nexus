@@ -2,10 +2,29 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import { Star, ArrowRight } from "lucide-react";
+import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEO/SEOHead";
+import SchemaMarkup from "@/components/SEO/SchemaMarkup";
 
 const Index = () => {
   return (
     <div className="skill-exchange-theme min-h-screen">
+      <SEOHead 
+        title="Skill Nexus - Community-Driven Learning Platform" 
+        description="Exchange skills that match your coding success with ease using our innovative learning marketplace." 
+      />
+      <SchemaMarkup 
+        type="website" 
+        data={{
+          "name": "Skill Nexus",
+          "url": "https://skillnexus.example.com/",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://skillnexus.example.com/marketplace?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }}
+      />
       <Navbar />
       
       <main className="container mx-auto px-4 pt-28 pb-16">
@@ -17,6 +36,9 @@ const Index = () => {
                 src="/lovable-uploads/609db0c7-2e29-405b-ad44-bee4b401e14e.png" 
                 alt="SKILL NEXUS Logo" 
                 className="h-24 w-auto animate-pulse"
+                loading="eager"
+                width="96"
+                height="96"
               />
               <h1 className="text-4xl md:text-6xl font-bold leading-tight text-white">
                 Skill <span className="text-pink-accent">Nexus</span>
@@ -127,6 +149,8 @@ const Index = () => {
           </div>
         </section>
       </main>
+      
+      <Footer />
     </div>
   );
 };

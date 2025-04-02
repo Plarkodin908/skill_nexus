@@ -2,7 +2,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://skillswap.example.com/sitemap.xml
+Sitemap: https://skillnexus.example.com/sitemap.xml
 
 Disallow: /settings
 Disallow: /messages
