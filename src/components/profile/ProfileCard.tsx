@@ -3,11 +3,17 @@ import { Button } from "@/components/ui/button";
 
 interface ProfileCardProps {
   name: string;
-  role: string;
+  role?: string;
+  title?: string; // Added this for backward compatibility
+  location?: string;
+  joinDate?: string;
   avatarUrl: string;
 }
 
-const ProfileCard = ({ name, role, avatarUrl }: ProfileCardProps) => {
+const ProfileCard = ({ name, role, title, location, joinDate, avatarUrl }: ProfileCardProps) => {
+  // Use role prop first, fall back to title if it exists
+  const displayRole = role || title || "Learning Enthusiast";
+  
   return (
     <div className="group relative w-full h-72 overflow-hidden rounded-2xl bg-dark-purple border border-primary-purple/20">
       {/* Animated background with gradient */}
@@ -26,7 +32,9 @@ const ProfileCard = ({ name, role, avatarUrl }: ProfileCardProps) => {
       {/* User info */}
       <div className="relative z-10 text-center mt-4 transition-all duration-500 group-hover:-translate-y-10">
         <h2 className="text-2xl font-semibold text-white">{name}</h2>
-        <p className="text-white/70">{role}</p>
+        <p className="text-white/70">{displayRole}</p>
+        {location && <p className="text-white/60 text-sm">{location}</p>}
+        {joinDate && <p className="text-white/60 text-xs mt-1">{joinDate}</p>}
       </div>
       
       {/* Follow button */}

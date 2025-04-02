@@ -1,6 +1,7 @@
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+import "./styles/SkillExchangeTheme.css";
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import Marketplace from "./pages/Marketplace";
@@ -32,37 +33,39 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
-        <Toaster />
-        <SchemaMarkup 
-          type="website"
-          data={{
-            name: "Skill Nexus",
-            description: "Connect with other learners, share skills, and grow together"
-          }}
-        />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/marketplace" element={<Marketplace />} />
-          <Route path="/community" element={<Community />} />
-          <Route path="/messages" element={<Messages />} />
-          <Route path="/matches" element={<Matches />} />
-          <Route path="/matches/:action" element={<MatchActionPage />} />
-          <Route path="/tutorials" element={<Tutorials />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/calendar" element={<CalendarPage />} />
-          <Route path="/achievements" element={<Achievements />} />
-          <Route path="/activity" element={<Activity />} />
-          <Route path="/company" element={<Company />} />
-          <Route path="/features" element={<Features />} />
-          <Route path="/legal" element={<Legal />} />
-          <Route path="/payment" element={<PaymentPage />} />
-          <Route path="/plan-details" element={<PlanDetails />} />
-          <Route path="/add-course" element={<AddCourse />} />
-          <Route path="/import-content" element={<ImportContent />} />
-        </Routes>
+        <div className="skill-exchange-theme">
+          <Toaster />
+          <SchemaMarkup 
+            type="website"
+            data={{
+              name: "Skill Exchange",
+              description: "Connect with other learners, share skills, and grow together"
+            }}
+          />
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/marketplace" element={<Marketplace />} />
+            <Route path="/community" element={<Community />} />
+            <Route path="/messages" element={<Messages />} />
+            <Route path="/matches" element={<Matches />} />
+            <Route path="/matches/:action" element={<MatchActionPage />} />
+            <Route path="/tutorials" element={<Tutorials />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/calendar" element={<CalendarPage />} />
+            <Route path="/achievements" element={<Achievements />} />
+            <Route path="/activity" element={<Activity />} />
+            <Route path="/company" element={<Company />} />
+            <Route path="/features" element={<Features />} />
+            <Route path="/legal" element={<Legal />} />
+            <Route path="/payment" element={<PaymentPage />} />
+            <Route path="/plan-details" element={<PlanDetails />} />
+            <Route path="/add-course" element={<AddCourse />} />
+            <Route path="/import-content" element={<ImportContent />} />
+          </Routes>
+        </div>
       </Router>
     </QueryClientProvider>
   );
