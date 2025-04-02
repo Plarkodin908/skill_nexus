@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { GraduationCap, BookOpen, Users, MessageSquare, Mail, Phone } from "lucide-react";
 
@@ -17,9 +16,9 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <img 
-                src="/lovable-uploads/aaa9c8ad-47c0-4ec1-b299-8b47f30da290.png" 
+                src="/lovable-uploads/609db0c7-2e29-405b-ad44-bee4b401e14e.png" 
                 alt="SKILL NEXUS Logo" 
-                className="h-10 w-auto"
+                className="h-12 w-auto"
               />
               <h3 className="text-2xl font-bold">SKILL NEXUS</h3>
             </div>

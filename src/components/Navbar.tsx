@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Search, Bell, User } from "lucide-react";
@@ -9,11 +8,11 @@ const Navbar = () => {
       <div className="container mx-auto px-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <img 
-            src="/lovable-uploads/bd4766ba-c923-4c14-8b50-b9a322d2a9ca.png" 
-            alt="SKILL EXCHANGE Logo" 
-            className="h-8 w-auto"
+            src="/lovable-uploads/609db0c7-2e29-405b-ad44-bee4b401e14e.png" 
+            alt="SKILL NEXUS Logo" 
+            className="h-12 w-auto"
           />
-          <span className="skill-exchange-logo">SKILL EXCHANGE</span>
+          <span className="skill-exchange-logo">SKILL NEXUS</span>
         </div>
         
         <div className="hidden md:flex items-center space-x-4">

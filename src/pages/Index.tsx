@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
@@ -13,13 +12,19 @@ const Index = () => {
         {/* Hero Section */}
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16 animate-fade-up">
           <div className="space-y-6">
-            <h1 className="text-4xl md:text-6xl font-bold leading-tight text-white">
-              Skill Exchange <br/>
-              <span className="text-pink-accent">Printage</span> 3.0
-            </h1>
+            <div className="flex items-center gap-3 mb-6">
+              <img 
+                src="/lovable-uploads/609db0c7-2e29-405b-ad44-bee4b401e14e.png" 
+                alt="SKILL NEXUS Logo" 
+                className="h-24 w-auto animate-pulse"
+              />
+              <h1 className="text-4xl md:text-6xl font-bold leading-tight text-white">
+                Skill <span className="text-pink-accent">Nexus</span>
+              </h1>
+            </div>
             <p className="text-lg text-white/80">
               Exchange skills that match your coding success <br/>
-              with ease using Printage technology.
+              with ease using our innovative learning marketplace.
             </p>
             <div className="flex flex-wrap gap-4">
               <Button className="primary-button flex items-center gap-2 py-6">

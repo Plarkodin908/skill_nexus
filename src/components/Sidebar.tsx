@@ -66,11 +66,11 @@ const Sidebar = () => {
           <div className="flex items-center justify-center mb-8">
             <Link to="/" className="flex flex-col items-center hover:opacity-90 transition-opacity" onClick={scrollToTop}>
               <img 
-                src="/lovable-uploads/971a0525-9509-4c96-9f90-66e481b188bc.png" 
-                alt="SKILL SWAP Logo" 
-                className="h-12 w-auto hover-scale transition-transform"
+                src="/lovable-uploads/609db0c7-2e29-405b-ad44-bee4b401e14e.png" 
+                alt="SKILL NEXUS Logo" 
+                className="h-16 w-auto hover-scale transition-transform"
               />
-              <h1 className="text-lg font-bold text-mint mt-2">SKILL SWAP</h1>
+              <h1 className="text-lg font-bold text-mint mt-2">SKILL NEXUS</h1>
             </Link>
           </div>
           

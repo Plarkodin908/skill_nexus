@@ -20,9 +20,9 @@ const EnhancedNavbar = () => {
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
           <img 
-            src="/lovable-uploads/aaa9c8ad-47c0-4ec1-b299-8b47f30da290.png" 
+            src="/lovable-uploads/609db0c7-2e29-405b-ad44-bee4b401e14e.png" 
             alt="SKILL NEXUS Logo" 
-            className="h-10 w-auto animate-fade-in"
+            className="h-12 w-auto animate-fade-in"
           />
           <span className="text-2xl font-bold text-white">SKILL NEXUS</span>
         </Link>

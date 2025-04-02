@@ -40,6 +40,13 @@ const SkillSidebar = () => {
   
   return (
     <div className="skill-sidebar">
+      <div className="flex flex-col items-center pb-6 pt-4">
+        <img 
+          src="/lovable-uploads/609db0c7-2e29-405b-ad44-bee4b401e14e.png" 
+          alt="SKILL NEXUS Logo" 
+          className="h-16 w-auto mb-2"
+        />
+      </div>
       <div className="flex flex-col">
         {sidebarItems.map((item) => (
           <Link 
