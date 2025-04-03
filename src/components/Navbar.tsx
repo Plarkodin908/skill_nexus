@@ -1,11 +1,9 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Search, Bell, User, Menu, X, CheckCircle2 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import VerifiedBadge from "./profile/VerifiedBadge";
-
 const Navbar = () => {
   const {
     user,
@@ -13,7 +11,6 @@ const Navbar = () => {
   } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const isVerified = user?.verificationStatus === "verified";
-  
   return <nav className="skill-exchange-navbar fixed top-0 left-0 right-0 z-50 py-4">
       <div className="container mx-auto px-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -59,11 +56,9 @@ const Navbar = () => {
             {user ? <div className="relative group">
                 <button className="bg-primary-purple/20 p-2 rounded-full hover:bg-primary-purple/30 transition-colors relative">
                   <User className="h-5 w-5 text-white" />
-                  {isVerified && (
-                    <div className="absolute -right-1 -bottom-1 bg-forest-light rounded-full p-0.5">
+                  {isVerified && <div className="absolute -right-1 -bottom-1 bg-forest-light rounded-full p-0.5">
                       <VerifiedBadge size="sm" />
-                    </div>
-                  )}
+                    </div>}
                 </button>
                 <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-forest-light border border-mint/10 hidden group-hover:block">
                   <div className="py-1">
@@ -96,12 +91,8 @@ const Navbar = () => {
       {isMobileMenuOpen && <div className="md:hidden bg-forest-light border-t border-mint/10 mt-4 animate-fade-in">
           <div className="container mx-auto px-4 py-3">
             <div className="space-y-2">
-              <Link to="/" className="block p-2 text-white hover:bg-mint/10 rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>
-                Home
-              </Link>
-              <Link to="/marketplace" className="block p-2 text-white hover:bg-mint/10 rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>
-                Market
-              </Link>
+              
+              
               <Link to="/dashboard" className="block p-2 text-white hover:bg-mint/10 rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>
                 Dashboard
               </Link>
