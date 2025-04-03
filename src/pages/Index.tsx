@@ -62,7 +62,7 @@ const Index = () => {
               
               <div className="w-full md:w-1/2">
                 <div className="relative bg-gray-300/20 rounded-xl p-2 shadow-lg">
-                  <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d" alt="Person working on laptop during online learning session" className="rounded-xl w-full h-auto" width="600" height="400" />
+                  <img alt="Person working on laptop during online learning session" width="600" height="400" src="/lovable-uploads/e576af5d-b52d-4c11-91bc-7709d1b17f33.png" className="rounded-xl w-full h-auto object-scale-down" />
                 </div>
               </div>
             </div>
