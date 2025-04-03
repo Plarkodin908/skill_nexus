@@ -1,14 +1,19 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Search, Bell, User, Menu, X } from "lucide-react";
+import { Search, Bell, User, Menu, X, CheckCircle2 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import VerifiedBadge from "./profile/VerifiedBadge";
+
 const Navbar = () => {
   const {
     user,
     signOut
   } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const isVerified = user?.verificationStatus === "verified";
+  
   return <nav className="skill-exchange-navbar fixed top-0 left-0 right-0 z-50 py-4">
       <div className="container mx-auto px-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -52,12 +57,20 @@ const Navbar = () => {
             </div>
             
             {user ? <div className="relative group">
-                <button className="bg-primary-purple/20 p-2 rounded-full hover:bg-primary-purple/30 transition-colors">
+                <button className="bg-primary-purple/20 p-2 rounded-full hover:bg-primary-purple/30 transition-colors relative">
                   <User className="h-5 w-5 text-white" />
+                  {isVerified && (
+                    <div className="absolute -right-1 -bottom-1 bg-forest-light rounded-full p-0.5">
+                      <VerifiedBadge size="sm" />
+                    </div>
+                  )}
                 </button>
                 <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-forest-light border border-mint/10 hidden group-hover:block">
                   <div className="py-1">
-                    <p className="px-4 py-2 text-sm border-b border-mint/10 text-white">{user.name}</p>
+                    <div className="px-4 py-2 text-sm border-b border-mint/10 text-white flex items-center">
+                      <span>{user.name}</span>
+                      {isVerified && <VerifiedBadge size="sm" className="ml-1" />}
+                    </div>
                     <Link to="/profile" className="block px-4 py-2 text-sm text-white hover:bg-mint/10">Profile</Link>
                     <Link to="/settings" className="block px-4 py-2 text-sm text-white hover:bg-mint/10">Settings</Link>
                     <button className="block w-full text-left px-4 py-2 text-sm text-white hover:bg-mint/10" onClick={signOut}>
@@ -101,8 +114,9 @@ const Navbar = () => {
               
               <div className="border-t border-mint/10 pt-2 mt-2">
                 {user ? <>
-                    <div className="p-2 text-white/70 text-sm">
-                      Signed in as <span className="font-medium text-white">{user.name}</span>
+                    <div className="p-2 text-white/70 text-sm flex items-center">
+                      Signed in as <span className="font-medium text-white ml-1">{user.name}</span>
+                      {isVerified && <VerifiedBadge size="sm" className="ml-1" />}
                     </div>
                     <Link to="/profile" className="block p-2 text-white hover:bg-mint/10 rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>
                       Profile

@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import GenderSelection from "./GenderSelection";
 import SocialLinksBadges from "./SocialLinksBadges";
+import VerificationSection from "./VerificationSection";
+import { useAuth } from "@/contexts/AuthContext";
 
 export interface ProfileSidebarProps {
   selectedGender: string;
@@ -13,6 +15,7 @@ export interface ProfileSidebarProps {
 
 const ProfileSidebar = ({ selectedGender, onGenderChange, isEditing = false }: ProfileSidebarProps) => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [socialLinks, setSocialLinks] = useState({
     twitter: "",
     github: "",
@@ -54,6 +57,9 @@ const ProfileSidebar = ({ selectedGender, onGenderChange, isEditing = false }: P
           readOnly={!isEditing}
         />
       </div>
+      
+      {/* Add VerificationSection */}
+      {!isEditing && <VerificationSection />}
       
       {isEditing && (
         <Button 

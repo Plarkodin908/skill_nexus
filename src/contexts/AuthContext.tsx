@@ -6,6 +6,8 @@ import { toast } from "sonner";
 // Define user types and membership levels
 export type MembershipType = "Free" | "Pro Learner" | "Educator";
 
+export type VerificationStatus = "unverified" | "pending" | "verified";
+
 export interface User {
   id: string;
   email: string;
@@ -13,6 +15,7 @@ export interface User {
   avatar?: string;
   membership: MembershipType;
   completedProfile: boolean;
+  verificationStatus: VerificationStatus;
 }
 
 interface AuthContextType {
@@ -22,6 +25,7 @@ interface AuthContextType {
   signUp: (email: string, password: string, name: string) => Promise<void>;
   signOut: () => void;
   upgradeSubscription: (plan: MembershipType) => void;
+  submitVerification: (idImageUrl: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -34,7 +38,8 @@ const mockUsers = [
     password: 'password123',
     name: 'Demo User',
     membership: 'Free' as MembershipType,
-    completedProfile: false
+    completedProfile: false,
+    verificationStatus: 'unverified' as VerificationStatus
   }
 ];
 
@@ -70,7 +75,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         email: foundUser.email,
         name: foundUser.name,
         membership: foundUser.membership,
-        completedProfile: foundUser.completedProfile
+        completedProfile: foundUser.completedProfile,
+        verificationStatus: foundUser.verificationStatus
       };
       
       setUser(userData);
@@ -107,7 +113,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         email,
         name,
         membership: 'Free',
-        completedProfile: false
+        completedProfile: false,
+        verificationStatus: 'unverified'
       };
       
       // In a real app, we would add this user to the database
@@ -144,8 +151,43 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     toast.success(`Subscription upgraded to ${plan} successfully!`);
   };
 
+  // Submit verification function
+  const submitVerification = async (idImageUrl: string) => {
+    if (!user) return;
+    
+    try {
+      setIsLoading(true);
+      // In a real app, this would be an API call to submit the verification request
+      
+      // Update the user's verification status to pending
+      const updatedUser = { ...user, verificationStatus: 'pending' as VerificationStatus };
+      setUser(updatedUser);
+      localStorage.setItem('skillNexusUser', JSON.stringify(updatedUser));
+      
+      // Update mock user data
+      const userIndex = mockUsers.findIndex(u => u.id === user.id);
+      if (userIndex !== -1) {
+        mockUsers[userIndex].verificationStatus = 'pending';
+      }
+      
+      toast.success('Verification request submitted successfully! We will review your submission.');
+    } catch (error) {
+      toast.error('Failed to submit verification request');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, isLoading, signIn, signUp, signOut, upgradeSubscription }}>
+    <AuthContext.Provider value={{ 
+      user, 
+      isLoading, 
+      signIn, 
+      signUp, 
+      signOut, 
+      upgradeSubscription,
+      submitVerification
+    }}>
       {children}
     </AuthContext.Provider>
   );

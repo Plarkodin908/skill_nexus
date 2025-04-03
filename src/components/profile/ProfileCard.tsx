@@ -1,5 +1,7 @@
 
 import { Button } from "@/components/ui/button";
+import VerifiedBadge from "./VerifiedBadge";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface ProfileCardProps {
   name: string;
@@ -13,6 +15,8 @@ interface ProfileCardProps {
 const ProfileCard = ({ name, role, title, location, joinDate, avatarUrl }: ProfileCardProps) => {
   // Use role prop first, fall back to title if it exists
   const displayRole = role || title || "Learning Enthusiast";
+  const { user } = useAuth();
+  const isVerified = user?.verificationStatus === "verified";
   
   return (
     <div className="group relative w-full h-72 overflow-hidden rounded-2xl bg-dark-purple border border-primary-purple/20">
@@ -27,11 +31,20 @@ const ProfileCard = ({ name, role, title, location, joinDate, avatarUrl }: Profi
         className="relative z-10 w-28 h-28 mt-8 mx-auto rounded-full border-4 border-dark-purple bg-cover bg-center
         transition-all duration-500 group-hover:scale-150 group-hover:-translate-x-24 group-hover:-translate-y-20"
         style={{ backgroundImage: `url(${avatarUrl})` }}
-      ></div>
+      >
+        {isVerified && (
+          <div className="absolute -right-1 -bottom-1 bg-dark-purple rounded-full p-1">
+            <VerifiedBadge size="md" />
+          </div>
+        )}
+      </div>
       
       {/* User info */}
       <div className="relative z-10 text-center mt-4 transition-all duration-500 group-hover:-translate-y-10">
-        <h2 className="text-2xl font-semibold text-white">{name}</h2>
+        <div className="flex items-center justify-center gap-1">
+          <h2 className="text-2xl font-semibold text-white">{name}</h2>
+          {isVerified && <VerifiedBadge size="sm" className="mt-1" />}
+        </div>
         <p className="text-white/70">{displayRole}</p>
         {location && <p className="text-white/60 text-sm">{location}</p>}
         {joinDate && <p className="text-white/60 text-xs mt-1">{joinDate}</p>}

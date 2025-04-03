@@ -7,12 +7,14 @@ import ProfileTabs from '@/components/profile/ProfileTabs';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
+import VerificationModal from '@/components/profile/VerificationModal';
 
 const Profile = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [selectedGender, setSelectedGender] = useState('');
   const [isEditing, setIsEditing] = useState(!user?.completedProfile);
+  const [isVerificationModalOpen, setIsVerificationModalOpen] = useState(false);
 
   const courses = [
     {
@@ -53,6 +55,10 @@ const Profile = () => {
     }
   };
 
+  const handleVerifyAccount = () => {
+    setIsVerificationModalOpen(true);
+  };
+
   return (
     <>
       <EnhancedNavbar />
@@ -78,7 +84,7 @@ const Profile = () => {
                 </Button>
               </div>
             ) : (
-              <div className="flex justify-end mb-6">
+              <div className="flex justify-between items-center mb-6">
                 <Button 
                   variant="outline" 
                   className="border-mint/20 text-white hover:bg-mint/10"
@@ -86,12 +92,26 @@ const Profile = () => {
                 >
                   Edit Profile
                 </Button>
+                
+                {user?.verificationStatus === "unverified" && (
+                  <Button 
+                    className="bg-mint hover:bg-mint/90 text-forest"
+                    onClick={handleVerifyAccount}
+                  >
+                    Verify Account
+                  </Button>
+                )}
               </div>
             )}
             <ProfileTabs courses={courses} />
           </div>
         </div>
       </div>
+      
+      <VerificationModal 
+        isOpen={isVerificationModalOpen} 
+        onClose={() => setIsVerificationModalOpen(false)} 
+      />
     </>
   );
 };

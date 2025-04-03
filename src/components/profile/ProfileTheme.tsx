@@ -2,6 +2,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
+import VerifiedBadge from './VerifiedBadge';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface ProfileThemeProps {
   name: string;
@@ -30,6 +32,8 @@ const ProfileTheme = ({
   },
   className
 }: ProfileThemeProps) => {
+  const { user } = useAuth();
+  const isVerified = user?.verificationStatus === "verified";
   const defaultGradient = `from-${customStyles.gradientFrom} via-${customStyles.gradientVia} to-${customStyles.gradientTo}`;
   const gradientClasses = `before:bg-gradient-to-bl ${defaultGradient}`;
   
@@ -39,12 +43,22 @@ const ProfileTheme = ({
       gradientClasses,
       className
     )}>
-      <div 
-        className="w-28 h-28 mt-8 rounded-full border-4 border-dark-purple z-10 group-hover:scale-150 group-hover:-translate-x-24 group-hover:-translate-y-20 transition-all duration-500 bg-cover bg-center"
-        style={{ backgroundImage: avatarUrl ? `url(${avatarUrl})` : `url('/lovable-uploads/aaa9c8ad-47c0-4ec1-b299-8b47f30da290.png')` }}
-      ></div>
+      <div className="relative">
+        <div 
+          className="w-28 h-28 mt-8 rounded-full border-4 border-dark-purple z-10 group-hover:scale-150 group-hover:-translate-x-24 group-hover:-translate-y-20 transition-all duration-500 bg-cover bg-center"
+          style={{ backgroundImage: avatarUrl ? `url(${avatarUrl})` : `url('/lovable-uploads/aaa9c8ad-47c0-4ec1-b299-8b47f30da290.png')` }}
+        ></div>
+        {isVerified && (
+          <div className="absolute -right-1 -bottom-1 bg-dark-purple rounded-full p-1 z-20">
+            <VerifiedBadge size="md" />
+          </div>
+        )}
+      </div>
       <div className="z-10 group-hover:-translate-y-10 transition-all duration-500">
-        <span className="text-2xl font-semibold text-white">{name}</span>
+        <div className="flex items-center justify-center gap-1">
+          <span className="text-2xl font-semibold text-white">{name}</span>
+          {isVerified && <VerifiedBadge size="sm" className="mt-1" />}
+        </div>
         <p className="text-white/80">{role}</p>
       </div>
       <Link 
