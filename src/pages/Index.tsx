@@ -47,7 +47,7 @@ const Index = () => {
                       <Button className="bg-primary-purple hover:bg-primary-purple/90 text-white font-medium px-6 py-2.5 text-base">
                         Dashboard <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
-                    </Link> : <Link to="/auth/sign-up">
+                    </Link> : <Link to="/auth/sign-up" className="Begin Your Journey">
                       <Button className="bg-primary-purple hover:bg-primary-purple/90 text-white font-medium px-6 py-2.5 text-base">
                         Start Free <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
@@ -62,7 +62,7 @@ const Index = () => {
               
               <div className="w-full md:w-1/2">
                 <div className="relative bg-gray-300/20 rounded-xl p-2 shadow-lg">
-                  <img alt="Person working on laptop during online learning session" width="600" height="400" src="/lovable-uploads/e576af5d-b52d-4c11-91bc-7709d1b17f33.png" className="rounded-xl w-full h-auto object-scale-down" />
+                  
                 </div>
               </div>
             </div>
