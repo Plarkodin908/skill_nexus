@@ -1,9 +1,10 @@
 
-export type PlanType = "Free" | "Pro Learner" | "Educator";
+export type PlanType = "Free" | "Lite" | "Pro Learner" | "Educator";
 
 export type PlanFeature = {
   name: string;
   free: boolean;
+  lite: boolean;
   pro: boolean;
   educator: boolean;
   description?: string;
@@ -19,4 +20,5 @@ export type PlanDefinition = {
   cta: string;
   highlighted: boolean;
   disabled: boolean;
+  tagline?: string;
 };

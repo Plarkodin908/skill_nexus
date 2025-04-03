@@ -9,7 +9,7 @@ type FeatureComparisonProps = {
 const FeatureComparison = ({ features }: FeatureComparisonProps) => {
   return (
     <section className="py-16 px-4 bg-forest/30">
-      <div className="container mx-auto max-w-5xl">
+      <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4">Compare Plan Features</h2>
           <p className="text-white/70">
@@ -22,9 +22,10 @@ const FeatureComparison = ({ features }: FeatureComparisonProps) => {
             <thead>
               <tr>
                 <th className="text-left p-4 border-b border-mint/10">Feature</th>
-                <th className="text-center p-4 border-b border-mint/10 min-w-[120px]">Free</th>
+                <th className="text-center p-4 border-b border-mint/10 min-w-[100px]">Free</th>
+                <th className="text-center p-4 border-b border-mint/10 min-w-[100px]">Lite</th>
                 <th className="text-center p-4 border-b border-mint/10 bg-mint/5 min-w-[120px]">Pro Learner</th>
-                <th className="text-center p-4 border-b border-mint/10 min-w-[120px]">Educator</th>
+                <th className="text-center p-4 border-b border-mint/10 min-w-[100px]">Educator</th>
               </tr>
             </thead>
             <tbody>
@@ -43,6 +44,9 @@ const FeatureComparison = ({ features }: FeatureComparisonProps) => {
                   </td>
                   <td className="text-center p-4 border-b border-mint/10">
                     {feature.free ? <Check className="h-5 w-5 text-mint mx-auto" /> : <X className="h-5 w-5 text-white/40 mx-auto" />}
+                  </td>
+                  <td className="text-center p-4 border-b border-mint/10">
+                    {feature.lite ? <Check className="h-5 w-5 text-mint mx-auto" /> : <X className="h-5 w-5 text-white/40 mx-auto" />}
                   </td>
                   <td className="text-center p-4 border-b border-mint/10 bg-mint/5">
                     {feature.pro ? <Check className="h-5 w-5 text-mint mx-auto" /> : <X className="h-5 w-5 text-white/40 mx-auto" />}

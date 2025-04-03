@@ -20,54 +20,72 @@ const PlanDetails = () => {
     price: { monthly: number; annually: number };
     features: string[];
     bestFor: string;
+    tagline: string;
     color: string;
   }> = {
     free: {
       title: "Free",
-      description: "Perfect for beginners and casual learners",
+      description: "Perfect for beginners who want to explore Skill Nexus.",
       price: { monthly: 0, annually: 0 },
       features: [
-        "Access to basic courses",
-        "Community forum access",
-        "Limited messaging",
-        "Basic progress tracking",
-        "3 social links"
+        "Access to free courses created by Educators",
+        "Basic community features (forums, discussions)",
+        "Limited messaging (5 messages per day)",
+        "View public tutorials and resources",
+        "Social channels (up to 10 communities)",
+        "Basic dashboard",
+        "Skill badges"
       ],
-      bestFor: "Casual learners and beginners",
+      bestFor: "Beginners who want to explore Skill Nexus",
+      tagline: "Start learning today with access to free courses, community support, and tools to track your progress—all at no cost.",
       color: "blue"
+    },
+    lite: {
+      title: "Lite",
+      description: "Ideal for casual learners who want more flexibility without committing to a full subscription.",
+      price: { monthly: 5, annually: 55 },
+      features: [
+        "Everything in Free Plan",
+        "Unlimited messaging",
+        "Access to select premium courses",
+        "Enhanced dashboard",
+        "Ad-free experience",
+        "Unlimited social channels"
+      ],
+      bestFor: "Casual learners who want more flexibility",
+      tagline: "Get more out of Skill Nexus with unlimited messaging, access to select premium courses, and an enhanced dashboard for just $5/month.",
+      color: "cyan"
     },
     pro: {
       title: "Pro Learner",
-      description: "For dedicated learners who want to maximize skills",
-      price: { monthly: 12.99, annually: 119.99 },
+      description: "Ideal for dedicated students who want premium access and advanced tools.",
+      price: { monthly: 15, annually: 165 },
       features: [
-        "All Free features",
-        "Unlimited access to premium courses",
-        "Priority messaging",
-        "Advanced progress tracking",
-        "Certificate of completion",
-        "Ad-free experience",
-        "Unlimited social links",
-        "Early access to new features"
+        "Everything in Lite Plan",
+        "Unlimited course access",
+        "Priority Support",
+        "Advanced dashboard",
+        "Certifications",
+        "Gamification features"
       ],
-      bestFor: "Dedicated learners looking to build multiple skills",
+      bestFor: "Dedicated students looking to maximize learning",
+      tagline: "Take your learning to the next level with unlimited access, personalized tools, and 24/7 support—all for just $15/month.",
       color: "mint"
     },
     educator: {
       title: "Educator",
-      description: "For teachers and experts who want to share knowledge",
-      price: { monthly: 24.99, annually: 239.99 },
+      description: "For teachers and content creators who want to share their expertise and grow their audience.",
+      price: { monthly: 39, annually: 420 },
       features: [
-        "All Pro Learner features",
-        "Create and publish courses",
-        "Analytics dashboard",
-        "Monetize your content",
-        "Custom branding options",
-        "Dedicated support",
-        "Group sessions",
-        "Verified educator badge"
+        "Everything in Pro Learner Plan",
+        "Teaching Tools",
+        "Advanced dashboard for Educators",
+        "Custom branding",
+        "Premium Support",
+        "100% revenue from your courses"
       ],
-      bestFor: "Teachers, experts, and content creators",
+      bestFor: "Teachers and content creators",
+      tagline: "Empower others by creating your own courses and setting your own rules. Build your brand, grow your audience, and earn from your expertise—all with the tools you need to succeed.",
       color: "purple"
     }
   };
@@ -98,7 +116,11 @@ const PlanDetails = () => {
           </button>
           
           <h1 className="text-4xl md:text-5xl font-bold mb-6">{plan.title} Plan</h1>
-          <p className="text-xl text-white/80 mb-12">{plan.description}</p>
+          <p className="text-xl text-white/80 mb-6">{plan.description}</p>
+          
+          <div className="bg-mint/5 border border-mint/10 p-6 rounded-lg mb-12">
+            <p className="text-white/90 italic">"{plan.tagline}"</p>
+          </div>
           
           <Card className="bg-forest-light border border-mint/10 mb-12">
             <CardHeader>

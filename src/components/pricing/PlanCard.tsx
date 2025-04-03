@@ -15,6 +15,7 @@ type PlanCardProps = {
   cta: string;
   highlighted: boolean;
   disabled: boolean;
+  tagline?: string;
   getAnnualDiscount?: (price: string) => string;
   billingPeriod: "monthly" | "annual";
   onSubscribe: (plan: string) => void;
@@ -31,6 +32,7 @@ const PlanCard = ({
   cta,
   highlighted,
   disabled,
+  tagline,
   getAnnualDiscount,
   billingPeriod,
   onSubscribe,
@@ -91,6 +93,12 @@ const PlanCard = ({
           )}
         </div>
         <p className="text-white/70 mb-6">{description}</p>
+        
+        {tagline && (
+          <div className="mb-6 bg-mint/5 border border-mint/10 p-4 rounded-md">
+            <p className="text-white/90 italic text-sm">"{tagline}"</p>
+          </div>
+        )}
         
         <div className="mb-6">
           <p className="font-medium mb-2">What's included:</p>

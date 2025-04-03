@@ -25,8 +25,9 @@ const RequiresMembership = ({
     
     const membershipLevels: Record<MembershipType, number> = {
       'Free': 0,
-      'Pro Learner': 1,
-      'Educator': 2
+      'Lite': 1,
+      'Pro Learner': 2,
+      'Educator': 3
     };
     
     return membershipLevels[user.membership] >= membershipLevels[requiredMembership];

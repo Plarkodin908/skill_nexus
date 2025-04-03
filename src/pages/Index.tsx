@@ -9,21 +9,28 @@ import { useAuth } from "@/contexts/AuthContext";
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import Stats from "@/components/Stats";
+
 const Index = () => {
-  const {
-    user
-  } = useAuth();
-  return <div className="skill-exchange-theme min-h-screen">
-      <SEOHead title="Skill Nexus - Community-Driven Learning Platform" description="Exchange skills that match your coding success with ease using our innovative learning marketplace." />
-      <SchemaMarkup type="website" data={{
-      "name": "Skill Nexus",
-      "url": "https://skillnexus.example.com/",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://skillnexus.example.com/marketplace?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    }} />
+  const { user } = useAuth();
+  
+  return (
+    <div className="skill-exchange-theme min-h-screen">
+      <SEOHead 
+        title="Skill Nexus - Community-Driven Learning Platform" 
+        description="Exchange skills that match your coding success with ease using our innovative learning marketplace." 
+      />
+      <SchemaMarkup 
+        type="website" 
+        data={{
+          "name": "Skill Nexus",
+          "url": "https://skillnexus.example.com/",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://skillnexus.example.com/marketplace?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }} 
+      />
       <Navbar />
       
       <main>
@@ -43,15 +50,19 @@ const Index = () => {
                 </p>
                 
                 <div className="flex flex-wrap gap-4">
-                  {user ? <Link to="/dashboard">
+                  {user ? (
+                    <Link to="/dashboard">
                       <Button className="bg-primary-purple hover:bg-primary-purple/90 text-white font-medium px-6 py-2.5 text-base">
                         Dashboard <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
-                    </Link> : <Link to="/auth/sign-up" className="Begin Your Journey">
+                    </Link>
+                  ) : (
+                    <Link to="/auth/sign-up">
                       <Button className="bg-primary-purple hover:bg-primary-purple/90 text-white font-medium px-6 py-2.5 text-base">
                         Start Free <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
-                    </Link>}
+                    </Link>
+                  )}
                   <Link to="/features">
                     <Button variant="outline" className="border-primary-purple/20 text-primary-purple hover:bg-primary-purple/10 font-medium px-6 py-2.5 text-base">
                       Learn More
@@ -134,6 +145,8 @@ const Index = () => {
       </main>
       
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default Index;
