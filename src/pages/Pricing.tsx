@@ -140,7 +140,7 @@ const Pricing = () => {
   };
 
   const getAnnualDiscount = (monthlyPrice: string) => {
-    const price = parseInt(monthlyPrice.replace("$", ""));
+    const price = parseInt(monthlyPrice);
     if (price === 5) return "5"; // $5 * 12 = $60, annual is $55, save $5
     if (price === 15) return "15"; // $15 * 12 = $180, annual is $165, save $15
     if (price === 39) return "48"; // $39 * 12 = $468, annual is $420, save $48

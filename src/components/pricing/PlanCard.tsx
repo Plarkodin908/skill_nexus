@@ -88,7 +88,7 @@ const PlanCard = ({
           <span className="text-white/60 ml-2">{period}</span>
           {billingPeriod === "annual" && name !== "Free" && getAnnualDiscount && (
             <p className="text-mint/80 text-sm mt-1">
-              Save ${getAnnualDiscount(price.split('$')[1] || "0")} per year
+              Save ${getAnnualDiscount(price.replace('$', ''))} per year
             </p>
           )}
         </div>
