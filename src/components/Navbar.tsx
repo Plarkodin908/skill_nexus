@@ -1,11 +1,9 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
 import { Search, Bell, User, Menu, X, CheckCircle2 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import VerifiedBadge from "./profile/VerifiedBadge";
-
 const Navbar = () => {
   const {
     user,
@@ -14,7 +12,6 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const isVerified = user?.verificationStatus === "verified";
   const location = useLocation();
-
   return <nav className="skill-exchange-navbar fixed top-0 left-0 right-0 z-50 py-4">
       <div className="container mx-auto px-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -59,14 +56,9 @@ const Navbar = () => {
             
             {user ? <div className="relative group">
                 <button className="bg-primary-purple/20 p-2 rounded-full hover:bg-primary-purple/30 transition-colors relative">
-                  {user.avatarUrl ? (
-                    <div 
-                      className="h-5 w-5 rounded-full bg-cover bg-center"
-                      style={{ backgroundImage: `url(${user.avatarUrl})` }}
-                    ></div>
-                  ) : (
-                    <User className="h-5 w-5 text-white" />
-                  )}
+                  {user.avatarUrl ? <div className="h-5 w-5 rounded-full bg-cover bg-center" style={{
+                backgroundImage: `url(${user.avatarUrl})`
+              }}></div> : <User className="h-5 w-5 text-white" />}
                   {isVerified && <div className="absolute -right-1 -bottom-1 bg-forest-light rounded-full p-0.5">
                       <VerifiedBadge size="sm" />
                     </div>}
@@ -92,9 +84,7 @@ const Navbar = () => {
           </div>
           
           {/* Mobile menu button */}
-          <button className="md:hidden bg-primary-purple/20 p-2 rounded-full hover:bg-primary-purple/30 transition-colors" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-            {isMobileMenuOpen ? <X className="h-5 w-5 text-white" /> : <Menu className="h-5 w-5 text-white" />}
-          </button>
+          
         </div>
       </div>
       
@@ -102,21 +92,11 @@ const Navbar = () => {
       {isMobileMenuOpen && <div className="md:hidden bg-forest-light border-t border-mint/10 mt-4 animate-fade-in">
           <div className="container mx-auto px-4 py-3">
             <div className="space-y-2">
-              <Link to="/" className="block p-2 text-white hover:bg-mint/10 rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>
-                Home
-              </Link>
-              <Link to="/marketplace" className="block p-2 text-white hover:bg-mint/10 rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>
-                Market
-              </Link>
-              <Link to="/dashboard" className="block p-2 text-white hover:bg-mint/10 rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>
-                Dashboard
-              </Link>
-              <Link to="/tutorials" className="block p-2 text-white hover:bg-mint/10 rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>
-                Community
-              </Link>
-              <Link to="/pricing" className="block p-2 text-white hover:bg-mint/10 rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>
-                Pricing
-              </Link>
+              
+              
+              
+              
+              
               
               <div className="border-t border-mint/10 pt-2 mt-2">
                 {user ? <>
@@ -137,12 +117,8 @@ const Navbar = () => {
                       Sign out
                     </button>
                   </> : <div className="flex flex-col gap-2">
-                    <Link to="/auth/sign-in" className="block p-2 text-center bg-mint text-forest font-medium rounded-lg hover:bg-mint/90" onClick={() => setIsMobileMenuOpen(false)}>
-                      Sign In
-                    </Link>
-                    <Link to="/auth/sign-up" className="block p-2 text-center border border-mint/20 text-white rounded-lg hover:bg-mint/10" onClick={() => setIsMobileMenuOpen(false)}>
-                      Create Account
-                    </Link>
+                    
+                    
                   </div>}
               </div>
             </div>
