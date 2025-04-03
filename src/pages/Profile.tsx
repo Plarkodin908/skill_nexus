@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import EnhancedNavbar from '@/components/EnhancedNavbar';
+import Navbar from '@/components/Navbar';
 import ProfileSidebar from '@/components/profile/ProfileSidebar';
 import ProfileTabs from '@/components/profile/ProfileTabs';
 import { useAuth } from '@/contexts/AuthContext';
@@ -15,6 +16,8 @@ const Profile = () => {
   const [selectedGender, setSelectedGender] = useState('');
   const [isEditing, setIsEditing] = useState(!user?.completedProfile);
   const [isVerificationModalOpen, setIsVerificationModalOpen] = useState(false);
+  const [profilePicture, setProfilePicture] = useState<string>(user?.avatarUrl || '');
+  const [coverPicture, setCoverPicture] = useState<string>('');
 
   const courses = [
     {
@@ -43,6 +46,16 @@ const Profile = () => {
     }
   ];
 
+  const handleProfilePictureChange = (url: string) => {
+    setProfilePicture(url);
+    // In a real app, you would update the user's profile picture in the backend
+  };
+
+  const handleCoverPictureChange = (url: string) => {
+    setCoverPicture(url);
+    // In a real app, you would update the user's cover picture in the backend
+  };
+
   const handleSaveChanges = () => {
     toast.success("Profile updated successfully!");
     setIsEditing(false);
@@ -61,13 +74,26 @@ const Profile = () => {
 
   return (
     <>
-      <EnhancedNavbar />
+      <Navbar />
       <div className="container mx-auto py-20 px-4">
+        {/* Cover Image (only visible when not editing) */}
+        {!isEditing && coverPicture && (
+          <div className="w-full h-48 md:h-64 rounded-lg overflow-hidden mb-6">
+            <img 
+              src={coverPicture} 
+              alt="Cover" 
+              className="w-full h-full object-cover" 
+            />
+          </div>
+        )}
+
         <div className="flex flex-col md:flex-row gap-8">
           <ProfileSidebar 
             selectedGender={selectedGender}
             onGenderChange={setSelectedGender}
             isEditing={isEditing}
+            onProfilePictureChange={handleProfilePictureChange}
+            onCoverPictureChange={handleCoverPictureChange}
           />
           <div className="w-full md:w-2/3">
             {isEditing ? (
