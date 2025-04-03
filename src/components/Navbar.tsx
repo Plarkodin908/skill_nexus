@@ -15,7 +15,7 @@ const Navbar = () => {
           <Link to="/">
             <img alt="SKILL NEXUS Logo" src="/lovable-uploads/fc36b4c8-69b6-42c9-a569-c1ecaf82ed35.png" className="h-12 w-auto object-scale-down" />
           </Link>
-          <span className="skill-exchange-logo">SKILL NEXUS</span>
+          <span className="skill-exchange-logo text-xl font-bold text-purple-900">SKILL NEXUS</span>
         </div>
         
         <div className="hidden md:flex items-center space-x-4">
