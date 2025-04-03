@@ -96,12 +96,8 @@ const Index = () => {
               </div>
               
               <div className="w-full md:w-1/2 grid grid-cols-2 gap-4">
-                <div className="bg-gray-300/20 rounded-xl aspect-square flex items-center justify-center">
-                  <img src="/lovable-uploads/d7418d3e-2f15-41f2-ac40-bc79d49a09bd.png" alt="Learning Platform Interface" className="w-full h-auto rounded-xl" width="300" height="300" />
-                </div>
-                <div className="bg-gray-300/20 rounded-xl aspect-square flex items-center justify-center">
-                  <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6" alt="Programming Education" className="w-full h-auto rounded-xl" width="300" height="300" />
-                </div>
+                
+                
               </div>
             </div>
           </div>
