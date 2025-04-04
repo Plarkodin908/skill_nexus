@@ -11,6 +11,7 @@ import ActivityFeed from "@/components/dashboard/ActivityFeed";
 import UserPlanCard from "@/components/dashboard/UserPlanCard";
 import StatCard from "@/components/dashboard/StatCard";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
+import { PlanType } from "@/components/pricing/types";
 
 // Define types for our data structures
 type UserStat = {
@@ -32,8 +33,9 @@ type Achievement = {
   earned: boolean;
 };
 
+// Updated to use PlanType instead of string
 type UserPlan = {
-  name: string;
+  name: PlanType;
   expires: string;
   features: string[];
 };
@@ -105,9 +107,9 @@ const Dashboard = () => {
     }
   ];
 
-  // Sample user plan data
+  // Update user plan data with correct PlanType
   const userPlan: UserPlan = {
-    name: "Pro Plan",
+    name: "Pro Learner",
     expires: "October 15, 2023",
     features: [
       "Unlimited course access",

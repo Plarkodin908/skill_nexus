@@ -1,4 +1,3 @@
-
 import { ExternalLink } from "lucide-react";
 
 interface SocialLinksProps {
@@ -8,7 +7,7 @@ interface SocialLinksProps {
     linkedin: string;
     website: string;
   };
-  onChange: (platform: keyof typeof links, value: string) => void;
+  onChange: (platform: keyof SocialLinksProps['links'], value: string) => void;
   readOnly: boolean;
 }
 

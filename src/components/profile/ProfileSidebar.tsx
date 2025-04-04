@@ -34,7 +34,7 @@ const ProfileSidebar = ({
     website: ""
   });
   
-  const [profilePicture, setProfilePicture] = useState<string>(user?.avatarUrl || "");
+  const [profilePicture, setProfilePicture] = useState<string>(user?.avatar || "");
   const [coverPicture, setCoverPicture] = useState<string>("");
 
   const handleSaveChanges = () => {

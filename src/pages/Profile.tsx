@@ -16,7 +16,7 @@ const Profile = () => {
   const [selectedGender, setSelectedGender] = useState('');
   const [isEditing, setIsEditing] = useState(!user?.completedProfile);
   const [isVerificationModalOpen, setIsVerificationModalOpen] = useState(false);
-  const [profilePicture, setProfilePicture] = useState<string>(user?.avatarUrl || '');
+  const [profilePicture, setProfilePicture] = useState<string>(user?.avatar || '');
   const [coverPicture, setCoverPicture] = useState<string>('');
 
   const courses = [
