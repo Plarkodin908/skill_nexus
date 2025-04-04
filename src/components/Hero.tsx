@@ -2,12 +2,11 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, BookOpen, Users, GraduationCap, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import Loading from "@/components/ui/loading";
-
 const Hero = () => {
   return <section className="pt-32 pb-20 px-4 relative overflow-hidden">
-      <div className="container mx-auto grid lg:grid-cols-2 gap-12 items-center relative z-10">
+      <div className="container grid lg:grid-cols-2 gap-12 items-center relative z-10 py-0 my-0 mx-px">
         <div className="space-y-8">
-          <div className="flex items-center gap-2 bg-primary-purple/10 w-fit px-4 py-2 rounded-full border border-primary-purple/20 animate-fade-in bg-purple-950">
+          <div className="flex items-center gap-2 bg-primary-purple/10 w-fit py-2 rounded-full border border-primary-purple/20 animate-fade-in bg-purple-950 px-[9px] my-[12px]">
             <GraduationCap aria-hidden="true" className="w-4 h-4 text-primary-purple bg-fuchsia-950" />
             <span className="text-primary-purple text-sm font-medium text-purple-50">Learn. Teach. Grow.</span>
           </div>
@@ -51,10 +50,10 @@ const Hero = () => {
         animationDelay: "800ms"
       }}>
           <div className="absolute -inset-0.5 bg-primary-purple/20 rounded-2xl blur opacity-30" aria-hidden="true" />
-          <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d" alt="Person working on laptop during online learning session" className="relative rounded-2xl shadow-2xl w-full h-auto hover-scale transition-all duration-500" width="800" height="600" loading="eager" />
-          <div className="absolute -bottom-10 -left-10 bg-dark-purple p-4 md:p-6 rounded-xl shadow-xl border border-primary-purple/10 animate-fade-in hover-scale" style={{
+          
+          <div style={{
           animationDelay: "1000ms"
-        }}>
+        }} className="absolute -bottom-10 -left-10 bg-dark-purple p-4 md:p-6 rounded-xl shadow-xl border border-primary-purple/10 animate-fade-in hover-scale px-[14px] py-[12px] my-0 mx-[5px]">
             <div className="flex items-center gap-3">
               <BookOpen className="h-6 w-6 md:h-8 md:w-8 text-primary-purple" aria-hidden="true" />
               <div>
