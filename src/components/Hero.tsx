@@ -1,10 +1,14 @@
+
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BookOpen, Users, GraduationCap, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import Loading from "@/components/ui/loading";
+
 const Hero = () => {
-  return <section className="pt-32 pb-20 px-4 relative">
-      <div className="container mx-auto grid lg:grid-cols-2 gap-12 items-center">
+  return <section className="pt-32 pb-20 px-4 relative overflow-hidden">
+      <div className="animated-bg"></div>
+      
+      <div className="container mx-auto grid lg:grid-cols-2 gap-12 items-center relative z-10">
         <div className="space-y-8">
           <div className="flex items-center gap-2 bg-primary-purple/10 w-fit px-4 py-2 rounded-full border border-primary-purple/20 animate-fade-in bg-purple-950">
             <GraduationCap aria-hidden="true" className="w-4 h-4 text-primary-purple bg-fuchsia-950" />
@@ -33,7 +37,7 @@ const Hero = () => {
         }}>
             <Link to="/marketplace">
               <Button className="bg-primary-purple hover:bg-primary-purple/90 text-white font-medium px-6 md:px-8 py-5 md:py-6 text-base md:text-lg hover-scale btn-pulse">
-                Explore Courses <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
+                Take the First Step <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
               </Button>
             </Link>
             <Link to="/features">
