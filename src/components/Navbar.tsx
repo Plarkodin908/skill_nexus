@@ -170,6 +170,7 @@ const Navbar = () => {
             </div>
           </div>
         </div>}
-    </nav>;
+    </nav>
+  );
 };
 export default Navbar;
