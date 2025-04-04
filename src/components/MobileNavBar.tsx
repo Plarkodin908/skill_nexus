@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, Home, BookOpen, ShoppingBag, User, CreditCard } from "lucide-react";
@@ -16,26 +15,14 @@ const MobileNavBar = () => {
           </div>
           
           <div className="grid grid-cols-2 gap-2">
-            <Link to="/" className="flex items-center gap-2 p-3 rounded-lg bg-forest hover:bg-mint/10 text-white" onClick={toggleMenu}>
-              <Home className="h-4 w-4 text-mint" strokeWidth={3} />
-              <span>Home</span>
-            </Link>
-            <Link to="/marketplace" className="flex items-center gap-2 p-3 rounded-lg bg-forest hover:bg-mint/10 text-white" onClick={toggleMenu}>
-              <ShoppingBag className="h-4 w-4 text-mint" strokeWidth={3} />
-              <span>Marketplace</span>
-            </Link>
+            
+            
             <Link to="/tutorials" className="flex items-center gap-2 p-3 rounded-lg bg-forest hover:bg-mint/10 text-white" onClick={toggleMenu}>
               <BookOpen className="h-4 w-4 text-mint" strokeWidth={3} />
               <span>Tutorials</span>
             </Link>
-            <Link to="/profile" className="flex items-center gap-2 p-3 rounded-lg bg-forest hover:bg-mint/10 text-white" onClick={toggleMenu}>
-              <User className="h-4 w-4 text-mint" strokeWidth={3} />
-              <span>Profile</span>
-            </Link>
-            <Link to="/pricing" className="flex items-center gap-2 p-3 rounded-lg bg-forest hover:bg-mint/10 text-white col-span-2" onClick={toggleMenu}>
-              <CreditCard className="h-4 w-4 text-mint" strokeWidth={3} />
-              <span>Pricing Plans</span>
-            </Link>
+            
+            
           </div>
         </div>}
       
