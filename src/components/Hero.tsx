@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BookOpen, Users, GraduationCap, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -6,8 +5,6 @@ import Loading from "@/components/ui/loading";
 
 const Hero = () => {
   return <section className="pt-32 pb-20 px-4 relative overflow-hidden">
-      <div className="animated-bg"></div>
-      
       <div className="container mx-auto grid lg:grid-cols-2 gap-12 items-center relative z-10">
         <div className="space-y-8">
           <div className="flex items-center gap-2 bg-primary-purple/10 w-fit px-4 py-2 rounded-full border border-primary-purple/20 animate-fade-in bg-purple-950">
