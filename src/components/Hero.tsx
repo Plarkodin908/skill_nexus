@@ -29,16 +29,17 @@ const Hero = () => {
           </p>
           <div className="flex flex-wrap items-center gap-4 animate-fade-in" style={{ animationDelay: "600ms" }}>
             <Link to="/marketplace">
-              <div className="animated-border">
-                <Button className="bg-primary-purple hover:bg-primary-purple/90 text-white font-medium px-6 md:px-8 py-5 md:py-6 text-base md:text-lg hover-scale btn-pulse">
-                  Explore Courses <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
-                </Button>
-              </div>
+              <button className="animated-button bg-primary-purple hover:bg-primary-purple/90 text-white font-medium px-6 md:px-8 py-5 md:py-6 text-base md:text-lg">
+                <span className="text">Explore Courses</span>
+                <span className="circle"></span>
+                <ArrowRight className="arr-1 h-5 w-5" aria-hidden="true" />
+                <ArrowRight className="arr-2 h-5 w-5" aria-hidden="true" />
+              </button>
             </Link>
             <Link to="/features">
-              <Button variant="outline" className="border-primary-purple/20 text-primary-purple hover:bg-primary-purple/10 hover-scale btn-glow">
+              <button className="glow-button border-primary-purple/20 text-primary-purple bg-transparent py-5 md:py-6 px-6 md:px-8 font-medium text-base md:text-lg">
                 How It Works
-              </Button>
+              </button>
             </Link>
             <div className="hidden md:block">
               <Loading size="small" />
