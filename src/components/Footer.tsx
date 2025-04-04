@@ -12,8 +12,8 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-12 bg-gray-950">
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <img src="/lovable-uploads/609db0c7-2e29-405b-ad44-bee4b401e14e.png" alt="SKILL NEXUS Logo" className="h-12 w-auto" />
-              <h3 className="text-2xl font-bold">SKILL NEXUS</h3>
+              
+              <h3 className="text-2xl font-bold text-right">SKILL NEXUS</h3>
             </div>
             <p className="text-white/60 max-w-xs">
               Connecting learners and educators through a collaborative platform for knowledge exchange and skill development.
