@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
@@ -9,33 +10,40 @@ import { useAuth } from "@/contexts/AuthContext";
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import Stats from "@/components/Stats";
+
 const Index = () => {
-  const {
-    user
-  } = useAuth();
-  return <div className="skill-exchange-theme min-h-screen">
-      <SEOHead title="Skill Nexus - Community-Driven Learning Platform" description="Exchange skills that match your coding success with ease using our innovative learning marketplace." />
-      <SchemaMarkup type="website" data={{
-      "name": "Skill Nexus",
-      "url": "https://skillnexus.example.com/",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://skillnexus.example.com/marketplace?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    }} />
+  const { user } = useAuth();
+  
+  return (
+    <div className="skill-exchange-theme min-h-screen">
+      <SEOHead 
+        title="Skill Nexus - Community-Driven Learning Platform" 
+        description="Exchange skills that match your coding success with ease using our innovative learning marketplace." 
+      />
+      <SchemaMarkup 
+        type="website" 
+        data={{
+          "name": "Skill Nexus",
+          "url": "https://skillnexus.example.com/",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://skillnexus.example.com/marketplace?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }} 
+      />
+      
       <Navbar />
       
-      <main>
+      <main className="mt-20">
         {/* Hero Banner Section */}
-        <section className="bg-dark-purple py-12 px-4 rounded-3xl">
+        <section className="bg-dark-purple py-12 px-4 rounded-3xl mt-10">
           <div className="container mx-auto">
             <div className="flex flex-col md:flex-row gap-8 items-center">
               <div className="w-full md:w-1/2 space-y-6">
-                <div className="flex items-center gap-3 mb-4">
-                  
-                  
-                </div>
+                <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight">
+                  Learn, Share, Grow with <span className="text-mint">Skill Nexus</span>
+                </h1>
                 
                 <p className="text-white/80 text-lg">
                   The ultimate platform for exchanging skills and knowledge.
@@ -43,15 +51,18 @@ const Index = () => {
                 </p>
                 
                 <div className="flex flex-wrap gap-4">
-                  {user ? <Link to="/dashboard">
+                  {user ? 
+                    <Link to="/dashboard">
                       <Button className="bg-primary-purple hover:bg-primary-purple/90 text-white font-medium px-6 py-2.5 text-base">
                         Dashboard <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
-                    </Link> : <Link to="/auth/sign-up">
+                    </Link> : 
+                    <Link to="/auth/sign-up">
                       <Button className="bg-primary-purple hover:bg-primary-purple/90 text-white font-medium px-6 py-2.5 text-base">
                         Start Free <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
-                    </Link>}
+                    </Link>
+                  }
                   <Link to="/features">
                     <Button variant="outline" className="border-primary-purple/20 text-primary-purple hover:bg-primary-purple/10 font-medium px-6 py-2.5 text-base">
                       Learn More
@@ -62,7 +73,11 @@ const Index = () => {
               
               <div className="w-full md:w-1/2">
                 <div className="relative bg-gray-300/20 rounded-xl p-2 shadow-lg">
-                  
+                  <img 
+                    src="/lovable-uploads/fc36b4c8-69b6-42c9-a569-c1ecaf82ed35.png" 
+                    alt="Skill Nexus Hero" 
+                    className="w-full h-auto rounded-lg"
+                  />
                 </div>
               </div>
             </div>
@@ -96,8 +111,7 @@ const Index = () => {
               </div>
               
               <div className="w-full md:w-1/2 grid grid-cols-2 gap-4">
-                
-                
+                {/* Feature images would go here */}
               </div>
             </div>
           </div>
@@ -117,9 +131,9 @@ const Index = () => {
                   View Tutorials
                 </Button>
               </Link>
-              <Link to="/community">
+              <Link to="/pricing">
                 <Button className="bg-primary-purple/80 hover:bg-primary-purple text-white px-6 py-2.5 rounded-full">
-                  Join Community
+                  View Plans
                 </Button>
               </Link>
             </div>
@@ -134,6 +148,8 @@ const Index = () => {
       </main>
       
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default Index;

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from "sonner";
 
 // Define user types and membership levels
-export type MembershipType = "Free" | "Pro Learner" | "Educator";
+export type MembershipType = "Free" | "Lite" | "Pro Learner" | "Educator";
 
 export type VerificationStatus = "unverified" | "pending" | "verified";
 
@@ -26,6 +26,8 @@ interface AuthContextType {
   signOut: () => void;
   upgradeSubscription: (plan: MembershipType) => void;
   submitVerification: (idImageUrl: string) => Promise<void>;
+  updateUserAvatar: (avatarUrl: string) => void;
+  updateUserCover: (coverUrl: string) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -151,6 +153,24 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     toast.success(`Subscription upgraded to ${plan} successfully!`);
   };
 
+  // Update user avatar
+  const updateUserAvatar = (avatarUrl: string) => {
+    if (!user) return;
+    
+    const updatedUser = { ...user, avatar: avatarUrl };
+    setUser(updatedUser);
+    localStorage.setItem('skillNexusUser', JSON.stringify(updatedUser));
+  };
+  
+  // Update user cover image
+  const updateUserCover = (coverUrl: string) => {
+    if (!user) return;
+    
+    const updatedUser = { ...user, coverImage: coverUrl };
+    setUser(updatedUser);
+    localStorage.setItem('skillNexusUser', JSON.stringify(updatedUser));
+  };
+
   // Submit verification function
   const submitVerification = async (idImageUrl: string) => {
     if (!user) return;
@@ -186,7 +206,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       signUp, 
       signOut, 
       upgradeSubscription,
-      submitVerification
+      submitVerification,
+      updateUserAvatar,
+      updateUserCover
     }}>
       {children}
     </AuthContext.Provider>

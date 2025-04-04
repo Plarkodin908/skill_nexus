@@ -2,6 +2,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { PlanType } from "@/components/pricing/types";
+import { useNavigate } from "react-router-dom";
 
 interface UserPlan {
   name: PlanType;
@@ -14,6 +15,7 @@ interface UserPlanCardProps {
 }
 
 const UserPlanCard = ({ plan }: UserPlanCardProps) => {
+  const navigate = useNavigate();
   const isPremium = plan.name !== "Free";
   const planColor = getPlanColor(plan.name);
   
@@ -26,6 +28,10 @@ const UserPlanCard = ({ plan }: UserPlanCardProps) => {
       default: return "text-white";
     }
   }
+  
+  const handlePlanAction = () => {
+    navigate('/pricing');
+  };
   
   return (
     <Card className="bg-dark-purple border border-primary-purple/10 p-6">
@@ -44,8 +50,8 @@ const UserPlanCard = ({ plan }: UserPlanCardProps) => {
         Expires: {plan.expires}
       </div>
       <Button 
-        className="w-full bg-primary-purple hover:bg-primary-purple/90 text-dark-purple"
-        onClick={() => window.location.href = "/pricing"}
+        className="w-full bg-primary-purple hover:bg-primary-purple/90 text-white"
+        onClick={handlePlanAction}
       >
         {isPremium ? "Manage Subscription" : "Upgrade Now"}
       </Button>
