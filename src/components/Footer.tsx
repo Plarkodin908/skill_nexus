@@ -13,12 +13,12 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               
-              <h3 className="text-2xl font-bold text-right">SKILL NEXUS</h3>
+              <h3 className="text-2xl text-right px-[16px] py-[4px] font-semibold">SKILL NEXUS</h3>
             </div>
-            <p className="text-white/60 max-w-xs">
+            <p className="text-white/60 max-w-xs py-[5px] px-0 mx-[21px] my-[24px]">
               Connecting learners and educators through a collaborative platform for knowledge exchange and skill development.
             </p>
-            <div className="flex gap-4 pt-2">
+            <div className="flex gap-4 pt-2 my-[37px] px-[19px]">
               <GraduationCap className="h-5 w-5 text-primary-purple" />
               <BookOpen className="h-5 w-5 text-primary-purple" />
               <Users className="h-5 w-5 text-primary-purple" />
@@ -26,8 +26,8 @@ const Footer = () => {
             </div>
           </div>
           <div>
-            <h4 className="font-medium mb-4">Platform</h4>
-            <ul className="space-y-2">
+            <h4 className="font-medium mb-4 px-[16px] my-[12px] mx-[150px] py-0">Platform</h4>
+            <ul className="space-y-2 py-[6px] my-[10px] mx-[2px] px-[2px]">
               <li><Link to="/features" className="text-white/60 hover:text-primary-purple transition-colors" onClick={scrollToTop}>Features</Link></li>
               <li><Link to="/pricing" className="text-white/60 hover:text-primary-purple transition-colors" onClick={scrollToTop}>Pricing</Link></li>
               <li><Link to="/marketplace" className="text-white/60 hover:text-primary-purple transition-colors" onClick={scrollToTop}>Course Marketplace</Link></li>
