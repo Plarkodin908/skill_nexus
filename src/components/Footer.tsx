@@ -8,7 +8,7 @@ const Footer = () => {
     });
   };
   return <footer className="py-20 px-4 border-t border-primary-purple/10">
-      <div className="container mx-auto">
+      <div className="container mx-auto rounded-sm">
         <div className="grid md:grid-cols-4 gap-12 bg-gray-950">
           <div className="space-y-4">
             <div className="flex items-center gap-3">
