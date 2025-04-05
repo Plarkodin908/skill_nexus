@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
@@ -10,31 +9,24 @@ import { useAuth } from "@/contexts/AuthContext";
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import Stats from "@/components/Stats";
-
 const Index = () => {
-  const { user } = useAuth();
-  
-  return (
-    <div className="min-h-screen">
+  const {
+    user
+  } = useAuth();
+  return <div className="min-h-screen bg-purple-950">
       <div className="container-rain fixed inset-0 -z-10"></div>
       
-      <SEOHead 
-        title="Skill Nexus - Community-Driven Learning Platform" 
-        description="Exchange skills that match your coding success with ease using our innovative learning marketplace." 
-      />
+      <SEOHead title="Skill Nexus - Community-Driven Learning Platform" description="Exchange skills that match your coding success with ease using our innovative learning marketplace." />
       
-      <SchemaMarkup 
-        type="website" 
-        data={{
-          "name": "Skill Nexus",
-          "url": "https://skillnexus.example.com/",
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://skillnexus.example.com/marketplace?q={search_term_string}",
-            "query-input": "required name=search_term_string"
-          }
-        }} 
-      />
+      <SchemaMarkup type="website" data={{
+      "name": "Skill Nexus",
+      "url": "https://skillnexus.example.com/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://skillnexus.example.com/marketplace?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }} />
       
       <Navbar />
       
@@ -112,8 +104,6 @@ const Index = () => {
       </main>
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
