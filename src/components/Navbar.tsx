@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
-import { Search, Bell, User, Menu, X, CheckCircle2 } from "lucide-react";
+import { Search, Bell, User as UserIcon, Menu, X } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import VerifiedBadge from "./profile/VerifiedBadge";
 import { toast } from "sonner";
@@ -73,7 +73,7 @@ const Navbar = () => {
                 <Link to="/profile" className="flex items-center p-1 rounded-full hover:bg-forest/60 transition-colors">
                   <div className="relative">
                     <div className="w-8 h-8 rounded-full bg-primary-purple/30 flex items-center justify-center text-lg font-semibold">
-                      {user.displayName?.[0] || user.email?.[0] || <User className="h-5 w-5" />}
+                      {user.name?.[0] || user.email?.[0] || <UserIcon className="h-5 w-5" />}
                     </div>
                     {isVerified && <VerifiedBadge className="absolute -bottom-1 -right-1" />}
                   </div>
