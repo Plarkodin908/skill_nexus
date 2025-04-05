@@ -38,7 +38,10 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <Link to="/" className="mr-6">
-              <h1 className="text-xl font-bold text-primary-purple">SKILL <span className="text-white">SWAP</span></h1>
+              <div className="flex items-center gap-3">
+                <img src="/lovable-uploads/skill-nexus-logo.png" alt="Skill Nexus Logo" className="h-8 w-auto" />
+                <h1 className="text-xl font-bold text-primary-purple">SKILL <span className="text-white">NEXUS</span></h1>
+              </div>
             </Link>
             
             <div className="hidden md:flex items-center space-x-4">

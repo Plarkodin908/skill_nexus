@@ -3,9 +3,13 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, BookOpen, Users, GraduationCap, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import Loading from "@/components/ui/loading";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Hero = () => {
-  return <section className="pt-32 pb-20 px-4 relative overflow-hidden">
+  const { user } = useAuth();
+  
+  return (
+    <section className="pt-32 pb-20 px-4 relative overflow-hidden">
       <div className="container grid lg:grid-cols-2 gap-12 items-center relative z-10 py-0 my-0 mx-px">
         <div className="space-y-8">
           <div className="flex items-center gap-2 bg-primary-purple/10 w-fit py-2 rounded-full border border-primary-purple/20 animate-fade-in bg-purple-950 px-[9px] my-[12px]">
@@ -33,16 +37,33 @@ const Hero = () => {
           <div className="flex flex-wrap items-center gap-4 animate-fade-in" style={{
           animationDelay: "600ms"
         }}>
-            <Link to="/marketplace">
-              <Button className="bg-primary-purple hover:bg-primary-purple/90 text-white font-medium px-6 md:px-8 py-5 md:py-6 text-base md:text-lg hover-scale btn-pulse">
-                Take the First Step <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
-              </Button>
-            </Link>
-            <Link to="/features">
-              <Button variant="outline" className="border-primary-purple/20 text-primary-purple hover:bg-primary-purple/10 hover-scale btn-glow">
-                How It Works
-              </Button>
-            </Link>
+            {user ? (
+              <>
+                <Link to="/profile">
+                  <Button className="bg-primary-purple hover:bg-primary-purple/90 text-white font-medium px-6 md:px-8 py-5 md:py-6 text-base md:text-lg hover-scale btn-pulse">
+                    Manage Profile <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
+                  </Button>
+                </Link>
+                <Link to="/marketplace">
+                  <Button variant="outline" className="border-primary-purple/20 text-primary-purple hover:bg-primary-purple/10 hover-scale btn-glow">
+                    Explore Marketplace
+                  </Button>
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link to="/auth/sign-up">
+                  <Button className="bg-primary-purple hover:bg-primary-purple/90 text-white font-medium px-6 md:px-8 py-5 md:py-6 text-base md:text-lg hover-scale btn-pulse">
+                    Take the First Step <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
+                  </Button>
+                </Link>
+                <Link to="/features">
+                  <Button variant="outline" className="border-primary-purple/20 text-primary-purple hover:bg-primary-purple/10 hover-scale btn-glow">
+                    How It Works
+                  </Button>
+                </Link>
+              </>
+            )}
             <div className="hidden md:block">
               <Loading size="small" />
             </div>
@@ -82,7 +103,8 @@ const Hero = () => {
         <span className="text-white/50 text-sm mb-1">Scroll Down</span>
         <ChevronDown className="h-5 w-5 text-primary-purple" />
       </div>
-    </section>;
+    </section>
+  );
 };
 
 export default Hero;
