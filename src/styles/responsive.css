@@ -1,0 +1,19 @@
+
+/* Mobile responsiveness enhancements */
+@media (max-width: 640px) {
+  h1 {
+    @apply text-3xl;
+  }
+  h2 {
+    @apply text-2xl;
+  }
+  h3 {
+    @apply text-xl;
+  }
+  p {
+    @apply text-sm;
+  }
+  .container {
+    @apply px-4;
+  }
+}

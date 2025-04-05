@@ -1,0 +1,29 @@
+
+/* Badge classes */
+.badge-beginner {
+  @apply bg-blue-500/20 text-blue-500;
+}
+
+.badge-intermediate {
+  @apply bg-green-500/20 text-green-500;
+}
+
+.badge-advanced {
+  @apply bg-yellow-500/20 text-yellow-500;
+}
+
+.badge-expert {
+  @apply bg-purple-500/20 text-purple-500;
+}
+
+.badge-master {
+  @apply bg-orange-500/20 text-orange-500;
+}
+
+.badge-legend {
+  @apply bg-primary-purple/20 text-primary-purple;
+}
+
+.coming-soon {
+  @apply bg-primary-purple/10 text-primary-purple px-3 py-1 rounded-full text-sm font-medium border border-primary-purple/20;
+}

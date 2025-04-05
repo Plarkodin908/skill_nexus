@@ -1,0 +1,17 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-color: #1A1F2C;
+  --primary-purple: #9b87f5;
+  --secondary-purple: #7E69AB;
+  --dark-purple: #1A1F2C;
+}
+
+@layer base {
+  body {
+    @apply text-white bg-black relative;
+  }
+}
