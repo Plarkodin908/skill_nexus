@@ -55,13 +55,10 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-primary-purple/10 mt-16 pt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="flex items-center gap-2 text-white/60">
-            <Mail className="h-4 w-4 text-primary-purple" />
-            <span>plarkodin@gmail.com</span>
-          </div>
+          
           <div className="flex items-center gap-2 text-white/60">
             <Phone className="h-4 w-4 text-primary-purple" />
-            <span>+21366521277</span>
+            
           </div>
           <div className="md:col-span-2 text-center text-white/60 pt-4">
             <p>&copy; {new Date().getFullYear()} SKILL NEXUS. All rights reserved.</p>
