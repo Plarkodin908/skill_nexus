@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,7 +12,7 @@
 
 @layer base {
   body {
-    @apply bg-dark-purple text-white relative;
+    @apply text-white relative;
     position: relative;
   }
 
@@ -73,6 +74,43 @@
     animation: bg-animate 150s linear infinite;
     z-index: -1;
     pointer-events: none;
+  }
+}
+
+@keyframes bg-animate {
+  0% {
+    background-position:
+      0px 220px,
+      3px 220px,
+      151.5px 337.5px,
+      25px 24px,
+      28px 24px,
+      176.5px 150px,
+      50px 16px,
+      53px 16px,
+      201.5px 91px,
+      75px 224px,
+      78px 224px,
+      226.5px 350.5px,
+      100px 19px,
+      103px 19px;
+  }
+  to {
+    background-position:
+      0px 6800px,
+      3px 6800px,
+      151.5px 6917.5px,
+      25px 13632px,
+      28px 13632px,
+      176.5px 13758px,
+      50px 5416px,
+      53px 5416px,
+      201.5px 5491px,
+      75px 17175px,
+      78px 17175px,
+      226.5px 17301.5px,
+      100px 5119px,
+      103px 5119px;
   }
 }
 
@@ -853,3 +891,4 @@
     animation: slide-in-top 0.3s both;
   }
 }
+

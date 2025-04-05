@@ -1,7 +1,9 @@
+
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BookOpen, Users, GraduationCap, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import Loading from "@/components/ui/loading";
+
 const Hero = () => {
   return <section className="pt-32 pb-20 px-4 relative overflow-hidden">
       <div className="container grid lg:grid-cols-2 gap-12 items-center relative z-10 py-0 my-0 mx-px">
@@ -82,4 +84,5 @@ const Hero = () => {
       </div>
     </section>;
 };
+
 export default Hero;
