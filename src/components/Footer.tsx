@@ -1,5 +1,7 @@
+
 import { Link } from "react-router-dom";
 import { GraduationCap, BookOpen, Users, MessageSquare, Mail, Phone } from "lucide-react";
+
 const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo({
@@ -7,12 +9,13 @@ const Footer = () => {
       behavior: "smooth"
     });
   };
-  return <footer className="py-20 px-4 border-t border-primary-purple/10">
+  
+  return (
+    <footer className="py-20 px-4 border-t border-primary-purple/10 bg-black/50 backdrop-blur-md relative z-10">
       <div className="container mx-auto rounded-sm">
-        <div className="grid md:grid-cols-4 gap-12 bg-gray-950">
+        <div className="grid md:grid-cols-4 gap-12">
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              
               <h3 className="text-2xl text-right px-[16px] py-[4px] font-semibold">SKILL NEXUS</h3>
             </div>
             <p className="text-white/60 max-w-xs py-[5px] px-0 mx-[21px] my-[24px]">
@@ -55,16 +58,16 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-primary-purple/10 mt-16 pt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-          
           <div className="flex items-center gap-2 text-white/60">
             <Phone className="h-4 w-4 text-primary-purple" />
-            
           </div>
           <div className="md:col-span-2 text-center text-white/60 pt-4">
             <p>&copy; {new Date().getFullYear()} SKILL NEXUS. All rights reserved.</p>
           </div>
         </div>
       </div>
-    </footer>;
+    </footer>
+  );
 };
+
 export default Footer;

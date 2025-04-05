@@ -9,7 +9,7 @@ const Hero = () => {
   const { user } = useAuth();
 
   return (
-    <section className="container mx-auto pt-32 pb-16 px-4">
+    <section className="container mx-auto pt-32 pb-16 px-4 relative">
       <div className="flex flex-col md:flex-row items-center justify-between gap-10">
         <div className="w-full md:w-1/2 space-y-6 animate-fade-in">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
