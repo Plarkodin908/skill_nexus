@@ -35,8 +35,8 @@ const MobileNavBar = () => {
           <ShoppingBag className="h-5 w-5" strokeWidth={3} />
           <span className="text-xs mt-1">Market</span>
         </Link>
-        <Button className="rounded-full bg-mint text-forest p-3 -mt-5 shadow-lg hover:bg-mint/90" onClick={toggleMenu}>
-          <Menu className="h-5 w-5" strokeWidth={3} />
+        <Button onClick={toggleMenu} className="rounded-full bg-mint text-forest p-3 -mt-5 shadow-lg hover:bg-mint/90 my-0 py-[22px]">
+          <Menu strokeWidth={3} className="h-5 w-5 my-[5px] px-[2px] mx-[5px] py-0" />
         </Button>
         <Link to="/profile" className="p-2 text-white hover:text-mint flex flex-col items-center">
           <User className="h-5 w-5" strokeWidth={3} />
