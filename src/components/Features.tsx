@@ -10,7 +10,7 @@ const Features = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
             How SkillSwap Works
           </h2>
-          <p className="text-white/80">Our AI-powered platform simplifies tech learning and knowledge sharing</p>
+          <p className="text-white/80">Our platform simplifies tech learning and knowledge sharing</p>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
           {[
@@ -30,14 +30,14 @@ const Features = () => {
               description: "Create your own courses and tutorials to help others while establishing yourself as an expert."
             }
           ].map((feature, index) => (
-            <div key={index} className="bg-black/30 backdrop-blur-sm p-6 md:p-8 rounded-xl border border-white/10">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center mb-6 bg-slate-800">
+            <div key={index} className="bg-gray-900/30 backdrop-blur-sm p-6 md:p-8 rounded-xl border border-gray-800/30">
+              <div className="w-12 h-12 rounded-full flex items-center justify-center mb-6 bg-gray-800">
                 {React.createElement(feature.icon, {
                   className: "w-6 h-6 text-gray-400",
                   "aria-hidden": "true"
                 })}
               </div>
-              <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
+              <h3 className="text-xl font-bold mb-3 text-gray-300">{feature.title}</h3>
               <p className="text-white/80">{feature.description}</p>
             </div>
           ))}

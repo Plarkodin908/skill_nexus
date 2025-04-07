@@ -28,18 +28,11 @@ const MobilePreview = () => {
         <div className="relative mt-8 lg:mt-0">
           <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-gray-700 to-gray-800 opacity-30 blur-lg" aria-hidden="true"></div>
           <img
-            src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952"
-            alt="Mobile app preview showing learning dashboard on smartphone"
-            className="rounded-2xl shadow-2xl mx-auto max-w-xs md:max-w-sm relative w-full h-auto"
-            width="500"
-            height="700"
+            src="/lovable-uploads/43cf2307-26cc-408d-b7ec-b67811205dab.png"
+            alt="Person working on laptop with illustrated design"
+            className="rounded-2xl shadow-2xl mx-auto w-full h-auto object-cover"
             loading="lazy"
           />
-          <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/40 rounded-2xl flex items-center justify-center">
-            <div className="bg-gray-800/90 px-6 py-3 rounded-full text-gray-300 font-bold">
-              Coming Soon
-            </div>
-          </div>
         </div>
       </div>
     </section>
