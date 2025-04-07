@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { GraduationCap, BookOpen, Users, MessageSquare, Mail, Phone } from "lucide-react";
+
 const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo({
@@ -7,7 +8,9 @@ const Footer = () => {
       behavior: "smooth"
     });
   };
-  return <footer className="py-20 px-4 border-t border-primary-purple/10 bg-black/50 backdrop-blur-md relative z-10">
+  
+  return (
+    <footer className="py-20 px-4 border-t border-white/10 bg-black/50 backdrop-blur-md relative z-10">
       <div className="container mx-auto rounded-sm">
         <div className="grid md:grid-cols-4 gap-12">
           <div className="space-y-4">
@@ -19,7 +22,7 @@ const Footer = () => {
             </p>
             <div className="flex gap-4 pt-2 my-[37px] px-[19px]">
               <GraduationCap className="h-5 w-5 text-primary-purple" />
-              <BookOpen className="h-5 w-5 text-primary-purple bg-slate-950" />
+              <BookOpen className="h-5 w-5 text-primary-purple" />
               <Users className="h-5 w-5 text-primary-purple" />
               <MessageSquare className="h-5 w-5 text-primary-purple" />
             </div>
@@ -53,7 +56,7 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="border-t border-primary-purple/10 mt-16 pt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="border-t border-white/10 mt-16 pt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="flex items-center gap-2 text-white/60">
             <Phone className="h-4 w-4 text-primary-purple" />
           </div>
@@ -62,6 +65,8 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>;
+    </footer>
+  );
 };
+
 export default Footer;

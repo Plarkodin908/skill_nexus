@@ -1,9 +1,9 @@
 
 /* Rain background container */
 .container-rain {
-  position: relative;
+  position: fixed;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   --c: #09f;
   background-color: #000;
   background-image: radial-gradient(4px 100px at 0px 235px, var(--c), #0000),
