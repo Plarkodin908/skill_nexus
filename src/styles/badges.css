@@ -1,29 +1,29 @@
 
 /* Badge classes */
 .badge-beginner {
-  @apply bg-blue-500/20 text-blue-500;
+  @apply bg-blue-800/20 text-blue-300;
 }
 
 .badge-intermediate {
-  @apply bg-green-500/20 text-green-500;
+  @apply bg-green-800/20 text-green-300;
 }
 
 .badge-advanced {
-  @apply bg-yellow-500/20 text-yellow-500;
+  @apply bg-yellow-800/20 text-yellow-300;
 }
 
 .badge-expert {
-  @apply bg-purple-500/20 text-purple-500;
+  @apply bg-purple-800/20 text-purple-300;
 }
 
 .badge-master {
-  @apply bg-orange-500/20 text-orange-500;
+  @apply bg-orange-800/20 text-orange-300;
 }
 
 .badge-legend {
-  @apply bg-primary-purple/20 text-primary-purple;
+  @apply bg-gray-700/20 text-gray-300;
 }
 
 .coming-soon {
-  @apply bg-primary-purple/10 text-primary-purple px-3 py-1 rounded-full text-sm font-medium border border-primary-purple/20;
+  @apply bg-gray-700/10 text-gray-400 px-3 py-1 rounded-full text-sm font-medium border border-gray-600/20;
 }

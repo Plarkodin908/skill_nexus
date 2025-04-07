@@ -33,7 +33,7 @@ const Features = () => {
             <div key={index} className="bg-black/30 backdrop-blur-sm p-6 md:p-8 rounded-xl border border-white/10">
               <div className="w-12 h-12 rounded-full flex items-center justify-center mb-6 bg-slate-800">
                 {React.createElement(feature.icon, {
-                  className: "w-6 h-6 text-primary-purple",
+                  className: "w-6 h-6 text-gray-400",
                   "aria-hidden": "true"
                 })}
               </div>

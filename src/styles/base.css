@@ -5,9 +5,11 @@
 
 :root {
   --bg-color: #000000;
-  --primary-purple: #9b87f5;
-  --secondary-purple: #7E69AB;
-  --dark-purple: #1A1F2C;
+  --primary-color: #4A5568;
+  --secondary-color: #2D3748;
+  --dark-color: #1A202C;
+  --text-color: #E2E8F0;
+  --accent-color: #718096;
 }
 
 @layer base {

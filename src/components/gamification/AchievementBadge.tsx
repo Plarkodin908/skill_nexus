@@ -18,33 +18,33 @@ const AchievementBadge = ({ type, title, description, earned }: AchievementBadge
   const config = {
     beginner: {
       icon: Zap,
-      color: "bg-blue-500/20 text-blue-500",
-      earnedColor: "bg-blue-500/20 text-blue-500"
+      color: "bg-blue-800/20 text-blue-300",
+      earnedColor: "bg-blue-800/20 text-blue-300"
     },
     intermediate: {
       icon: Star,
-      color: "bg-green-500/20 text-green-500",
-      earnedColor: "bg-green-500/20 text-green-500"
+      color: "bg-green-800/20 text-green-300",
+      earnedColor: "bg-green-800/20 text-green-300"
     },
     advanced: {
       icon: Award,
-      color: "bg-yellow-500/20 text-yellow-500",
-      earnedColor: "bg-yellow-500/20 text-yellow-500"
+      color: "bg-yellow-800/20 text-yellow-300",
+      earnedColor: "bg-yellow-800/20 text-yellow-300"
     },
     expert: {
       icon: Trophy,
-      color: "bg-purple-500/20 text-purple-500",
-      earnedColor: "bg-purple-500/20 text-purple-500"
+      color: "bg-purple-800/20 text-purple-300",
+      earnedColor: "bg-purple-800/20 text-purple-300"
     },
     master: {
       icon: Crown,
-      color: "bg-orange-500/20 text-orange-500",
-      earnedColor: "bg-orange-500/20 text-orange-500"
+      color: "bg-orange-800/20 text-orange-300",
+      earnedColor: "bg-orange-800/20 text-orange-300"
     },
     legend: {
       icon: Crown,
-      color: "bg-mint/20 text-mint",
-      earnedColor: "bg-mint/20 text-mint"
+      color: "bg-gray-700/20 text-gray-300",
+      earnedColor: "bg-gray-700/20 text-gray-300"
     }
   };
 

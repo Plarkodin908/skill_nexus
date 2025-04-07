@@ -22,18 +22,18 @@ export default {
       colors: {
         black: "#000000",
         divine: {
-          DEFAULT: "#FFD700", // Keep as a fallback
+          DEFAULT: "#E2E8F0", // Changed to a more serious gray
         },
         primary: {
-          DEFAULT: "#9b87f5",
+          DEFAULT: "#4A5568",
         },
-        "primary-purple": "#8a2be2",
-        "secondary-purple": "#7a1fd6",
-        "dark-purple": "#240046",
-        "light-purple": "#c77dff",
-        "pink-accent": "#f72585",
-        mint: "#F2FCE2",
-        forest: "#2D3B36",
+        "primary-purple": "#4A5568", // Changed to slate gray
+        "secondary-purple": "#2D3748", // Changed to darker slate
+        "dark-purple": "#1A202C", // Changed to very dark slate
+        "light-purple": "#A0AEC0", // Changed to light slate
+        "pink-accent": "#718096", // Changed to medium slate
+        mint: "#E2E8F0", // Changed to light gray
+        forest: "#2D3748", // Changed to dark slate
       },
       fontFamily: {
         sans: ["Inter var", "system-ui", "sans-serif"],
