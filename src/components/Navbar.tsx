@@ -49,7 +49,7 @@ const Navbar = () => {
           <div className="flex items-center">
             <Link to="/" className="mr-6">
               <div className="flex items-center gap-3">
-                <img alt="Skill Nexus Logo" src="/lovable-uploads/5fbc4b30-68bb-4412-8a7b-bf9e138ebc78.png" className="h-8 w-auto object-scale-down" />
+                
                 <h1 className="text-xl font-bold text-primary-purple text-fuchsia-100">SKILL <span className="text-white">NEXUS</span></h1>
               </div>
             </Link>
