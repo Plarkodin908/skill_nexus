@@ -12,6 +12,6 @@
 
 @layer base {
   body {
-    @apply text-white bg-black relative;
+    @apply text-white bg-black relative pb-16;
   }
 }
