@@ -16,7 +16,14 @@ const Index = () => {
   
   return (
     <div className="min-h-screen bg-black">
-      <div className="container-rain fixed inset-0 -z-10"></div>
+      <div className="fixed inset-0 -z-10">
+        <img 
+          src="/lovable-uploads/7fa67612-a8dd-4f50-bb04-411ef3855c5c.png" 
+          alt="Background" 
+          className="w-full h-full object-cover opacity-20"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/95"></div>
+      </div>
       
       <SEOHead 
         title="Skill Nexus - Community-Driven Learning Platform" 
