@@ -1,24 +1,16 @@
-
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BookOpen, Users, GraduationCap, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import Loading from "@/components/ui/loading";
 import { useAuth } from "@/contexts/AuthContext";
-
 const Hero = () => {
   const {
     user
   } = useAuth();
-  
-  return (
-    <section className="container mx-auto pt-32 pb-16 px-4 relative">
+  return <section className="container mx-auto pt-32 pb-16 px-4 relative">
       <div className="flex flex-col md:flex-row items-center justify-between gap-10">
         <div className="w-full md:w-1/2 space-y-6 animate-fade-in">
-          <img 
-            src="/lovable-uploads/7fa67612-a8dd-4f50-bb04-411ef3855c5c.png" 
-            alt="Unlock Your Potential" 
-            className="w-full max-w-lg mx-auto md:mx-0"
-          />
+          <img src="/lovable-uploads/7fa67612-a8dd-4f50-bb04-411ef3855c5c.png" alt="Unlock Your Potential" className="w-full max-w-lg mx-auto md:mx-0" />
           
           <p className="text-lg text-white/80 max-w-lg">
             Connect with experts, share your skills, and grow together in our community-driven learning platform.
@@ -65,7 +57,7 @@ const Hero = () => {
         <div className="w-full md:w-1/2 flex justify-center animate-fade-in">
           <div className="relative">
             <div className="absolute -z-10 w-full h-full bg-gradient-to-br from-gray-700/30 to-gray-800/30 rounded-full blur-3xl"></div>
-            <img src="/lovable-uploads/43cf2307-26cc-408d-b7ec-b67811205dab.png" alt="Person learning online" className="w-full max-w-md mx-auto relative z-10" />
+            
           </div>
         </div>
       </div>
@@ -76,8 +68,6 @@ const Hero = () => {
           <ChevronDown className="h-6 w-6 animate-bounce" />
         </a>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;
