@@ -20,11 +20,13 @@ const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Marketplace = lazy(() => import("./pages/Marketplace"));
 const Community = lazy(() => import("./pages/Community"));
 const Messages = lazy(() => import("./pages/Messages"));
+const Notifications = lazy(() => import("./pages/Notifications"));
 const Matches = lazy(() => import("./pages/Matches"));
 const MatchActionPage = lazy(() => import("./pages/matches/MatchActionPage"));
 const Tutorials = lazy(() => import("./pages/Tutorials"));
 const Pricing = lazy(() => import("./pages/Pricing"));
 const Profile = lazy(() => import("./pages/Profile"));
+const ProfileDetail = lazy(() => import("./pages/ProfileDetail"));
 const Settings = lazy(() => import("./pages/Settings"));
 const CalendarPage = lazy(() => import("./pages/CalendarPage"));
 const Achievements = lazy(() => import("./pages/Achievements"));
@@ -74,11 +76,13 @@ function App() {
                 <Route path="/marketplace" element={<Marketplace />} />
                 <Route path="/community" element={<Community />} />
                 <Route path="/messages" element={<Messages />} />
+                <Route path="/notifications" element={<Notifications />} />
                 <Route path="/matches" element={<Matches />} />
                 <Route path="/matches/:action" element={<MatchActionPage />} />
                 <Route path="/tutorials" element={<Tutorials />} />
                 <Route path="/pricing" element={<Pricing />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/profile/:id" element={<ProfileDetail />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/calendar" element={<CalendarPage />} />
                 <Route path="/achievements" element={<Achievements />} />
