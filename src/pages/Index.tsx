@@ -20,9 +20,9 @@ const Index = () => {
         <img 
           src="/lovable-uploads/7fa67612-a8dd-4f50-bb04-411ef3855c5c.png" 
           alt="Background" 
-          className="w-full h-full object-cover opacity-20"
+          className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/95"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-900/70 to-black/95"></div>
       </div>
       
       <SEOHead 
@@ -50,7 +50,7 @@ const Index = () => {
         <Hero />
         
         {/* Feature Highlights */}
-        <section className="py-12 px-4 bg-black/50 backdrop-blur-sm">
+        <section className="py-12 px-4 bg-gray-900/50 backdrop-blur-sm">
           <div className="container mx-auto">
             <div className="flex flex-col md:flex-row justify-between items-center gap-8">
               <div className="w-full md:w-1/2 space-y-4">
@@ -61,15 +61,15 @@ const Index = () => {
                 </p>
                 <ul className="space-y-2 text-white/80">
                   <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-primary-purple rounded-full"></span>
+                    <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
                     Access to high-quality courses and resources
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-primary-purple rounded-full"></span>
+                    <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
                     Connect with industry professionals
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-primary-purple rounded-full"></span>
+                    <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
                     Track your progress with innovative tools
                   </li>
                 </ul>
@@ -83,7 +83,7 @@ const Index = () => {
         </section>
         
         {/* Action Buttons */}
-        <section className="py-10 px-4 bg-black/70 backdrop-blur-sm">
+        <section className="py-10 px-4 bg-gray-900/70 backdrop-blur-sm">
           <div className="container mx-auto">
             <div className="flex flex-wrap justify-center gap-4">
               <Link to="/marketplace">

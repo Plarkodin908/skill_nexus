@@ -1,5 +1,7 @@
+
 import React from "react";
 import { Star, Award, ShieldCheck } from "lucide-react";
+
 const Features = () => {
   return <section className="py-20 px-4" id="features">
       <div className="container mx-auto">
@@ -20,8 +22,8 @@ const Features = () => {
           icon: ShieldCheck,
           title: "Share Your Knowledge",
           description: "Create your own courses and tutorials to help others while establishing yourself as an expert."
-        }].map((feature, index) => <div key={index} className="bg-gray-900/30 backdrop-blur-sm p-6 md:p-8 rounded-xl border border-gray-800/30">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center mb-6 bg-gray-800">
+        }].map((feature, index) => <div key={index} className="bg-gray-800/30 backdrop-blur-sm p-6 md:p-8 rounded-xl border border-gray-700/30">
+              <div className="w-12 h-12 rounded-full flex items-center justify-center mb-6 bg-gray-700">
                 {React.createElement(feature.icon, {
               className: "w-6 h-6 text-gray-400",
               "aria-hidden": "true"
@@ -34,4 +36,5 @@ const Features = () => {
       </div>
     </section>;
 };
+
 export default Features;
