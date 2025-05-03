@@ -9,6 +9,9 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import VerificationModal from '@/components/profile/VerificationModal';
+import ProgressTracker from '@/components/gamification/ProgressTracker';
+import AchievementsCard from '@/components/dashboard/AchievementsCard';
+import UserStatsCard from '@/components/dashboard/UserStatsCard';
 
 const Profile = () => {
   const { user } = useAuth();
@@ -18,6 +21,32 @@ const Profile = () => {
   const [isVerificationModalOpen, setIsVerificationModalOpen] = useState(false);
   const [profilePicture, setProfilePicture] = useState<string>(user?.avatar || '');
   const [coverPicture, setCoverPicture] = useState<string>('');
+
+  // Sample progress data
+  const progressItems = [
+    { id: 1, label: "Courses Completed", currentValue: 3, targetValue: 10 },
+    { id: 2, label: "Skills Acquired", currentValue: 8, targetValue: 12 },
+    { id: 3, label: "Community Points", currentValue: 520, targetValue: 1000 },
+    { id: 4, label: "Tutorial Contributions", currentValue: 2, targetValue: 5 }
+  ];
+
+  // Sample stats data
+  const statsData = [
+    { value: "85%", label: "Learning Score" },
+    { value: "18", label: "Days Streak" },
+    { value: "3", label: "Courses" },
+    { value: "8", label: "Skills" }
+  ];
+
+  // Sample achievements data
+  const achievements = [
+    { type: "beginner", title: "First Course", description: "Complete your first course", earned: true },
+    { type: "intermediate", title: "Streak Master", description: "Maintain a 14-day learning streak", earned: true },
+    { type: "advanced", title: "Community Guide", description: "Help 5 other members", earned: false },
+    { type: "expert", title: "Content Creator", description: "Create your first tutorial", earned: true },
+    { type: "master", title: "Skill Expert", description: "Master 5 skills", earned: false },
+    { type: "legend", title: "Pioneer", description: "Be among the first 100 users", earned: true }
+  ];
 
   const courses = [
     {
@@ -73,7 +102,7 @@ const Profile = () => {
   };
 
   return (
-    <>
+    <div className="bg-dark-purple min-h-screen">
       <Navbar />
       <div className="container mx-auto py-20 px-4">
         {/* Cover Image (only visible when not editing) */}
@@ -129,6 +158,22 @@ const Profile = () => {
                 )}
               </div>
             )}
+            
+            {/* Progress Dashboard - Only visible when not editing */}
+            {!isEditing && (
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <div className="lg:col-span-2">
+                  <ProgressTracker 
+                    items={progressItems} 
+                    className="bg-forest-light p-6 rounded-lg border border-mint/20"
+                    animated={true}
+                  />
+                </div>
+                <UserStatsCard stats={statsData} />
+                <AchievementsCard achievements={achievements} />
+              </div>
+            )}
+            
             <ProfileTabs courses={courses} />
           </div>
         </div>
@@ -138,7 +183,7 @@ const Profile = () => {
         isOpen={isVerificationModalOpen} 
         onClose={() => setIsVerificationModalOpen(false)} 
       />
-    </>
+    </div>
   );
 };
 

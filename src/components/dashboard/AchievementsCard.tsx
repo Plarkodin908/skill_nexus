@@ -2,6 +2,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import AchievementBadge from "@/components/gamification/AchievementBadge";
+import { Link } from 'react-router-dom';
 
 interface Achievement {
   type: "beginner" | "intermediate" | "advanced" | "expert" | "master" | "legend";
@@ -19,13 +20,14 @@ const AchievementsCard = ({ achievements }: AchievementsCardProps) => {
     <Card className="bg-forest-light border border-mint/10 p-6">
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-xl font-bold text-white">Achievements</h3>
-        <Button 
-          variant="ghost" 
-          className="text-mint hover:text-mint/80 hover:bg-mint/10 p-1 h-auto" 
-          onClick={() => window.location.href = "/achievements"}
-        >
-          View All
-        </Button>
+        <Link to="/achievements">
+          <Button 
+            variant="ghost" 
+            className="text-mint hover:text-mint/80 hover:bg-mint/10 p-1 h-auto"
+          >
+            View All
+          </Button>
+        </Link>
       </div>
       <div className="grid grid-cols-3 gap-2">
         {achievements.map((achievement, index) => (
