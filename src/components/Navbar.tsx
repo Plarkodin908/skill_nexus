@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
@@ -6,7 +5,6 @@ import { Search, Bell, User as UserIcon, Menu, X, Shield } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import VerifiedBadge from "./profile/VerifiedBadge";
 import { toast } from "sonner";
-
 const Navbar = () => {
   const {
     user,
@@ -38,24 +36,19 @@ const Navbar = () => {
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
-  
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     setShowSearchResults(false);
     toast.info("Search functionality coming soon!");
   };
-  
   const handleNotificationsClick = () => {
     toast.info("Notification center coming soon!");
   };
-  
   const toggleSecureNavigation = () => {
     setSecureNavigation(!secureNavigation);
     toast.success(secureNavigation ? "Standard navigation mode enabled" : "Secure navigation mode enabled");
   };
-  
-  return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-gray-900/90 backdrop-blur-lg shadow-lg" : "bg-transparent"}`}>
+  return <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-gray-900/90 backdrop-blur-lg shadow-lg" : "bg-transparent"}`}>
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
@@ -66,29 +59,19 @@ const Navbar = () => {
             </Link>
             
             <div className="hidden md:flex items-center space-x-6">
-              <Link to="/marketplace" prefetch="intent" className="text-white hover:text-gray-400 transition-colors">Marketplace</Link>
-              <Link to="/tutorials" prefetch="intent" className="text-white hover:text-gray-400 transition-colors">Tutorials</Link>
-              <Link to="/community" prefetch="intent" className="text-white hover:text-gray-400 transition-colors">Community</Link>
+              
+              
+              
             </div>
           </div>
           
           <div className="flex items-center space-x-3">
-            <button 
-              onClick={toggleSecureNavigation}
-              className="p-2 rounded-full hover:bg-white/5 transition-colors relative hidden md:flex"
-              aria-label={secureNavigation ? "Disable secure navigation" : "Enable secure navigation"}
-              title={secureNavigation ? "Secure navigation active" : "Standard navigation"}
-            >
+            <button onClick={toggleSecureNavigation} className="p-2 rounded-full hover:bg-white/5 transition-colors relative hidden md:flex" aria-label={secureNavigation ? "Disable secure navigation" : "Enable secure navigation"} title={secureNavigation ? "Secure navigation active" : "Standard navigation"}>
               <Shield className={`h-5 w-5 ${secureNavigation ? "text-green-400" : "text-gray-400"}`} />
             </button>
 
             <form onSubmit={handleSearch} className="hidden md:flex relative">
-              <input 
-                type="text" 
-                placeholder="Search..." 
-                className="bg-white/5 backdrop-blur-sm border border-white/10 text-white px-4 py-2 rounded-full focus:outline-none focus:border-gray-400 w-[200px]" 
-                autoComplete="off"
-              />
+              <input type="text" placeholder="Search..." className="bg-white/5 backdrop-blur-sm border border-white/10 text-white px-4 py-2 rounded-full focus:outline-none focus:border-gray-400 w-[200px]" autoComplete="off" />
               <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2">
                 <Search className="h-5 w-5 text-white/50" />
               </button>
@@ -142,21 +125,13 @@ const Navbar = () => {
               
               <div className="flex items-center justify-between">
                 <span className="text-white/80">Secure Navigation</span>
-                <button 
-                  onClick={toggleSecureNavigation}
-                  className="p-2 rounded-full hover:bg-white/5 transition-colors relative"
-                >
+                <button onClick={toggleSecureNavigation} className="p-2 rounded-full hover:bg-white/5 transition-colors relative">
                   <Shield className={`h-5 w-5 ${secureNavigation ? "text-green-400" : "text-gray-400"}`} />
                 </button>
               </div>
               
               <form onSubmit={handleSearch} className="relative mt-2">
-                <input 
-                  type="text" 
-                  placeholder="Search..." 
-                  className="w-full bg-white/5 backdrop-blur-sm border border-white/10 text-white px-4 py-2 rounded-full focus:outline-none focus:border-gray-400"
-                  autoComplete="off"
-                />
+                <input type="text" placeholder="Search..." className="w-full bg-white/5 backdrop-blur-sm border border-white/10 text-white px-4 py-2 rounded-full focus:outline-none focus:border-gray-400" autoComplete="off" />
                 <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2">
                   <Search className="h-5 w-5 text-white/50" />
                 </button>
@@ -177,8 +152,6 @@ const Navbar = () => {
             </div>
           </div>}
       </div>
-    </nav>
-  );
+    </nav>;
 };
-
 export default Navbar;
