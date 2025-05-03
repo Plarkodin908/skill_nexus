@@ -4,6 +4,7 @@ import { ArrowRight, BookOpen, Users, GraduationCap, ChevronDown } from "lucide-
 import { Link } from "react-router-dom";
 import Loading from "@/components/ui/loading";
 import { useAuth } from "@/contexts/AuthContext";
+import ScrollReveal from "./ScrollReveal";
 
 const Hero = () => {
   const { user } = useAuth();
@@ -11,7 +12,7 @@ const Hero = () => {
   return (
     <section className="container mx-auto pt-32 pb-16 px-4 relative">
       <div className="flex flex-col md:flex-row items-center justify-between gap-10">
-        <div className="w-full md:w-1/2 space-y-6 animate-fade-in">
+        <ScrollReveal direction="left" className="w-full md:w-1/2 space-y-6">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
             Unlock Your <span className="text-gray-400">Potential</span>
           </h1>
@@ -23,13 +24,13 @@ const Hero = () => {
           <div className="flex flex-wrap gap-4 pt-4">
             {user ? (
               <>
-                <Link to="/profile">
+                <Link to="/profile" rel="noopener">
                   <Button className="bg-gray-700 hover:bg-gray-800 text-white px-6 py-6">
                     <span>Manage Profile</span>
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
-                <Link to="/marketplace">
+                <Link to="/marketplace" rel="noopener">
                   <Button variant="outline" className="border-gray-600 text-gray-300 hover:bg-gray-800/10 px-6 py-6">
                     <span>Explore Marketplace</span>
                     <ArrowRight className="ml-2 h-5 w-5" />
@@ -37,7 +38,7 @@ const Hero = () => {
                 </Link>
               </>
             ) : (
-              <Link to="/auth/sign-up">
+              <Link to="/auth/sign-up" rel="noopener">
                 <Button className="bg-gray-700 hover:bg-gray-800 text-white px-6 py-6">
                   <span>Take the First Step</span>
                   <ArrowRight className="ml-2 h-5 w-5" />
@@ -60,18 +61,20 @@ const Hero = () => {
               <span className="text-gray-300">Expert Instructors</span>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
         
-        <div className="w-full md:w-1/2 flex justify-center animate-fade-in">
+        <ScrollReveal direction="right" className="w-full md:w-1/2 flex justify-center">
           <div className="relative">
             <div className="absolute -z-10 w-full h-full bg-gradient-to-br from-gray-700/30 to-gray-800/30 rounded-full blur-3xl"></div>
             <img 
               src="/lovable-uploads/43cf2307-26cc-408d-b7ec-b67811205dab.png" 
               alt="Professional working with digital interface" 
               className="relative z-10 w-full max-w-md mx-auto rounded-lg shadow-2xl"
+              loading="eager"
+              fetchpriority="high"
             />
           </div>
-        </div>
+        </ScrollReveal>
       </div>
       
       <div className="mt-12 flex justify-center">

@@ -10,6 +10,12 @@
   <meta name="keywords" content="learning platform, skill sharing, online courses, education, community learning, tech skills" />
   <meta name="author" content="Skill Nexus" />
   
+  <!-- Security headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.gpteng.co; connect-src 'self' https://api.example.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+  
   <!-- Open Graph / Social Media -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Skill Nexus - Community-Driven Learning Platform" />
@@ -26,19 +32,25 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/lovable-uploads/609db0c7-2e29-405b-ad44-bee4b401e14e.png" />
   
-  <!-- Google Fonts - Preconnect for performance -->
+  <!-- Preload critical fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
+  <!-- Preload critical assets -->
+  <link rel="preload" as="image" href="/lovable-uploads/609db0c7-2e29-405b-ad44-bee4b401e14e.png">
+  <link rel="preload" as="image" href="/lovable-uploads/7fa67612-a8dd-4f50-bb04-411ef3855c5c.png">
+  <link rel="preload" as="image" href="/lovable-uploads/43cf2307-26cc-408d-b7ec-b67811205dab.png">
+  
+  <!-- DNS prefetch for external resources -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  
   <!-- Canonical URL -->
   <link rel="canonical" href="https://skillnexus.example.com" />
   
-  <!-- Preload critical assets -->
-  <link rel="preload" as="image" href="/lovable-uploads/609db0c7-2e29-405b-ad44-bee4b401e14e.png">
-  
   <!-- Meta theme color -->
-  <meta name="theme-color" content="#6d28d9">
+  <meta name="theme-color" content="#09f">
 </head>
 
 <body>

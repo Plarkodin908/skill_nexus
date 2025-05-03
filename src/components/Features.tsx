@@ -1,40 +1,58 @@
 
 import React from "react";
 import { Star, Award, ShieldCheck } from "lucide-react";
+import ScrollReveal from "./ScrollReveal";
 
 const Features = () => {
-  return <section className="py-20 px-4" id="features">
+  const features = [
+    {
+      icon: Star,
+      title: "Discover Expert Content",
+      description: "Explore high-quality courses and resources created by industry professionals and passionate educators."
+    },
+    {
+      icon: Award,
+      title: "Learn At Your Own Pace",
+      description: "Access structured learning paths and bite-sized lessons that fit into your busy schedule."
+    },
+    {
+      icon: ShieldCheck,
+      title: "Share Your Knowledge",
+      description: "Create your own courses and tutorials to help others while establishing yourself as an expert."
+    }
+  ];
+
+  return (
+    <section className="py-20 px-4" id="features">
       <div className="container mx-auto">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">How Skill Nexus Works</h2>
           <p className="text-white/80">Our platform simplifies tech learning and knowledge sharing</p>
         </div>
+        
         <div className="grid md:grid-cols-3 gap-8">
-          {[{
-          icon: Star,
-          title: "Discover Expert Content",
-          description: "Explore high-quality courses and resources created by industry professionals and passionate educators."
-        }, {
-          icon: Award,
-          title: "Learn At Your Own Pace",
-          description: "Access structured learning paths and bite-sized lessons that fit into your busy schedule."
-        }, {
-          icon: ShieldCheck,
-          title: "Share Your Knowledge",
-          description: "Create your own courses and tutorials to help others while establishing yourself as an expert."
-        }].map((feature, index) => <div key={index} className="bg-gray-800/30 backdrop-blur-sm p-6 md:p-8 rounded-xl border border-gray-700/30">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center mb-6 bg-gray-700">
-                {React.createElement(feature.icon, {
-              className: "w-6 h-6 text-gray-400",
-              "aria-hidden": "true"
-            })}
+          {features.map((feature, index) => (
+            <ScrollReveal 
+              key={index} 
+              delay={(index + 1) * 100} 
+              direction={index === 0 ? 'left' : index === 2 ? 'right' : 'up'}
+            >
+              <div className="bg-gray-800/30 backdrop-blur-sm p-6 md:p-8 rounded-xl border border-gray-700/30 h-full">
+                <div className="w-12 h-12 rounded-full flex items-center justify-center mb-6 bg-gray-700">
+                  {React.createElement(feature.icon, {
+                    className: "w-6 h-6 text-gray-400",
+                    "aria-hidden": "true"
+                  })}
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-gray-300">{feature.title}</h3>
+                <p className="text-white/80">{feature.description}</p>
               </div>
-              <h3 className="text-xl font-bold mb-3 text-gray-300">{feature.title}</h3>
-              <p className="text-white/80">{feature.description}</p>
-            </div>)}
+            </ScrollReveal>
+          ))}
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
 
 export default Features;
