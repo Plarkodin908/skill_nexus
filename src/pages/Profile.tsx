@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import EnhancedNavbar from '@/components/EnhancedNavbar';
@@ -38,14 +37,14 @@ const Profile = () => {
     { value: "8", label: "Skills" }
   ];
 
-  // Sample achievements data
+  // Sample achievements data - fixed type property to match the Achievement type
   const achievements = [
-    { type: "beginner", title: "First Course", description: "Complete your first course", earned: true },
-    { type: "intermediate", title: "Streak Master", description: "Maintain a 14-day learning streak", earned: true },
-    { type: "advanced", title: "Community Guide", description: "Help 5 other members", earned: false },
-    { type: "expert", title: "Content Creator", description: "Create your first tutorial", earned: true },
-    { type: "master", title: "Skill Expert", description: "Master 5 skills", earned: false },
-    { type: "legend", title: "Pioneer", description: "Be among the first 100 users", earned: true }
+    { type: "beginner" as const, title: "First Course", description: "Complete your first course", earned: true },
+    { type: "intermediate" as const, title: "Streak Master", description: "Maintain a 14-day learning streak", earned: true },
+    { type: "advanced" as const, title: "Community Guide", description: "Help 5 other members", earned: false },
+    { type: "expert" as const, title: "Content Creator", description: "Create your first tutorial", earned: true },
+    { type: "master" as const, title: "Skill Expert", description: "Master 5 skills", earned: false },
+    { type: "legend" as const, title: "Pioneer", description: "Be among the first 100 users", earned: true }
   ];
 
   const courses = [
