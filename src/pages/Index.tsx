@@ -10,6 +10,8 @@ import { useAuth } from "@/contexts/AuthContext";
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import Stats from "@/components/Stats";
+import DashboardDemo from "@/components/DashboardDemo";
+import Testimonials from "@/components/Testimonials";
 import { useEffect } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 
@@ -22,7 +24,10 @@ const Index = () => {
     const imagesToPreload = [
       "/lovable-uploads/7fa67612-a8dd-4f50-bb04-411ef3855c5c.png",
       "/lovable-uploads/43cf2307-26cc-408d-b7ec-b67811205dab.png",
-      "/lovable-uploads/609db0c7-2e29-405b-ad44-bee4b401e14e.png"
+      "/lovable-uploads/609db0c7-2e29-405b-ad44-bee4b401e14e.png",
+      "/lovable-uploads/6a919366-1f11-4890-a656-15f1262cac03.jpg",
+      "/lovable-uploads/44320338-928a-4f87-80c5-b108d09edc5e.png",
+      "/lovable-uploads/54ffc2eb-8b8d-4893-beca-68661a996ce4.png"
     ];
     
     imagesToPreload.forEach(src => {
@@ -32,9 +37,7 @@ const Index = () => {
   }, []);
   
   return (
-    <div className="min-h-screen bg-black">
-      <div className="container-rain"></div>
-      
+    <div className="min-h-screen bg-black overflow-x-hidden">
       <SEOHead 
         title="Skill Nexus - Community-Driven Learning Platform" 
         description="Exchange skills that match your coding success with ease using our innovative learning marketplace." 
@@ -66,81 +69,50 @@ const Index = () => {
         {/* Hero Section */}
         <Hero />
         
-        {/* Feature Highlights */}
-        <section className="py-12 px-4 bg-gray-900/50 backdrop-blur-sm">
-          <div className="container mx-auto">
-            <ScrollReveal>
-              <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-                <div className="w-full md:w-1/2 space-y-4">
-                  <h2 className="text-2xl md:text-3xl font-bold text-white">Learn, Share, and Grow Together</h2>
-                  <p className="text-white/70">
-                    Our platform facilitates knowledge exchange and skill development through
-                    a community-driven approach, connecting learners with expert educators.
-                  </p>
-                  <ul className="space-y-2 text-white/80">
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
-                      Access to high-quality courses and resources
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
-                      Connect with industry professionals
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
-                      Track your progress with innovative tools
-                    </li>
-                  </ul>
-                </div>
-                
-                <div className="w-full md:w-1/2 grid grid-cols-2 gap-4">
-                  
-                </div>
-              </div>
-            </ScrollReveal>
-          </div>
-        </section>
+        {/* Feature Highlights with Icons and Descriptions */}
+        <Features />
         
-        {/* Action Buttons */}
-        <section className="py-10 px-4 bg-gray-900/70 backdrop-blur-sm">
-          <div className="container mx-auto">
-            <ScrollReveal>
-              <div className="flex flex-wrap justify-center gap-4">
-                <Link to="/marketplace" rel="noopener">
-                  <button className="animated-button">
-                    <span className="text">Explore Courses</span>
-                    <span className="circle"></span>
-                    <ArrowRight className="arr-1 h-5 w-5" aria-hidden="true" />
-                    <ArrowRight className="arr-2 h-5 w-5" aria-hidden="true" />
-                  </button>
-                </Link>
-                <Link to="/tutorials" rel="noopener">
-                  <button className="glow-button">
-                    View Tutorials
-                  </button>
-                </Link>
-                <Link to="/community" rel="noopener">
-                  <button className="animated-button">
-                    <span className="text">Join Community</span>
-                    <span className="circle"></span>
-                    <ArrowRight className="arr-1 h-5 w-5" aria-hidden="true" />
-                    <ArrowRight className="arr-2 h-5 w-5" aria-hidden="true" />
-                  </button>
-                </Link>
-              </div>
-            </ScrollReveal>
-          </div>
-        </section>
-        
-        {/* Stats Section with scroll reveal */}
+        {/* Stats Section */}
         <ScrollReveal>
           <Stats />
         </ScrollReveal>
         
-        {/* Features Section with scroll reveal */}
-        <ScrollReveal>
-          <Features />
-        </ScrollReveal>
+        {/* Dashboard Demo Section */}
+        <DashboardDemo />
+        
+        {/* Testimonials Section */}
+        <Testimonials />
+        
+        {/* Action Buttons */}
+        <section className="py-16 px-4 bg-gray-900/70 backdrop-blur-sm">
+          <div className="container mx-auto">
+            <ScrollReveal>
+              <div className="text-center max-w-2xl mx-auto mb-8">
+                <h2 className="text-3xl font-bold mb-4 text-white">Ready to Start Your Journey?</h2>
+                <p className="text-white/80">Join our community today and accelerate your learning with expert guidance and support.</p>
+              </div>
+              <div className="flex flex-wrap justify-center gap-4">
+                <Link to="/marketplace">
+                  <Button className="bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-800 hover:to-gray-900 text-white px-6 py-6 text-lg">
+                    <span>Explore Courses</span>
+                    <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
+                  </Button>
+                </Link>
+                <Link to="/tutorials">
+                  <Button variant="outline" className="border-gray-600 text-white hover:bg-gray-800/10 px-6 py-6 text-lg">
+                    View Tutorials
+                  </Button>
+                </Link>
+                <Link to="/community">
+                  <Button className="bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-800 hover:to-gray-900 text-white px-6 py-6 text-lg">
+                    <span>Join Community</span>
+                    <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
+                  </Button>
+                </Link>
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
       </main>
       
       <Footer />

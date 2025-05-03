@@ -16,3 +16,71 @@
   background: linear-gradient(135deg, #0f0f17 0%, #1a192d 100%);
   overflow: hidden;
 }
+
+/* Hero section gradient */
+.hero-gradient {
+  background: linear-gradient(135deg, #09090b 0%, #1a192d 70%, #2d2a4a 100%);
+  position: relative;
+}
+
+/* Feature section gradient */
+.feature-gradient {
+  background: linear-gradient(180deg, #0f0f17 0%, #161525 100%);
+  position: relative;
+}
+
+/* Dashboard demo gradient */
+.dashboard-gradient {
+  background: linear-gradient(135deg, #0f0f17 0%, #1a192d 50%, #2d2a4a 90%);
+  position: relative;
+}
+
+/* Testimonials gradient */
+.testimonial-gradient {
+  background: linear-gradient(180deg, #1a192d 0%, #0f0f17 100%);
+}
+
+/* Animated background element */
+.animated-bg-element {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.15;
+  animation: float 8s ease-in-out infinite;
+}
+
+.animated-bg-element.one {
+  background: linear-gradient(45deg, #645dfa 0%, #9179ff 100%);
+  width: 300px;
+  height: 300px;
+  top: -50px;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.animated-bg-element.two {
+  background: linear-gradient(45deg, #3e3a9c 0%, #6a63d5 100%);
+  width: 250px;
+  height: 250px;
+  top: 30%;
+  right: 10%;
+  animation-delay: 2s;
+}
+
+.animated-bg-element.three {
+  background: linear-gradient(45deg, #2c297a 0%, #4a45b3 100%);
+  width: 200px;
+  height: 200px;
+  bottom: 10%;
+  left: 20%;
+  animation-delay: 4s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.05);
+  }
+}
