@@ -84,7 +84,7 @@ const Index = () => {
         <Testimonials />
         
         {/* Action Buttons */}
-        <section className="py-16 px-4 bg-gray-900/70 backdrop-blur-sm">
+        <section className="gradient-rain-background py-16 px-4 backdrop-blur-sm">
           <div className="container mx-auto">
             <ScrollReveal>
               <div className="text-center max-w-2xl mx-auto mb-8">

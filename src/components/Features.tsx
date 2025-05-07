@@ -38,7 +38,7 @@ const Features = () => {
   ];
 
   return (
-    <section className="feature-gradient py-20 px-4" id="features">
+    <section className="gradient-rain-background py-20 px-4" id="features">
       <div className="container mx-auto">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">How Skill Nexus Works</h2>

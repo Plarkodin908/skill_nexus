@@ -9,7 +9,7 @@ const Hero = () => {
   const { user } = useAuth();
   
   return (
-    <section className="hero-gradient pt-24 md:pt-32 pb-16 px-4 relative">
+    <section className="hero-rain-gradient pt-24 md:pt-32 pb-16 px-4 relative">
       {/* Animated background elements */}
       <div className="animated-bg-element one"></div>
       <div className="animated-bg-element two"></div>

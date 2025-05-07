@@ -26,7 +26,7 @@ const Testimonials = () => {
   ];
 
   return (
-    <section className="testimonial-gradient py-20 px-4">
+    <section className="gradient-rain-background py-20 px-4">
       <div className="container mx-auto">
         <ScrollReveal>
           <div className="max-w-3xl mx-auto text-center mb-16">
