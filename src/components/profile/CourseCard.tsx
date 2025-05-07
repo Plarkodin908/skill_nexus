@@ -1,5 +1,7 @@
 import React from 'react';
 import { Card } from '@/components/ui/card';
+import { MessageSquare, Eye, Heart } from 'lucide-react';
+
 interface CourseCardProps {
   id: number;
   title: string;
@@ -9,6 +11,7 @@ interface CourseCardProps {
   views: number;
   imagePath?: string;
 }
+
 const CourseCard: React.FC<CourseCardProps> = ({
   id,
   title,
@@ -18,24 +21,14 @@ const CourseCard: React.FC<CourseCardProps> = ({
   views,
   imagePath
 }) => {
-  return <div className="main">
-      <Card className="card">
-        <div className="fl">
-          <div className="fullscreen">
-            
-          </div>
-        </div>
-        <div className="card_content">
-          <label className="switch_738">
-            <input type="checkbox" className="chk_738" />
-            <span className="slider_738"></span>
-          </label>
-        </div>
-        <div className="card_back"></div>
-      </Card>
-      <div className="data">
-        <div className="img">
-          {imagePath ? <img src={imagePath} alt={title} className="w-full h-full object-cover" /> : <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  return (
+    <Card className="overflow-hidden bg-forest-light border border-mint/20 rounded-lg">
+      <div className="relative h-40">
+        {imagePath ? (
+          <img src={imagePath} alt={title} className="w-full h-full object-cover" />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-forest">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" className="w-16 h-16">
               <g strokeWidth="2.00" fill="none" strokeLinecap="butt">
                 <path stroke="#59afb1" d="M 14.06 0.00 Q 13.33 4.09 13.93 7.52 A 1.04 1.02 -78.7 0 0 14.37 8.19 L 32.87 20.19"></path>
                 <path stroke="#4fa6a8" d="M 32.87 20.19 L 42.25 26.79"></path>
@@ -61,24 +54,32 @@ const CourseCard: React.FC<CourseCardProps> = ({
                 <path stroke="#5fd6b0" d="M 32.50 55.79 L 11.00 41.21"></path>
                 <path stroke="#48d08e" d="M 11.19 80.00 Q 12.51 79.61 11.57 78.67 Q 5.99 73.11 1.70 65.70 C 1.28 64.97 0.74 64.76 0.00 65.19"></path>
               </g>
-            </svg>}
-        </div>
-        <div className="text">
-          
-          
-        </div>
+            </svg>
+          </div>
+        )}
       </div>
-      <div className="btns">
+      
+      <div className="p-4">
+        <h3 className="text-lg font-semibold text-white mb-1">{title}</h3>
+        <p className="text-white/70 text-sm mb-4">by {author}</p>
         
-        <div className="comments">
-          
-          <span className="comments_text">{comments}</span>
-        </div>
-        <div className="views">
-          
-          <span className="views_text">{views}</span>
+        <div className="flex justify-between text-white/60 text-sm">
+          <div className="flex items-center gap-1">
+            <Heart size={16} />
+            <span>{likes}</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <MessageSquare size={16} />
+            <span>{comments}</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <Eye size={16} />
+            <span>{views}</span>
+          </div>
         </div>
       </div>
-    </div>;
+    </Card>
+  );
 };
+
 export default CourseCard;
