@@ -3,7 +3,7 @@ import React from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BarChart, Award, Users } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
 const DashboardDemo = () => {
@@ -11,17 +11,20 @@ const DashboardDemo = () => {
     {
       title: "Track Your Progress",
       description: "Monitor your learning journey with detailed analytics and interactive charts",
-      image: "/lovable-uploads/43cf2307-26cc-408d-b7ec-b67811205dab.png"
+      image: "/lovable-uploads/17329a38-89d9-46a6-a5a4-68c82d327261.png",
+      icon: BarChart
     },
     {
       title: "Earn Achievements",
       description: "Collect badges and certificates as you master new skills and complete courses",
-      image: "/lovable-uploads/609db0c7-2e29-405b-ad44-bee4b401e14e.png"
+      image: "/lovable-uploads/db371b92-29cf-42e1-839f-6319dd0dd4f0.png",
+      icon: Award
     },
     {
       title: "Connect with Experts",
       description: "Find and collaborate with mentors who can help accelerate your learning",
-      image: "/lovable-uploads/7fa67612-a8dd-4f50-bb04-411ef3855c5c.png"
+      image: "/lovable-uploads/64f792cd-e83e-45f9-96a2-f024afd21c41.png",
+      icon: Users
     }
   ];
 
@@ -47,7 +50,7 @@ const DashboardDemo = () => {
                   <img 
                     src={item.image} 
                     alt={item.title} 
-                    className="w-full aspect-video object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                    className="w-full aspect-video object-cover object-center transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                     <div className="p-4">
@@ -56,7 +59,10 @@ const DashboardDemo = () => {
                   </div>
                 </div>
                 <div className="p-5 flex-grow flex flex-col">
-                  <h3 className="text-lg font-bold text-white mb-3">{item.title}</h3>
+                  <div className="flex items-center gap-2 mb-3">
+                    <item.icon className="h-5 w-5 text-white/70" />
+                    <h3 className="text-lg font-bold text-white">{item.title}</h3>
+                  </div>
                   <p className="text-white/70 text-sm mb-4">{item.description}</p>
                 </div>
               </Card>
