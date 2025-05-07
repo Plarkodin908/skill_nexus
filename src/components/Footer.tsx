@@ -1,7 +1,5 @@
-
 import { Link } from "react-router-dom";
 import { GraduationCap, BookOpen, Users, MessageSquare, Mail, Phone } from "lucide-react";
-
 const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo({
@@ -9,9 +7,7 @@ const Footer = () => {
       behavior: "smooth"
     });
   };
-  
-  return (
-    <footer className="py-20 px-4 border-t border-white/10 bg-black/50 backdrop-blur-md relative z-10">
+  return <footer className="py-20 px-4 border-t border-white/10 bg-black/50 backdrop-blur-md relative z-10">
       <div className="container mx-auto rounded-sm">
         <div className="grid md:grid-cols-4 gap-12">
           <div className="space-y-4">
@@ -29,8 +25,8 @@ const Footer = () => {
             </div>
           </div>
           
-          <div>
-            <h4 className="font-medium mb-4 px-[16px] my-[12px] mx-[150px] py-0">Platform</h4>
+          <div className="py-0 my-[5px]">
+            <h4 className="font-medium mb-4 px-[16px] my-[12px] py-0 mx-[22px]">Platform</h4>
             <ul className="space-y-2 py-[6px] my-[10px] mx-[2px] px-[2px]">
               <li className="py-[3px]"><Link to="/features" className="text-white/60 hover:text-gray-300 transition-colors" onClick={scrollToTop}>Features</Link></li>
               <li className="py-[3px]"><Link to="/pricing" className="text-white/60 hover:text-gray-300 transition-colors" onClick={scrollToTop}>Pricing</Link></li>
@@ -65,12 +61,10 @@ const Footer = () => {
             <Phone className="h-4 w-4 text-gray-400" />
           </div>
           <div className="md:col-span-2 text-center text-white/60 pt-4">
-            <p>&copy; {new Date().getFullYear()} SKILL NEXUS. All rights reserved.</p>
+            <p className="px-0 py-0 my-[51px]">&copy; {new Date().getFullYear()} SKILL NEXUS. All rights reserved.</p>
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
