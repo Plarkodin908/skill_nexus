@@ -25,7 +25,7 @@ const Footer = () => {
             </div>
           </div>
           
-          <div className="py-0 my-[5px]">
+          <div className="py-0 my-0">
             <h4 className="font-medium mb-4 px-[16px] my-[12px] py-0 mx-[22px]">Platform</h4>
             <ul className="space-y-2 py-[6px] my-[10px] mx-[2px] px-[2px]">
               <li className="py-[3px]"><Link to="/features" className="text-white/60 hover:text-gray-300 transition-colors" onClick={scrollToTop}>Features</Link></li>
