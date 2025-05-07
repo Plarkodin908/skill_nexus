@@ -51,7 +51,7 @@ const Hero = () => {
                 <BookOpen className="text-gray-400 h-4 w-4 md:h-5 md:w-5" />
                 <span className="text-gray-300 text-sm md:text-base">500+ Courses</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 py-0 px-0 my-[15px]">
                 <Users className="text-gray-400 h-4 w-4 md:h-5 md:w-5" />
                 <span className="text-gray-300 text-sm md:text-base">10k+ Members</span>
               </div>
