@@ -47,26 +47,26 @@ const SignUp = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="name" className="text-white">Full Name</Label>
-              <Input id="name" placeholder="John Doe" value={name} onChange={e => setName(e.target.value)} required className="bg-forest border-mint/20 text-white" />
+              <Input id="name" placeholder="John Doe" value={name} onChange={e => setName(e.target.value)} required className="border-mint/20 text-white bg-slate-950" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="email" className="text-white">Email</Label>
-              <Input id="email" type="email" placeholder="your@email.com" value={email} onChange={e => setEmail(e.target.value)} required className="bg-forest border-mint/20 text-white" />
+              <Input id="email" type="email" placeholder="your@email.com" value={email} onChange={e => setEmail(e.target.value)} required className="border-mint/20 text-white bg-slate-950" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="password" className="text-white">Password</Label>
-              <Input id="password" type="password" placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} required className="bg-forest border-mint/20 text-white" />
+              <Input id="password" type="password" placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} required className="border-mint/20 text-white bg-slate-950" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="confirm-password" className="text-white">Confirm Password</Label>
-              <Input id="confirm-password" type="password" placeholder="••••••••" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} required className="bg-forest border-mint/20 text-white" />
+              <Input id="confirm-password" type="password" placeholder="••••••••" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} required className="border-mint/20 text-white bg-slate-950" />
             </div>
             
             {error && <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-3 rounded-md text-sm">
                 {error}
               </div>}
             
-            <Button type="submit" className="w-full bg-mint hover:bg-mint/90 text-forest" disabled={isLoading}>
+            <Button type="submit" disabled={isLoading} className="w-full text-indigo-950 bg-indigo-900 hover:bg-indigo-800">
               {isLoading ? "Creating account..." : "Create Account"}
             </Button>
           </form>
