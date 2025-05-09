@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
@@ -7,7 +6,6 @@ import { useAuth } from "@/contexts/AuthContext";
 import VerifiedBadge from "./profile/VerifiedBadge";
 import { toast } from "sonner";
 import UserSearch from "./UserSearch";
-
 const Navbar = () => {
   const {
     user,
@@ -38,7 +36,6 @@ const Navbar = () => {
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
-  
   const handleNotificationsClick = () => {
     if (user) {
       window.location.href = "/notifications";
@@ -46,14 +43,12 @@ const Navbar = () => {
       toast.info("Please sign in to view notifications");
     }
   };
-  
   const toggleSecureNavigation = () => {
     setSecureNavigation(!secureNavigation);
     toast.success(secureNavigation ? "Standard navigation mode enabled" : "Secure navigation mode enabled");
   };
-  
   return <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-gray-900/90 backdrop-blur-lg shadow-lg" : "bg-transparent"}`}>
-      <div className="container mx-auto px-4 py-2 md:py-4">
+      <div className="container mx-auto px-4 py-2 md:py-4 bg-gray-900">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <Link to="/" className="mr-6">
