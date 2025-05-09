@@ -12,6 +12,8 @@ import { FileVideo, Link as LinkIcon, Upload, DollarSign, ArrowLeft, PlusCircle,
 import RequiresMembership from "@/components/membership/RequiresMembership";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import DeliveryAnimation from "@/components/animations/DeliveryAnimation";
+import Loading from "@/components/ui/loading";
 
 const AddCourse = () => {
   const { user } = useAuth();
@@ -23,6 +25,8 @@ const AddCourse = () => {
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [sections, setSections] = useState([{ title: "", content: "", type: "text" }]);
   const [links, setLinks] = useState([{ title: "", url: "" }]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showDeliveryAnimation, setShowDeliveryAnimation] = useState(false);
   
   const handleVideoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -90,14 +94,20 @@ const AddCourse = () => {
       return;
     }
     
-    toast.success("Course created successfully!", {
-      description: "Your course has been submitted for review.",
-    });
+    setIsSubmitting(true);
+    setShowDeliveryAnimation(true);
     
-    // Navigate to dashboard after successful submission
+    // Simulate course submission
     setTimeout(() => {
-      navigate('/dashboard');
-    }, 2000);
+      toast.success("Course created successfully!", {
+        description: "Your course has been submitted for review.",
+      });
+      
+      // Navigate to dashboard after successful submission
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 2000);
+    }, 3000); // Show the animation for 3 seconds before completing
   };
   
   // Check if the user is logged in
@@ -114,6 +124,32 @@ const AddCourse = () => {
             Sign In
           </Button>
         </div>
+      </div>
+    );
+  }
+  
+  // If course is being submitted, show delivery animation
+  if (showDeliveryAnimation) {
+    return (
+      <div className="container mx-auto px-4 py-20">
+        <div className="max-w-lg mx-auto text-center space-y-8">
+          <h1 className="text-2xl font-bold text-white">Delivering your course to the marketplace...</h1>
+          <div className="flex justify-center">
+            <DeliveryAnimation />
+          </div>
+          <p className="text-white/70">
+            Your course is being processed and will be available soon.
+          </p>
+        </div>
+      </div>
+    );
+  }
+  
+  // If submitting but animation not yet shown
+  if (isSubmitting) {
+    return (
+      <div className="container mx-auto px-4 py-20 flex items-center justify-center">
+        <Loading size="large" text="Preparing your course..." />
       </div>
     );
   }
