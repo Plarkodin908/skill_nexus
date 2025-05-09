@@ -133,12 +133,12 @@ const Navbar = () => {
               
               {!user && <div className="flex space-x-2 mt-2">
                   <Link to="/auth/sign-in" className="flex-1">
-                    <Button variant="outline" className="w-full border-gray-600/30 text-gray-400 hover:bg-gray-700/10">
+                    <Button variant="outline" className="w-full border-gray-600/30 hover:bg-gray-700/10 text-base text-gray-200">
                       Sign In
                     </Button>
                   </Link>
                   <Link to="/auth/sign-up" className="flex-1">
-                    <Button className="w-full bg-gray-700 hover:bg-gray-800/90 text-white">
+                    <Button className="w-full bg-gray-700 hover:bg-gray-800/90 text-stone-200 text-justify">
                       Sign Up
                     </Button>
                   </Link>
