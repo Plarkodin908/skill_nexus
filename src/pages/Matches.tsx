@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+
+import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,7 +10,6 @@ import {
   MessageSquare, 
   Calendar, 
   Star, 
-  BookOpen, 
   User,
   X,
   CheckSquare
@@ -17,6 +17,11 @@ import {
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import Loading from "@/components/ui/loading";
+import { useAuth } from "@/contexts/AuthContext";
+import RequiresMembership from "@/components/membership/RequiresMembership";
+
+type MatchCategory = "Programming" | "Design" | "Marketing" | "Business" | "Art" | "Music" | "Writing" | "All";
+type SkillLevel = "Beginner" | "Intermediate" | "Advanced" | "Expert" | "All";
 
 type Match = {
   id: number;
@@ -26,13 +31,18 @@ type Match = {
   skills: string[];
   rating: number;
   isPremium: boolean;
+  category: MatchCategory;
+  skillLevel: SkillLevel;
 };
 
 const Matches = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
+  const [category, setCategory] = useState<MatchCategory>("All");
+  const [skillLevel, setSkillLevel] = useState<SkillLevel>("All");
   
-  // In a real app, this data would come from an API
+  // Personalized matches based on user preferences and skills (would come from user profile)
   const allMatches: Match[] = [
     {
       id: 1,
@@ -41,7 +51,9 @@ const Matches = () => {
       title: "Frontend Developer",
       skills: ["React", "JavaScript", "CSS", "UX Design"],
       rating: 4.9,
-      isPremium: true
+      isPremium: true,
+      category: "Programming",
+      skillLevel: "Expert"
     },
     {
       id: 2,
@@ -50,7 +62,9 @@ const Matches = () => {
       title: "Backend Engineer",
       skills: ["Node.js", "Python", "MongoDB", "AWS"],
       rating: 4.7,
-      isPremium: false
+      isPremium: false,
+      category: "Programming",
+      skillLevel: "Advanced"
     },
     {
       id: 3,
@@ -59,7 +73,9 @@ const Matches = () => {
       title: "UX/UI Designer",
       skills: ["Figma", "Sketch", "Wireframing", "User Research"],
       rating: 4.8,
-      isPremium: true
+      isPremium: true,
+      category: "Design",
+      skillLevel: "Expert"
     },
     {
       id: 4,
@@ -68,25 +84,9 @@ const Matches = () => {
       title: "Data Scientist",
       skills: ["Python", "Machine Learning", "SQL", "Statistics"],
       rating: 4.6,
-      isPremium: false
-    },
-    {
-      id: 5,
-      name: "Jessica Williams",
-      avatar: "https://i.pravatar.cc/150?img=9",
-      title: "Mobile Developer",
-      skills: ["React Native", "Swift", "Kotlin", "Firebase"],
-      rating: 4.7,
-      isPremium: true
-    },
-    {
-      id: 6,
-      name: "David Brown",
-      avatar: "https://i.pravatar.cc/150?img=6",
-      title: "DevOps Engineer",
-      skills: ["Docker", "Kubernetes", "CI/CD", "Linux"],
-      rating: 4.5,
-      isPremium: false
+      isPremium: false,
+      category: "Programming",
+      skillLevel: "Advanced"
     }
   ];
 
@@ -98,6 +98,12 @@ const Matches = () => {
 
   // Extract all unique skills for the filter
   const allSkills = Array.from(new Set(allMatches.flatMap(match => match.skills))).sort();
+  
+  // Filter categories
+  const categories: MatchCategory[] = ["All", "Programming", "Design", "Marketing", "Business", "Art", "Music", "Writing"];
+  
+  // Skill levels
+  const skillLevels: SkillLevel[] = ["All", "Beginner", "Intermediate", "Advanced", "Expert"];
 
   // Apply filters
   const filteredMatches = allMatches.filter(match => {
@@ -105,7 +111,8 @@ const Matches = () => {
     if (
       searchTerm && 
       !match.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      !match.title.toLowerCase().includes(searchTerm.toLowerCase())
+      !match.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      !match.skills.some(skill => skill.toLowerCase().includes(searchTerm.toLowerCase()))
     ) {
       return false;
     }
@@ -125,25 +132,36 @@ const Matches = () => {
       return false;
     }
     
+    // Category filter
+    if (category !== "All" && match.category !== category) {
+      return false;
+    }
+    
+    // Skill level filter
+    if (skillLevel !== "All" && match.skillLevel !== skillLevel) {
+      return false;
+    }
+    
     return true;
   });
 
   const handleConnect = (match: Match) => {
     setIsLoading(true);
     // Show toast and navigate to the connect page
-    toast.success(`Navigating to connection page for ${match.name}`);
+    toast.success(`Sending connection request to ${match.name}`);
     setTimeout(() => {
-      navigate(`/matches/${match.id}/connect`);
-    }, 500);
+      setIsLoading(false);
+      toast.success(`Connection request sent to ${match.name}`);
+    }, 1000);
   };
 
   const handleMessage = (match: Match) => {
-    setIsLoading(true);
-    // Show toast and navigate to the message page
+    // In a real app, this would add a contact to the messages list
+    // and navigate to that conversation
+    navigate(`/messages`);
+    
+    // We'll simulate adding this contact to messages
     toast.success(`Opening chat with ${match.name}`);
-    setTimeout(() => {
-      navigate(`/matches/${match.id}/message`);
-    }, 500);
   };
 
   const handleSchedule = (match: Match) => {
@@ -151,7 +169,7 @@ const Matches = () => {
     // Show toast and navigate to the schedule page
     toast.success(`Setting up scheduling with ${match.name}`);
     setTimeout(() => {
-      navigate(`/matches/${match.id}/schedule`);
+      navigate(`/calendar`);
     }, 500);
   };
 
@@ -161,6 +179,14 @@ const Matches = () => {
     } else {
       setSelectedSkills([...selectedSkills, skill]);
     }
+  };
+  
+  const handleCategoryChange = (cat: MatchCategory) => {
+    setCategory(cat);
+  };
+  
+  const handleSkillLevelChange = (level: SkillLevel) => {
+    setSkillLevel(level);
   };
 
   if (isLoading) {
@@ -195,12 +221,36 @@ const Matches = () => {
           >
             <Filter className="h-4 w-4" />
             Filters
-            {(selectedSkills.length > 0 || isPremiumOnly || minRating > 0) && (
+            {(selectedSkills.length > 0 || isPremiumOnly || minRating > 0 || category !== "All" || skillLevel !== "All") && (
               <span className="bg-mint text-forest h-5 w-5 rounded-full flex items-center justify-center text-xs">
-                {(selectedSkills.length > 0 ? 1 : 0) + (isPremiumOnly ? 1 : 0) + (minRating > 0 ? 1 : 0)}
+                {(selectedSkills.length > 0 ? 1 : 0) + 
+                 (isPremiumOnly ? 1 : 0) + 
+                 (minRating > 0 ? 1 : 0) + 
+                 (category !== "All" ? 1 : 0) + 
+                 (skillLevel !== "All" ? 1 : 0)}
               </span>
             )}
           </Button>
+        </div>
+      </div>
+      
+      {/* Categories filter */}
+      <div className="mb-6 overflow-x-auto">
+        <div className="flex space-x-2 min-w-max pb-2">
+          {categories.map((cat) => (
+            <Button
+              key={cat}
+              variant={category === cat ? "default" : "outline"}
+              className={`${
+                category === cat 
+                  ? "bg-mint hover:bg-mint/90 text-forest" 
+                  : "border-mint/20 text-white hover:bg-mint/10"
+              }`}
+              onClick={() => handleCategoryChange(cat)}
+            >
+              {cat}
+            </Button>
+          ))}
         </div>
       </div>
 
@@ -218,6 +268,27 @@ const Matches = () => {
                 >
                   <X className="h-5 w-5" />
                 </Button>
+              </div>
+              
+              <div className="mb-6">
+                <h4 className="font-medium text-white mb-2">Skill Level</h4>
+                <div className="grid grid-cols-2 gap-2">
+                  {skillLevels.map((level) => (
+                    <Button
+                      key={level}
+                      variant={skillLevel === level ? "default" : "outline"}
+                      size="sm"
+                      className={`${
+                        skillLevel === level 
+                          ? "bg-mint hover:bg-mint/90 text-forest" 
+                          : "border-mint/20 text-white hover:bg-mint/10"
+                      }`}
+                      onClick={() => handleSkillLevelChange(level)}
+                    >
+                      {level}
+                    </Button>
+                  ))}
+                </div>
               </div>
               
               <div className="mb-6">
@@ -281,6 +352,8 @@ const Matches = () => {
                     setSelectedSkills([]);
                     setIsPremiumOnly(false);
                     setMinRating(0);
+                    setCategory("All");
+                    setSkillLevel("All");
                   }}
                   className="flex-1 bg-mint/10 text-mint hover:bg-mint/20"
                 >
@@ -298,103 +371,113 @@ const Matches = () => {
         )}
         
         <div className={`${showFilters ? 'lg:col-span-3' : 'lg:col-span-4'}`}>
-          {filteredMatches.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredMatches.map(match => (
-                <Card key={match.id} className="bg-forest-light border border-mint/10 p-6 hover:border-mint/30 transition-all">
-                  {match.isPremium && (
-                    <div className="absolute top-2 right-2">
-                      <span className="bg-mint text-forest px-2 py-0.5 rounded-full text-xs font-medium">
-                        PRO
-                      </span>
-                    </div>
-                  )}
-                  
-                  <div className="flex flex-col items-center text-center mb-4">
-                    <div className="w-20 h-20 rounded-full overflow-hidden mb-3">
-                      <img src={match.avatar} alt={match.name} className="w-full h-full object-cover" />
-                    </div>
-                    <h3 className="text-lg font-bold text-white">{match.name}</h3>
-                    <p className="text-white/70">{match.title}</p>
-                    <div className="flex items-center mt-1">
-                      <Star className="h-4 w-4 text-mint fill-mint" />
-                      <span className="text-white/80 ml-1">{match.rating}</span>
-                    </div>
-                  </div>
-                  
-                  <div className="mb-4">
-                    <h4 className="text-white/70 mb-2 text-sm font-medium">Skills</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {match.skills.map(skill => (
-                        <span 
-                          key={skill} 
-                          className={`
-                            text-xs px-2 py-1 rounded-full 
-                            ${selectedSkills.includes(skill) 
-                              ? 'bg-mint text-forest font-medium' 
-                              : 'bg-forest text-white/80'}
-                          `}
-                        >
-                          {skill}
+          <RequiresMembership
+            requiredMembership="Lite"
+            fallbackText="Advanced matching features are available to our Lite and Pro members. Upgrade your plan to connect with experts and peers in your field."
+          >
+            {filteredMatches.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredMatches.map(match => (
+                  <Card key={match.id} className="bg-forest-light border border-mint/10 p-6 hover:border-mint/30 transition-all">
+                    {match.isPremium && (
+                      <div className="absolute top-2 right-2">
+                        <span className="bg-mint text-forest px-2 py-0.5 rounded-full text-xs font-medium">
+                          PRO
                         </span>
-                      ))}
+                      </div>
+                    )}
+                    
+                    <div className="flex flex-col items-center text-center mb-4">
+                      <div className="w-20 h-20 rounded-full overflow-hidden mb-3">
+                        <img src={match.avatar} alt={match.name} className="w-full h-full object-cover" />
+                      </div>
+                      <h3 className="text-lg font-bold text-white">{match.name}</h3>
+                      <p className="text-white/70">{match.title}</p>
+                      <div className="flex items-center mt-1">
+                        <Star className="h-4 w-4 text-mint fill-mint" />
+                        <span className="text-white/80 ml-1">{match.rating}</span>
+                      </div>
+                      <Badge className="mt-2 bg-forest border-mint/20 text-white">
+                        {match.skillLevel} • {match.category}
+                      </Badge>
                     </div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Button 
-                      onClick={() => handleConnect(match)}
-                      className="w-full bg-mint hover:bg-mint/90 text-forest flex items-center justify-center gap-2"
-                    >
-                      <CheckSquare className="h-4 w-4" />
-                      Connect
-                    </Button>
-                    <div className="grid grid-cols-2 gap-2">
-                      <Button 
-                        onClick={() => handleMessage(match)}
-                        variant="outline"
-                        className="border-mint/20 text-mint hover:bg-mint/10 flex items-center justify-center gap-1"
-                      >
-                        <MessageSquare className="h-4 w-4" />
-                        Message
-                      </Button>
-                      <Button 
-                        onClick={() => handleSchedule(match)}
-                        variant="outline"
-                        className="border-mint/20 text-mint hover:bg-mint/10 flex items-center justify-center gap-1"
-                      >
-                        <Calendar className="h-4 w-4" />
-                        Schedule
-                      </Button>
+                    
+                    <div className="mb-4">
+                      <h4 className="text-white/70 mb-2 text-sm font-medium">Skills</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {match.skills.map(skill => (
+                          <span 
+                            key={skill} 
+                            className={`
+                              text-xs px-2 py-1 rounded-full 
+                              ${selectedSkills.includes(skill) 
+                                ? 'bg-mint text-forest font-medium' 
+                                : 'bg-forest text-white/80'}
+                            `}
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          ) : (
-            <Card className="bg-forest-light border border-mint/10 p-8 text-center">
-              <div className="flex flex-col items-center">
-                <div className="bg-forest p-4 rounded-full mb-4">
-                  <User className="h-8 w-8 text-mint/40" />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2">No matches found</h3>
-                <p className="text-white/70 mb-6 max-w-md mx-auto">
-                  Try adjusting your filters or search term to find more people that match your criteria.
-                </p>
-                <Button 
-                  onClick={() => {
-                    setSearchTerm("");
-                    setSelectedSkills([]);
-                    setIsPremiumOnly(false);
-                    setMinRating(0);
-                  }}
-                  className="bg-mint hover:bg-mint/90 text-forest"
-                >
-                  Clear All Filters
-                </Button>
+                    
+                    <div className="space-y-2">
+                      <Button 
+                        onClick={() => handleConnect(match)}
+                        className="w-full bg-mint hover:bg-mint/90 text-forest flex items-center justify-center gap-2"
+                      >
+                        <CheckSquare className="h-4 w-4" />
+                        Connect
+                      </Button>
+                      <div className="grid grid-cols-2 gap-2">
+                        <Button 
+                          onClick={() => handleMessage(match)}
+                          variant="outline"
+                          className="border-mint/20 text-mint hover:bg-mint/10 flex items-center justify-center gap-1"
+                        >
+                          <MessageSquare className="h-4 w-4" />
+                          Message
+                        </Button>
+                        <Button 
+                          onClick={() => handleSchedule(match)}
+                          variant="outline"
+                          className="border-mint/20 text-mint hover:bg-mint/10 flex items-center justify-center gap-1"
+                        >
+                          <Calendar className="h-4 w-4" />
+                          Schedule
+                        </Button>
+                      </div>
+                    </div>
+                  </Card>
+                ))}
               </div>
-            </Card>
-          )}
+            ) : (
+              <Card className="bg-forest-light border border-mint/10 p-8 text-center">
+                <div className="flex flex-col items-center">
+                  <div className="bg-forest p-4 rounded-full mb-4">
+                    <User className="h-8 w-8 text-mint/40" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-2">No matches found</h3>
+                  <p className="text-white/70 mb-6 max-w-md mx-auto">
+                    Try adjusting your filters or search term to find more people that match your criteria.
+                  </p>
+                  <Button 
+                    onClick={() => {
+                      setSearchTerm("");
+                      setSelectedSkills([]);
+                      setIsPremiumOnly(false);
+                      setMinRating(0);
+                      setCategory("All");
+                      setSkillLevel("All");
+                    }}
+                    className="bg-mint hover:bg-mint/90 text-forest"
+                  >
+                    Clear All Filters
+                  </Button>
+                </div>
+              </Card>
+            )}
+          </RequiresMembership>
         </div>
       </div>
     </div>
