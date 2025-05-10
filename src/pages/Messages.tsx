@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import ChatList from "@/components/messages/ChatList";
 import ChatContainer from "@/components/messages/ChatContainer";
+import MessageRestriction from "@/components/messages/MessageRestriction";
 import { Message } from "@/services/messageService";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,6 +11,7 @@ import { toast } from "sonner";
 import RequiresMembership from "@/components/membership/RequiresMembership";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { getSampleChats, getSampleMessages } from "@/services/messageService";
 
 export interface ChatUser {
   name: string;
@@ -25,6 +27,14 @@ export interface Chat {
   unread: number;
 }
 
+// Message limits by plan
+const MESSAGE_LIMITS = {
+  "Free": 5,
+  "Lite": Infinity,
+  "Pro Learner": Infinity,
+  "Educator": Infinity
+};
+
 const Messages = () => {
   const [selectedChatId, setSelectedChatId] = useState<number | null>(null);
   const [chats, setChats] = useState<Chat[]>([]);
@@ -32,13 +42,49 @@ const Messages = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showAddContact, setShowAddContact] = useState(false);
   const [newContactName, setNewContactName] = useState("");
+  const [messagesSentToday, setMessagesSentToday] = useState(0);
   const { user } = useAuth();
   const navigate = useNavigate();
   
   const selectedChat = selectedChatId ? chats.find(chat => chat.id === selectedChatId) : undefined;
+  const membership = user?.membership || "Free";
+  const maxDailyMessages = MESSAGE_LIMITS[membership];
+  const canSendMessage = messagesSentToday < maxDailyMessages;
+  
+  // Load chats and messages from service
+  useEffect(() => {
+    setChats(getSampleChats());
+    setMessages(getSampleMessages());
+    
+    // In a real app, we would load the message count from a database or localStorage
+    const storedCount = localStorage.getItem('messagesSentToday');
+    const lastSentDate = localStorage.getItem('lastMessageSentDate');
+    const today = new Date().toDateString();
+    
+    // Reset message count if it's a new day
+    if (lastSentDate !== today) {
+      setMessagesSentToday(0);
+      localStorage.setItem('messagesSentToday', '0');
+      localStorage.setItem('lastMessageSentDate', today);
+    } else if (storedCount) {
+      setMessagesSentToday(parseInt(storedCount, 10));
+    }
+  }, []);
   
   const handleSendMessage = (text: string) => {
     if (!selectedChatId) return;
+    
+    // Check if the user can send a message based on their plan
+    if (!canSendMessage && membership === "Free") {
+      toast.error("Daily message limit reached", {
+        description: "Upgrade your plan to send unlimited messages",
+        action: {
+          label: "Upgrade",
+          onClick: () => navigate('/pricing'),
+        },
+      });
+      return;
+    }
     
     // Add the message to the state
     const newMessage: Message = {
@@ -62,7 +108,14 @@ const Messages = () => {
         : chat
     ));
     
-    // In a real app, this would send the message to a backend service
+    // Increment message count for Free users
+    if (membership === "Free") {
+      const newCount = messagesSentToday + 1;
+      setMessagesSentToday(newCount);
+      localStorage.setItem('messagesSentToday', newCount.toString());
+      localStorage.setItem('lastMessageSentDate', new Date().toDateString());
+    }
+    
     toast.success("Message sent!");
   };
 
@@ -90,12 +143,16 @@ const Messages = () => {
     toast.success("Contact added successfully");
   };
 
+  const handleUpgrade = () => {
+    navigate('/pricing');
+  };
+
   const filteredChats = chats.filter(chat => 
     chat.user.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // This would be replaced with actual subscription check logic in a real app
-  const requiredMembership = "Pro Learner";
+  // Minimum membership required to access messaging feature
+  const requiredMembership = "Free";
   
   return (
     <div className="container mx-auto h-full px-4 py-8">
@@ -103,8 +160,16 @@ const Messages = () => {
       
       <RequiresMembership 
         requiredMembership={requiredMembership}
-        fallbackText="Messaging features are available exclusively to Pro Learner and Educator subscribers. Upgrade your plan to unlock unlimited messaging with our community of experts and learners."
+        fallbackText="Messaging features are available to all users. Free users can send up to 5 messages per day. Upgrade your plan to unlock unlimited messaging with our community of experts and learners."
       >
+        {/* Message Restriction Banner */}
+        <MessageRestriction 
+          membership={membership}
+          messagesSent={messagesSentToday}
+          maxMessages={maxDailyMessages}
+          onUpgrade={handleUpgrade}
+        />
+        
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[calc(100vh-220px)]">
           <div className="flex flex-col">
             <div className="bg-forest-light border border-mint/10 p-4 rounded-t-lg">
@@ -159,6 +224,8 @@ const Messages = () => {
             selectedChat={selectedChat} 
             messages={selectedChatId ? messages.filter(msg => msg.chatId === selectedChatId) : []} 
             onSendMessage={handleSendMessage} 
+            canSendMessage={canSendMessage}
+            membership={membership}
           />
         </div>
       </RequiresMembership>
