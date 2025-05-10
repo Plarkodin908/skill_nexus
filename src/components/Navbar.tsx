@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
@@ -7,9 +6,11 @@ import { useAuth } from "@/contexts/AuthContext";
 import VerifiedBadge from "./profile/VerifiedBadge";
 import { toast } from "sonner";
 import UserSearch from "./UserSearch";
-
 const Navbar = () => {
-  const { user, signOut } = useAuth();
+  const {
+    user,
+    signOut
+  } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [secureNavigation, setSecureNavigation] = useState(true);
@@ -35,23 +36,18 @@ const Navbar = () => {
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
-
   const handleNotificationsClick = () => {
     if (user) {
-      // Use Link component navigation instead of direct manipulation
       window.location.href = "/notifications";
     } else {
       toast.info("Please sign in to view notifications");
     }
   };
-
   const toggleSecureNavigation = () => {
     setSecureNavigation(!secureNavigation);
     toast.success(secureNavigation ? "Standard navigation mode enabled" : "Secure navigation mode enabled");
   };
-
-  return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-gray-900/90 backdrop-blur-lg shadow-lg" : "bg-transparent"}`}>
+  return <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-gray-900/90 backdrop-blur-lg shadow-lg" : "bg-transparent"}`}>
       <div className="container mx-auto px-4 py-2 md:py-4 bg-gray-900">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
@@ -62,29 +58,22 @@ const Navbar = () => {
             </Link>
             
             <div className="hidden md:flex items-center space-x-6">
-              {/* Navigation items */}
+              
+              
+              
             </div>
           </div>
           
           <div className="flex items-center space-x-3">
-            <button 
-              onClick={toggleSecureNavigation} 
-              className="p-2 rounded-full hover:bg-white/5 transition-colors relative hidden md:flex" 
-              aria-label={secureNavigation ? "Disable secure navigation" : "Enable secure navigation"} 
-              title={secureNavigation ? "Secure navigation active" : "Standard navigation"}
-            >
+            <button onClick={toggleSecureNavigation} className="p-2 rounded-full hover:bg-white/5 transition-colors relative hidden md:flex" aria-label={secureNavigation ? "Disable secure navigation" : "Enable secure navigation"} title={secureNavigation ? "Secure navigation active" : "Standard navigation"}>
               <Shield className={`h-5 w-5 ${secureNavigation ? "text-green-400" : "text-gray-400"}`} />
             </button>
 
             {/* User Search Component */}
             <UserSearch />
             
-            {user ? (
-              <>
-                <button 
-                  onClick={handleNotificationsClick} 
-                  className="p-1 md:p-2 rounded-full hover:bg-white/5 transition-colors relative"
-                >
+            {user ? <>
+                <button onClick={handleNotificationsClick} className="p-1 md:p-2 rounded-full hover:bg-white/5 transition-colors relative">
                   <Bell className="h-4 w-4 md:h-5 md:w-5 text-white" />
                   <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
                 </button>
@@ -97,9 +86,7 @@ const Navbar = () => {
                     {isVerified && <VerifiedBadge className="absolute -bottom-1 -right-1" />}
                   </div>
                 </Link>
-              </>
-            ) : (
-              <div className="hidden md:flex items-center space-x-3">
+              </> : <div className="hidden md:flex items-center space-x-3">
                 <Link to="/auth/sign-in">
                   <Button variant="outline" className="border-gray-600/30 text-gray-400 hover:bg-gray-700/10">
                     Sign In
@@ -110,25 +97,16 @@ const Navbar = () => {
                     Sign Up
                   </Button>
                 </Link>
-              </div>
-            )}
+              </div>}
             
-            <button 
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
-              className="p-1 md:p-2 rounded-full hover:bg-white/5 transition-colors md:hidden"
-            >
-              {isMobileMenuOpen ? (
-                <X className="h-5 w-5 text-white" />
-              ) : (
-                <Menu className="h-5 w-5 text-white" />
-              )}
+            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-1 md:p-2 rounded-full hover:bg-white/5 transition-colors md:hidden">
+              {isMobileMenuOpen ? <X className="h-5 w-5 text-white" /> : <Menu className="h-5 w-5 text-white" />}
             </button>
           </div>
         </div>
         
         {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden py-3 border-t border-white/10 mt-2 animate-fade-in">
+        {isMobileMenuOpen && <div className="md:hidden py-3 border-t border-white/10 mt-2 animate-fade-in">
             <div className="flex flex-col space-y-3">
               <Link to="/marketplace" className="text-white hover:text-gray-400 transition-colors">
                 Marketplace
@@ -142,10 +120,7 @@ const Navbar = () => {
               
               <div className="flex items-center justify-between">
                 <span className="text-white/80">Secure Navigation</span>
-                <button 
-                  onClick={toggleSecureNavigation} 
-                  className="p-2 rounded-full hover:bg-white/5 transition-colors relative"
-                >
+                <button onClick={toggleSecureNavigation} className="p-2 rounded-full hover:bg-white/5 transition-colors relative">
                   <Shield className={`h-5 w-5 ${secureNavigation ? "text-green-400" : "text-gray-400"}`} />
                 </button>
               </div>
@@ -156,8 +131,7 @@ const Navbar = () => {
                 </div>
               </form>
               
-              {!user && (
-                <div className="flex space-x-2 mt-2">
+              {!user && <div className="flex space-x-2 mt-2">
                   <Link to="/auth/sign-in" className="flex-1">
                     <Button variant="outline" className="w-full border-gray-600/30 hover:bg-gray-700/10 text-base text-gray-200">
                       Sign In
@@ -168,14 +142,10 @@ const Navbar = () => {
                       Sign Up
                     </Button>
                   </Link>
-                </div>
-              )}
+                </div>}
             </div>
-          </div>
-        )}
+          </div>}
       </div>
-    </nav>
-  );
+    </nav>;
 };
-
 export default Navbar;
