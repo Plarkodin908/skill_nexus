@@ -26,6 +26,12 @@ const SimpleNavBar = () => {
             >
               Posts
             </Link>
+            <Link 
+              to="/profile" 
+              className={`text-gray-600 hover:text-blue-500 ${location.pathname === '/profile' ? 'text-blue-500' : ''}`}
+            >
+              Profile
+            </Link>
           </div>
         </div>
       </div>
