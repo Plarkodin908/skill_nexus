@@ -12,17 +12,9 @@ import Posts from "./pages/Posts";
 import Profile from "./pages/Profile";
 import ProfileDetail from "./pages/ProfileDetail";
 import SimpleNavBar from "./components/SimpleNavBar";
+import { Toaster } from 'sonner';
 
-// Create a layout component that includes the AuthProvider
-const AppLayout = () => {
-  return (
-    <AuthProvider>
-      <Outlet />
-    </AuthProvider>
-  );
-};
-
-// Create a root layout that includes the navbar and content
+// Create a layout component that includes the navbar and content
 const RootLayout = () => {
   return (
     <>
@@ -35,35 +27,33 @@ const RootLayout = () => {
   );
 };
 
+// Define routes - each route will be wrapped in AuthProvider via the App component
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <AppLayout />,
-    children: [
-      {
-        path: "/",
-        element: <RootLayout />,
-      },
-      {
-        path: "/posts",
-        element: <Posts />,
-      },
-      {
-        path: "/profile",
-        element: <Profile />,
-      },
-      {
-        path: "/profile/:id",
-        element: <ProfileDetail />,
-      },
-    ],
+    element: <RootLayout />,
+  },
+  {
+    path: "/posts",
+    element: <Posts />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
+  },
+  {
+    path: "/profile/:id",
+    element: <ProfileDetail />,
   },
 ]);
 
 function App() {
   return (
     <div className="skill-exchange-theme">
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+        <Toaster position="top-right" />
+      </AuthProvider>
     </div>
   );
 }
