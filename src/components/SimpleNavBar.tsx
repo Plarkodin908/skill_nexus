@@ -1,9 +1,11 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 const SimpleNavBar = () => {
   const location = useLocation();
+  const { user, signOut } = useAuth();
   
   return (
     <nav className="bg-white shadow-md">
@@ -32,6 +34,27 @@ const SimpleNavBar = () => {
             >
               Profile
             </Link>
+            <Link 
+              to="/messages" 
+              className={`text-gray-600 hover:text-blue-500 ${location.pathname === '/messages' ? 'text-blue-500' : ''}`}
+            >
+              Messages
+            </Link>
+            {user ? (
+              <button
+                onClick={signOut}
+                className="text-gray-600 hover:text-blue-500"
+              >
+                Sign Out
+              </button>
+            ) : (
+              <Link 
+                to="/auth/sign-in" 
+                className={`text-gray-600 hover:text-blue-500 ${location.pathname === '/auth/sign-in' ? 'text-blue-500' : ''}`}
+              >
+                Sign In
+              </Link>
+            )}
           </div>
         </div>
       </div>

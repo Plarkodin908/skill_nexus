@@ -28,6 +28,9 @@ const SignIn = () => {
         // Set localStorage flag to show demo notice after some time
         localStorage.setItem("showDemoNotice", "true");
       }
+      
+      // Navigate on success
+      navigate("/profile");
     } catch (error) {
       console.error("Sign in error:", error);
       toast.error("Failed to sign in. Please check your credentials.");

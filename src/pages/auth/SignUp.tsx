@@ -46,6 +46,7 @@ const SignUp = () => {
     try {
       await signUp(email, password, name);
       toast.success("Account created successfully!");
+      navigate("/profile");
     } catch (error: any) {
       setError(error.message || "Failed to create account");
     }

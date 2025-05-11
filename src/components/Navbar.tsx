@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Bell, User as UserIcon, Menu, X, Shield } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import VerifiedBadge from "./profile/VerifiedBadge";
@@ -15,6 +15,7 @@ const Navbar = () => {
   const [secureNavigation, setSecureNavigation] = useState(true);
   const isVerified = user?.verificationStatus === "verified";
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Handle scroll events
   useEffect(() => {
@@ -38,8 +39,7 @@ const Navbar = () => {
 
   const handleNotificationsClick = () => {
     if (user) {
-      // Use Link component navigation instead of direct manipulation
-      window.location.href = "/notifications";
+      navigate("/notifications");
     } else {
       toast.info("Please sign in to view notifications");
     }
