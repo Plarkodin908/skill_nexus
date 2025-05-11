@@ -7,7 +7,6 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import VerificationModal from '@/components/profile/VerificationModal';
-import SocialLinks from '@/components/community/SocialLinks';
 
 const Profile = () => {
   const { user } = useAuth();
@@ -45,7 +44,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="bg-dark-purple min-h-screen pb-16">
+    <div className="bg-dark-purple min-h-screen">
       <Navbar />
       <div className="container mx-auto py-20 px-4">
         {/* Cover Image (only visible when not editing) */}
@@ -101,13 +100,6 @@ const Profile = () => {
                 )}
               </div>
             )}
-            
-            {/* Social Links Section */}
-            <SocialLinks 
-              isPremium={user?.membership === "Pro Learner" || user?.membership === "Educator"} 
-              maxLinks={3}
-              showAddButton={isEditing}
-            />
           </div>
         </div>
       </div>

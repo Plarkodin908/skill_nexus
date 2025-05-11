@@ -1,6 +1,6 @@
-
 import React from 'react';
-import { Bookmark } from 'lucide-react';
+import { Card } from '@/components/ui/card';
+import { MessageSquare, Eye, Heart } from 'lucide-react';
 
 interface CourseCardProps {
   id: number;
@@ -21,52 +21,64 @@ const CourseCard: React.FC<CourseCardProps> = ({
   views,
   imagePath
 }) => {
-  // Calculate a description based on the stats
-  const description = `${comments} Video - ${views} min`;
-  
-  // Define background gradient
-  const backgroundStyle = imagePath 
-    ? { backgroundImage: `url(${imagePath})`, backgroundSize: 'cover' }
-    : { background: 'linear-gradient(#e66465, #9198e5)' };
-
   return (
-    <div className="course-card">
-      <div className="img" style={backgroundStyle}>
-        <div className="save">
-          <Bookmark className="svg" size={15} />
-        </div>
+    <Card className="overflow-hidden bg-forest-light border border-mint/20 rounded-lg">
+      <div className="relative h-40">
+        {imagePath ? (
+          <img src={imagePath} alt={title} className="w-full h-full object-cover" />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-forest">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" className="w-16 h-16">
+              <g strokeWidth="2.00" fill="none" strokeLinecap="butt">
+                <path stroke="#59afb1" d="M 14.06 0.00 Q 13.33 4.09 13.93 7.52 A 1.04 1.02 -78.7 0 0 14.37 8.19 L 32.87 20.19"></path>
+                <path stroke="#4fa6a8" d="M 32.87 20.19 L 42.25 26.79"></path>
+                <path stroke="#69cbc0" d="M 42.25 26.79 C 41.40 28.26 24.14 34.92 21.32 36.20"></path>
+                <path stroke="#6fcdbb" d="M 21.32 36.20 Q 15.81 38.21 11.00 41.21"></path>
+                <path stroke="#5ec8ab" d="M 11.00 41.21 L 9.75 40.96"></path>
+                <path stroke="#5cae9e" d="M 9.75 40.96 Q 5.99 37.71 1.71 35.19 A 1.00 1.00 0.0 0 0 0.22 35.85 L 0.00 36.94"></path>
+                <path stroke="#3190a6" d="M 79.95 6.12 L 62.46 11.32"></path>
+                <path stroke="#3a96a3" d="M 62.46 11.32 Q 47.42 14.67 32.87 20.19"></path>
+                <path stroke="#22a3be" d="M 80.00 11.06 L 64.50 17.46"></path>
+                <path stroke="#28879d" d="M 64.50 17.46 L 62.46 11.32"></path>
+                <path stroke="#2ba9bb" d="M 64.50 17.46 L 43.00 26.96"></path>
+                <path stroke="#4ab2b2" d="M 43.00 26.96 L 42.25 26.79"></path>
+                <path stroke="#45ced3" d="M 80.00 52.31 Q 71.64 45.91 62.46 40.67"></path>
+                <path stroke="#13636e" d="M 62.46 40.67 Q 62.43 36.88 58.50 36.79"></path>
+                <path stroke="#45ced3" d="M 58.50 36.79 Q 50.07 32.95 43.00 26.96"></path>
+                <path stroke="#326b65" d="M 58.50 36.79 Q 55.85 40.04 56.86 44.07 C 57.53 46.71 60.02 47.68 61.77 45.19 Q 61.91 44.99 61.94 44.74 L 62.46 40.67"></path>
+                <path stroke="#59d4b5" d="M 40.81 79.86 Q 46.22 74.94 52.34 70.94 A 1.00 1.00 0.0 0 0 52.39 69.30 Q 44.74 63.65 43.10 62.62 Q 34.11 56.98 32.50 55.79"></path>
+                <path stroke="#6ad8c5" d="M 32.50 55.79 C 36.74 55.42 30.64 48.79 29.79 47.81 C 27.54 45.21 26.34 42.09 24.05 39.44 Q 22.66 37.82 21.32 36.20"></path>
+                <path stroke="#326b65" d="M 48.75 39.07 A 2.30 2.30 0.0 0 0 46.45 36.77 L 46.05 36.77 A 2.30 2.30 0.0 0 0 43.75 39.07 L 43.75 44.21 A 2.30 2.30 0.0 0 0 46.05 46.51 L 46.45 46.51 A 2.30 2.30 0.0 0 0 48.75 44.21 L 48.75 39.07"></path>
+                <path stroke="#326b65" d="M 58.63 54.41 C 54.90 57.18 50.72 56.87 46.91 54.39 A 1.00 0.99 51.9 0 0 46.04 54.28 C 42.37 55.52 43.88 58.13 46.28 59.41 Q 53.38 63.20 60.15 58.94 C 62.54 57.43 62.47 54.80 59.41 54.23 A 1.00 1.00 0.0 0 0 58.63 54.41"></path>
+                <path stroke="#4bb793" d="M 9.75 40.96 Q 5.15 43.50 0.05 44.46"></path>
+                <path stroke="#5fd6b0" d="M 32.50 55.79 L 11.00 41.21"></path>
+                <path stroke="#48d08e" d="M 11.19 80.00 Q 12.51 79.61 11.57 78.67 Q 5.99 73.11 1.70 65.70 C 1.28 64.97 0.74 64.76 0.00 65.19"></path>
+              </g>
+            </svg>
+          </div>
+        )}
       </div>
       
-      <div className="text">
-        <h3>{title}</h3>
-        <p>{description}</p>
+      <div className="p-4">
+        <h3 className="text-lg font-semibold text-white mb-1">{title}</h3>
+        <p className="text-white/70 text-sm mb-4">by {author}</p>
         
-        <div className="icon-box">
-          <svg version="1.1" className="svg" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-            viewBox="0 0 512.001 512.001" style={{enableBackground: "new 0 0 512.001 512.001"} as React.CSSProperties}>
-            <path style={{fill: "#3D6687"}} d="M165,68.715l-26.327-26.327l37.363-37.363c3.739-3.739,9.801-3.739,13.54,0l12.786,12.786
-              c3.739,3.739,3.739,9.801,0,13.54L165,68.715z"></path>
-            <path style={{fill: "#3D6687"}} d="M234.998,101.725l-26.327-26.327l37.363-37.363c3.739-3.739,9.801-3.739,13.54,0l12.786,12.786
-              c3.739,3.739,3.739,9.801,0,13.54L234.998,101.725z"></path>
-            <path style={{fill: "#3D6687"}} d="M445.507,349.222l26.327,26.327l37.363-37.363c3.739-3.739,3.739-9.801,0-13.54l-12.787-12.787
-              c-3.739-3.739-9.801-3.739-13.54,0L445.507,349.222z"></path>
-            <path style={{fill: "#3D6687"}} d="M408.054,279.224l26.327,26.327l37.363-37.363c3.739-3.739,3.739-9.801,0-13.54l-12.786-12.786
-              c-3.739-3.739-9.801-3.739-13.54,0L408.054,279.224z"></path>
-            <path style={{fill: "#CCDFED"}} d="M443.378,458.836L276.261,234.948L52.372,67.83c-7.845-5.856-8.673-17.309-1.75-24.232
-              l22.953-22.954c10.277-10.277,25.733-13.35,39.158-7.785l272.626,112.989l112.989,272.626c5.564,13.427,2.491,28.882-7.785,39.158
-              l-22.953,22.953C460.688,467.51,449.234,466.683,443.378,458.836z"></path>
-            <path style={{fill: "#CCDFED"}} d="M181.785,507.029L104.93,404.848L2.75,327.993c-3.349-2.518-3.694-7.418-0.73-10.381l11.782-11.782
-              c7.939-7.939,19.965-10.129,30.193-5.499l113.895,51.558l51.558,113.895c4.63,10.228,2.439,22.254-5.499,30.193l-11.783,11.782
-              C189.203,510.722,184.303,510.378,181.785,507.029z"></path>
-            <path style={{fill: "#61AFF6"}} d="M104.914,432.283L104.914,432.283c-17.494,8.348-35.767-9.925-27.419-27.419l0,0
-              c18.554-38.883,42.253-75.095,70.46-107.661L341.791,73.417c28.676-33.108,69.054-53.832,112.672-57.831l11.885-1.089
-              c16.568-1.519,30.453,12.365,28.935,28.934l-1.089,11.885c-3.999,43.617-24.724,83.995-57.831,112.672L212.576,361.824
-              C180.009,390.03,143.799,413.73,104.914,432.283z"></path>
-          </svg>
-          <span>Business Trip</span>
+        <div className="flex justify-between text-white/60 text-sm">
+          <div className="flex items-center gap-1">
+            <Heart size={16} />
+            <span>{likes}</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <MessageSquare size={16} />
+            <span>{comments}</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <Eye size={16} />
+            <span>{views}</span>
+          </div>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 
