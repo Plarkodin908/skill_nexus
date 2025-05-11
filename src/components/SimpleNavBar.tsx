@@ -23,10 +23,16 @@ const SimpleNavBar = () => {
               Home
             </Link>
             <Link 
-              to="/posts" 
-              className={`text-gray-600 hover:text-blue-500 ${location.pathname === '/posts' ? 'text-blue-500' : ''}`}
+              to="/marketplace" 
+              className={`text-gray-600 hover:text-blue-500 ${location.pathname === '/marketplace' ? 'text-blue-500' : ''}`}
             >
-              Posts
+              Marketplace
+            </Link>
+            <Link 
+              to="/tutorials" 
+              className={`text-gray-600 hover:text-blue-500 ${location.pathname === '/tutorials' ? 'text-blue-500' : ''}`}
+            >
+              Tutorials
             </Link>
             <Link 
               to="/profile" 

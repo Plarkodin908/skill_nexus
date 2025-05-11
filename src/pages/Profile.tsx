@@ -70,7 +70,7 @@ const Profile = () => {
   return (
     <div className="bg-dark-purple min-h-screen">
       <Navbar />
-      <div className="container mx-auto py-20 px-4">
+      <div className="container mx-auto py-20 pb-32 px-4">
         {/* Cover Image (only visible when not editing) */}
         {!isEditing && coverPicture && (
           <div className="w-full h-48 md:h-64 rounded-lg overflow-hidden mb-6">

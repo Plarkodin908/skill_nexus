@@ -12,28 +12,40 @@ import Posts from "./pages/Posts";
 import Profile from "./pages/Profile";
 import ProfileDetail from "./pages/ProfileDetail";
 import SimpleNavBar from "./components/SimpleNavBar";
+import MobileNavBar from "./components/MobileNavBar";
 import { Toaster } from 'sonner';
 import Index from "./pages/Index";
 import Messages from "./pages/Messages";
 import SignIn from "./pages/auth/SignIn";
 import SignUp from "./pages/auth/SignUp";
+import Tutorials from "./pages/Tutorials";
 
-// Define the regular layout component with navbar
+// Define the regular layout component with navbar and mobile nav
 const RootLayout = () => {
   return (
     <>
       <SimpleNavBar />
-      <div className="p-8 text-center">
+      <div className="p-8 text-center pb-20">
         <h1 className="text-3xl font-bold">Welcome to Skill Exchange</h1>
         <p className="mt-4">Navigate to the Posts or Profile page to see content</p>
       </div>
       <Outlet />
+      <MobileNavBar />
+    </>
+  );
+};
+
+// Layout wrapper for pages with both navbars
+const PageWithNavbars = ({ children }) => {
+  return (
+    <>
+      {children}
+      <MobileNavBar />
     </>
   );
 };
 
 // Define the main app wrapper with AuthProvider
-// This component will wrap the router to provide auth context to all routes
 const AppWithProviders = () => {
   return (
     <div className="skill-exchange-theme">
@@ -49,7 +61,7 @@ const AppWithProviders = () => {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Index />,
+    element: <PageWithNavbars><Index /></PageWithNavbars>,
   },
   {
     path: "/home",
@@ -63,19 +75,27 @@ const router = createBrowserRouter([
   },
   {
     path: "/posts",
-    element: <Posts />,
+    element: <PageWithNavbars><Posts /></PageWithNavbars>,
   },
   {
     path: "/profile",
-    element: <Profile />,
+    element: <PageWithNavbars><Profile /></PageWithNavbars>,
   },
   {
     path: "/profile/:id",
-    element: <ProfileDetail />,
+    element: <PageWithNavbars><ProfileDetail /></PageWithNavbars>,
   },
   {
     path: "/messages",
-    element: <Messages />,
+    element: <PageWithNavbars><Messages /></PageWithNavbars>,
+  },
+  {
+    path: "/tutorials",
+    element: <PageWithNavbars><Tutorials /></PageWithNavbars>,
+  },
+  {
+    path: "/marketplace",
+    element: <PageWithNavbars><div className="container mx-auto py-20 px-4">Marketplace Content</div></PageWithNavbars>,
   },
   {
     path: "/auth/sign-in",

@@ -66,7 +66,7 @@ const ProfileDetail = () => {
     return (
       <>
         <Navbar />
-        <div className="container mx-auto pt-24 pb-16 px-4">
+        <div className="container mx-auto pt-24 pb-24 px-4">
           <div className="text-center">
             <h2 className="text-xl text-white">User not found</h2>
             <Link to="/marketplace" className="mt-4 inline-block">
@@ -113,7 +113,7 @@ const ProfileDetail = () => {
   return (
     <>
       <Navbar />
-      <div className="container mx-auto py-20 px-4">
+      <div className="container mx-auto py-20 pb-32 px-4">
         {/* Cover Image */}
         {profile.coverImage && (
           <div className="w-full h-48 md:h-64 rounded-lg overflow-hidden mb-6">
