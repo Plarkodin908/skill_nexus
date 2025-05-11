@@ -7,6 +7,7 @@ import { Toaster } from "./components/ui/toaster";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "./contexts/AuthContext";
 import MobileNavBar from "./components/MobileNavBar";
+import MobileNavigationMenu from "./components/MobileNavigationMenu";
 
 // Import the Index page directly since it's the first page users see
 import Index from "./pages/Index";
@@ -84,6 +85,8 @@ function App() {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/profile/:id" element={<ProfileDetail />} />
                 <Route path="/settings" element={<Settings />} />
+                <Route path="/settings/appearance" element={<Settings />} />
+                <Route path="/settings/accessibility" element={<Settings />} />
                 <Route path="/calendar" element={<CalendarPage />} />
                 <Route path="/achievements" element={<Achievements />} />
                 <Route path="/activity" element={<Activity />} />
@@ -96,7 +99,7 @@ function App() {
                 <Route path="/import-content" element={<ImportContent />} />
               </Routes>
             </Suspense>
-            <MobileNavBar />
+            <MobileNavigationMenu />
           </div>
         </AuthProvider>
       </Router>
