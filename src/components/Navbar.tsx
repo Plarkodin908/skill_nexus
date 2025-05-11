@@ -108,18 +108,12 @@ const Navbar = () => {
         {/* Mobile Menu */}
         {isMobileMenuOpen && <div className="md:hidden py-3 border-t border-white/10 mt-2 animate-fade-in">
             <div className="flex flex-col space-y-3">
-              <Link to="/marketplace" className="text-white hover:text-gray-400 transition-colors">
-                Marketplace
-              </Link>
-              <Link to="/tutorials" className="text-white hover:text-gray-400 transition-colors">
-                Tutorials
-              </Link>
-              <Link to="/community" className="text-white hover:text-gray-400 transition-colors">
-                Community
-              </Link>
+              
+              
+              
               
               <div className="flex items-center justify-between">
-                <span className="text-white/80">Secure Navigation</span>
+                <span className="mx-0 text-base font-normal text-slate-50">Secure Navigation</span>
                 <button onClick={toggleSecureNavigation} className="p-2 rounded-full hover:bg-white/5 transition-colors relative">
                   <Shield className={`h-5 w-5 ${secureNavigation ? "text-green-400" : "text-gray-400"}`} />
                 </button>
