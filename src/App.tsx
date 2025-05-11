@@ -3,7 +3,7 @@ import React from 'react';
 import {
   createBrowserRouter,
   RouterProvider,
-  Outlet,
+  Outlet
 } from "react-router-dom";
 import './App.css'
 import './styles/index.css'
@@ -18,7 +18,7 @@ import Messages from "./pages/Messages";
 import SignIn from "./pages/auth/SignIn";
 import SignUp from "./pages/auth/SignUp";
 
-// Create a layout component that includes the navbar and content
+// Define the regular layout component with navbar
 const RootLayout = () => {
   return (
     <>
@@ -32,7 +32,20 @@ const RootLayout = () => {
   );
 };
 
-// Define routes with the AuthProvider applied at the router level
+// Define the main app wrapper with AuthProvider
+// This component will wrap the router to provide auth context to all routes
+const AppWithProviders = () => {
+  return (
+    <div className="skill-exchange-theme">
+      <AuthProvider>
+        <RouterProvider router={router} />
+        <Toaster position="top-right" />
+      </AuthProvider>
+    </div>
+  );
+};
+
+// Define routes
 const router = createBrowserRouter([
   {
     path: "/",
@@ -41,6 +54,12 @@ const router = createBrowserRouter([
   {
     path: "/home",
     element: <RootLayout />,
+    children: [
+      {
+        path: "",
+        element: <div>Home Content</div>
+      }
+    ]
   },
   {
     path: "/posts",
@@ -68,16 +87,8 @@ const router = createBrowserRouter([
   }
 ]);
 
-// Wrap the entire app with the AuthProvider
 function App() {
-  return (
-    <div className="skill-exchange-theme">
-      <AuthProvider>
-        <RouterProvider router={router} />
-        <Toaster position="top-right" />
-      </AuthProvider>
-    </div>
-  );
+  return <AppWithProviders />;
 }
 
 export default App;

@@ -135,7 +135,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setUser(null);
     localStorage.removeItem('skillNexusUser');
     toast.info('You have been signed out');
-    window.location.href = '/';  // Use direct navigation instead of useNavigate
+    // Use window.location instead of useNavigate
+    window.location.href = '/';
   };
 
   // Upgrade subscription function
