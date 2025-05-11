@@ -1,3 +1,4 @@
+
 import { ExternalLink } from "lucide-react";
 
 interface SocialLinksProps {
@@ -19,7 +20,7 @@ const SocialLinksBadges = ({ links, onChange, readOnly }: SocialLinksProps) => {
   };
 
   return (
-    <div className="flex flex-wrap justify-center gap-4 p-4 bg-dark-purple border border-primary-purple/20 rounded-lg">
+    <div className="social-container">
       <a 
         href={readOnly ? undefined : "#"} 
         className="socialContainer containerOne"
