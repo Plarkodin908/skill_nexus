@@ -1,14 +1,13 @@
 
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Home, BookOpen, ShoppingBag, User, MessageSquare } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Menu, X, Home, BookOpen, ShoppingBag, User, CreditCard, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 
 const MobileNavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useAuth();
-  const location = useLocation();
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
@@ -37,29 +36,23 @@ const MobileNavBar = () => {
               <span>Tutorials</span>
             </Link>
             <Link
-              to="/messages"
+              to="/notifications"
               className="flex items-center gap-2 p-3 rounded-lg bg-black/40 hover:bg-white/10 text-white"
               onClick={toggleMenu}
             >
-              <MessageSquare className="h-4 w-4 text-white" strokeWidth={3} />
-              <span>Messages</span>
+              <Bell className="h-4 w-4 text-white" strokeWidth={3} />
+              <span>Notifications</span>
             </Link>
           </div>
         </div>
       )}
       
       <div className="flex justify-around items-center bg-black/80 border-t border-white/10 p-1 px-[12px] py-[2px]">
-        <Link 
-          to="/" 
-          className={`p-1 flex flex-col items-center ${location.pathname === '/' ? 'text-primary-purple' : 'text-white hover:text-white/80'}`}
-        >
+        <Link to="/" className="p-1 text-white hover:text-white flex flex-col items-center">
           <Home className="h-4 w-4" strokeWidth={3} />
           <span className="text-xs">Home</span>
         </Link>
-        <Link 
-          to="/marketplace" 
-          className={`p-1 flex flex-col items-center ${location.pathname === '/marketplace' ? 'text-primary-purple' : 'text-white hover:text-white/80'}`}
-        >
+        <Link to="/marketplace" className="p-1 text-white hover:text-white flex flex-col items-center">
           <ShoppingBag className="h-4 w-4" strokeWidth={3} />
           <span className="text-xs">Market</span>
         </Link>
@@ -69,19 +62,13 @@ const MobileNavBar = () => {
         >
           <Menu strokeWidth={3} className="h-4 w-4 my-[3px] mx-[3px]" />
         </Button>
-        <Link 
-          to="/profile" 
-          className={`p-1 flex flex-col items-center ${location.pathname.includes('/profile') ? 'text-primary-purple' : 'text-white hover:text-white/80'}`}
-        >
+        <Link to="/profile" className="p-1 text-white hover:text-white flex flex-col items-center">
           <User className="h-4 w-4" strokeWidth={3} />
           <span className="text-xs">Profile</span>
         </Link>
-        <Link 
-          to="/tutorials" 
-          className={`p-1 flex flex-col items-center ${location.pathname === '/tutorials' ? 'text-primary-purple' : 'text-white hover:text-white/80'}`}
-        >
-          <BookOpen className="h-4 w-4" strokeWidth={3} />
-          <span className="text-xs">Learn</span>
+        <Link to="/pricing" className="p-1 text-white hover:text-white flex flex-col items-center">
+          <CreditCard className="h-4 w-4" strokeWidth={3} />
+          <span className="text-xs">Pricing</span>
         </Link>
       </div>
     </div>

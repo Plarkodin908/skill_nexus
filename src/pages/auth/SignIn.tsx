@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -27,9 +28,6 @@ const SignIn = () => {
         // Set localStorage flag to show demo notice after some time
         localStorage.setItem("showDemoNotice", "true");
       }
-      
-      // Navigate on success
-      navigate("/profile");
     } catch (error) {
       console.error("Sign in error:", error);
       toast.error("Failed to sign in. Please check your credentials.");

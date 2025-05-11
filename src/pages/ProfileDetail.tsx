@@ -9,7 +9,6 @@ import { useAuth } from '@/contexts/AuthContext';
 import VerifiedBadge from '@/components/profile/VerifiedBadge';
 import { Mail, UserPlus, UserMinus, Flag } from 'lucide-react';
 import { toast } from 'sonner';
-import PublisherProfileCard from '@/components/profile/PublisherProfileCard';
 
 interface UserProfile {
   id: string;
@@ -66,7 +65,7 @@ const ProfileDetail = () => {
     return (
       <>
         <Navbar />
-        <div className="container mx-auto pt-24 pb-24 px-4">
+        <div className="container mx-auto pt-24 pb-16 px-4">
           <div className="text-center">
             <h2 className="text-xl text-white">User not found</h2>
             <Link to="/marketplace" className="mt-4 inline-block">
@@ -113,7 +112,7 @@ const ProfileDetail = () => {
   return (
     <>
       <Navbar />
-      <div className="container mx-auto py-20 pb-32 px-4">
+      <div className="container mx-auto py-20 px-4">
         {/* Cover Image */}
         {profile.coverImage && (
           <div className="w-full h-48 md:h-64 rounded-lg overflow-hidden mb-6">
@@ -129,15 +128,63 @@ const ProfileDetail = () => {
           {/* Profile Sidebar */}
           <div className="w-full md:w-1/3">
             <div className="bg-forest-light border border-mint/10 rounded-lg p-6 space-y-6">
-              <div className="flex flex-col items-center">
-                <PublisherProfileCard
-                  name={profile.name}
-                  subtitle={profile.role}
-                  onPrimaryAction={handleFollow}
-                  onSecondaryAction={handleMessage}
-                  primaryButtonText={isFollowing ? "Unfollow" : "Follow"}
-                  secondaryButtonText="Message"
-                />
+              <div className="flex flex-col items-center text-center">
+                <Avatar className="h-24 w-24 border-2 border-mint/30 mb-4">
+                  {profile.avatar ? (
+                    <AvatarImage src={profile.avatar} alt={profile.name} />
+                  ) : (
+                    <AvatarFallback className="bg-forest text-2xl">
+                      {profile.name.substring(0, 2)}
+                    </AvatarFallback>
+                  )}
+                </Avatar>
+                
+                <h2 className="text-xl font-bold text-white flex items-center gap-2">
+                  {profile.name}
+                  {profile.verificationStatus === "verified" && (
+                    <VerifiedBadge size="md" />
+                  )}
+                </h2>
+                
+                <p className="text-mint mt-1">{profile.role}</p>
+                
+                <div className="flex justify-center gap-4 mt-3">
+                  <div className="text-center">
+                    <p className="text-white font-semibold">{profile.followers}</p>
+                    <p className="text-white/60 text-sm">Followers</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-white font-semibold">{profile.following}</p>
+                    <p className="text-white/60 text-sm">Following</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <Button
+                  className={isFollowing ? 'w-full border border-mint/20 text-white bg-transparent hover:bg-white/5' : 'w-full bg-mint hover:bg-mint/90 text-forest'}
+                  onClick={handleFollow}
+                >
+                  {isFollowing ? (
+                    <>
+                      <UserMinus className="h-4 w-4 mr-2" />
+                      Unfollow
+                    </>
+                  ) : (
+                    <>
+                      <UserPlus className="h-4 w-4 mr-2" />
+                      Follow
+                    </>
+                  )}
+                </Button>
+                
+                <Button
+                  className="w-full border border-mint/20 text-mint hover:bg-mint/10 bg-transparent"
+                  onClick={handleMessage}
+                >
+                  <Mail className="h-4 w-4 mr-2" />
+                  Message
+                </Button>
               </div>
               
               <div className="pt-4 border-t border-mint/10">

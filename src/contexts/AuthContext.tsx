@@ -1,5 +1,6 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from "sonner";
 
 // Define user types and membership levels
@@ -47,6 +48,7 @@ const mockUsers = [
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const navigate = useNavigate();
 
   // Check for existing session on component mount
   useEffect(() => {
@@ -84,11 +86,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       
       toast.success('Successfully signed in!');
       
-      // Return success for the component to handle navigation
-      return Promise.resolve();
+      // Redirect based on profile completion
+      if (!foundUser.completedProfile) {
+        navigate('/profile');
+      } else {
+        navigate('/dashboard');
+      }
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'Failed to sign in');
-      return Promise.reject(error);
+      toast.error(error.message || 'Failed to sign in');
     } finally {
       setIsLoading(false);
     }
@@ -121,10 +126,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       localStorage.setItem('skillNexusUser', JSON.stringify(newUser));
       
       toast.success('Account created successfully!');
-      return Promise.resolve();
+      navigate('/profile');
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'Failed to create account');
-      return Promise.reject(error);
+      toast.error(error.message || 'Failed to create account');
     } finally {
       setIsLoading(false);
     }
@@ -135,8 +139,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setUser(null);
     localStorage.removeItem('skillNexusUser');
     toast.info('You have been signed out');
-    // Use window.location instead of useNavigate
-    window.location.href = '/';
+    navigate('/');
   };
 
   // Upgrade subscription function
@@ -170,7 +173,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   // Submit verification function
   const submitVerification = async (idImageUrl: string) => {
-    if (!user) return Promise.reject(new Error('User not signed in'));
+    if (!user) return;
     
     try {
       setIsLoading(true);
@@ -188,10 +191,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
       
       toast.success('Verification request submitted successfully! We will review your submission.');
-      return Promise.resolve();
     } catch (error) {
       toast.error('Failed to submit verification request');
-      return Promise.reject(error);
     } finally {
       setIsLoading(false);
     }
