@@ -43,7 +43,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
         
         <div className="icon-box">
           <svg version="1.1" className="svg" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-            viewBox="0 0 512.001 512.001" style={{enableBackground: "new 0 0 512.001 512.001"}}>
+            viewBox="0 0 512.001 512.001" style={{enableBackground: "new 0 0 512.001 512.001"} as React.CSSProperties}>
             <path style={{fill: "#3D6687"}} d="M165,68.715l-26.327-26.327l37.363-37.363c3.739-3.739,9.801-3.739,13.54,0l12.786,12.786
               c3.739,3.739,3.739,9.801,0,13.54L165,68.715z"></path>
             <path style={{fill: "#3D6687"}} d="M234.998,101.725l-26.327-26.327l37.363-37.363c3.739-3.739,9.801-3.739,13.54,0l12.786,12.786
