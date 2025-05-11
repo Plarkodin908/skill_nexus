@@ -120,9 +120,7 @@ const Navbar = () => {
               </div>
               
               <form className="relative mt-2">
-                <div className="w-full bg-white/5 backdrop-blur-sm border border-white/10 text-white px-4 py-2 rounded-full">
-                  <UserSearch />
-                </div>
+                
               </form>
               
               {!user && <div className="flex space-x-2 mt-2">
