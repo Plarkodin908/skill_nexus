@@ -25,6 +25,14 @@ const analytics = typeof window !== 'undefined' ? getAnalytics(app) : null;
 if (typeof window !== 'undefined') {
   // Add security measures for network requests
   const originalFetch = window.fetch;
+  // Create an interface to extend the Window object
+  interface CustomWindow extends Window {
+    lastFirebaseRequestTime?: number;
+  }
+  
+  // Cast window to our custom type
+  const customWindow = window as CustomWindow;
+  
   window.fetch = function(input, init) {
     // Add security headers to requests to Firebase services
     if (typeof input === 'string' && input.includes('firebase')) {
@@ -38,11 +46,11 @@ if (typeof window !== 'undefined') {
       // Implement request throttling to prevent abuse
       // This is a simplified version - you might want to use a more sophisticated approach
       const now = Date.now();
-      const lastRequestTime = window.lastFirebaseRequestTime || 0;
+      const lastRequestTime = customWindow.lastFirebaseRequestTime || 0;
       if (now - lastRequestTime < 100) { // Limit to max 10 requests per second
         return Promise.reject(new Error('Too many requests'));
       }
-      window.lastFirebaseRequestTime = now;
+      customWindow.lastFirebaseRequestTime = now;
     }
     return originalFetch.call(this, input, init);
   };

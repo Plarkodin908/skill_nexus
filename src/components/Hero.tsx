@@ -1,17 +1,20 @@
+
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BookOpen, Users, GraduationCap, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import ScrollReveal from "./ScrollReveal";
+
 const Hero = () => {
   const {
     user
   } = useAuth();
-  return <section className="hero-rain-gradient pt-24 md:pt-32 pb-16 px-4 relative">
-      {/* Animated background elements */}
-      <div className="animated-bg-element one"></div>
-      <div className="animated-bg-element two"></div>
-      <div className="animated-bg-element three"></div>
+  
+  return (
+    <section className="relative pt-24 md:pt-32 pb-16 px-4 overflow-hidden">
+      {/* Animated pattern background */}
+      <div className="animated-pattern-container"></div>
+      <div className="animated-pattern-overlay"></div>
       
       <div className="container mx-auto relative z-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-10">
@@ -25,7 +28,8 @@ const Hero = () => {
             </p>
             
             <div className="flex flex-wrap gap-4 pt-4">
-              {user ? <>
+              {user ? (
+                <>
                   <Link to="/profile">
                     <Button className="bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-800 hover:to-gray-900 text-white px-4 py-2 md:px-6 md:py-6 text-sm md:text-base">
                       <span>Manage Profile</span>
@@ -38,12 +42,15 @@ const Hero = () => {
                       <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
                     </Button>
                   </Link>
-                </> : <Link to="/auth/sign-up">
+                </>
+              ) : (
+                <Link to="/auth/sign-up">
                   <Button className="bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-800 hover:to-gray-900 text-white px-4 py-2 md:px-6 md:py-6 text-sm md:text-base">
                     <span>Take the First Step</span>
                     <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
                   </Button>
-                </Link>}
+                </Link>
+              )}
             </div>
             
             <div className="flex flex-wrap items-center gap-4 pt-6">
@@ -66,7 +73,12 @@ const Hero = () => {
             <div className="relative">
               {/* Animated collaboration illustration */}
               <div className="relative z-20">
-                <img alt="Users collaborating" className="max-w-full w-full md:max-w-md mx-auto animate-float" src="/lovable-uploads/79bf9c55-24c6-4feb-84ff-310a64214018.png" />
+                <img 
+                  alt="Users collaborating" 
+                  className="max-w-full w-full md:max-w-md mx-auto animate-float" 
+                  src="/lovable-uploads/79bf9c55-24c6-4feb-84ff-310a64214018.png" 
+                  loading="eager"
+                />
               </div>
               <div className="absolute -z-10 w-full h-full bg-gradient-to-br from-gray-700/30 to-gray-800/30 rounded-full blur-3xl"></div>
             </div>
@@ -80,6 +92,8 @@ const Hero = () => {
           </a>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default Hero;

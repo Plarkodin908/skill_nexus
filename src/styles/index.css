@@ -8,6 +8,7 @@
 @import './animations.css';
 @import './responsive.css';
 @import './delivery-animation.css';
+@import './animated-pattern.css';
 
 /* Performance optimizations */
 img {
