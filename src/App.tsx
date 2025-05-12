@@ -1,6 +1,6 @@
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Suspense, lazy } from "react";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { Suspense, lazy, useEffect } from "react";
 import "./App.css";
 import "./styles/SkillExchangeTheme.css";
 import { Toaster } from "./components/ui/toaster";
@@ -39,19 +39,34 @@ const PlanDetails = lazy(() => import("./pages/PlanDetails"));
 const AddCourse = lazy(() => import("./pages/AddCourse"));
 const ImportContent = lazy(() => import("./pages/ImportContent"));
 
-// Loading component
+// Loading component with improved appearance
 const PageLoading = () => (
   <div className="flex items-center justify-center min-h-screen">
-    <div className="w-12 h-12 border-4 border-primary-purple rounded-full border-t-transparent animate-spin"></div>
+    <div className="flex flex-col items-center">
+      <div className="w-12 h-12 border-4 border-primary-purple rounded-full border-t-transparent animate-spin mb-4"></div>
+      <p className="text-white/70">Loading content...</p>
+    </div>
   </div>
 );
+
+// Track when route changes to scroll to top
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  
+  return null;
+};
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 60 * 1000, // 1 minute
       refetchOnWindowFocus: false,
-      retry: 1
+      retry: 1,
+      cacheTime: 5 * 60 * 1000 // 5 minutes cache for better performance
     }
   }
 });
@@ -61,6 +76,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Router>
         <AuthProvider>
+          <ScrollToTop />
           <div className="skill-exchange-theme">
             <Toaster />
             <Suspense fallback={<PageLoading />}>

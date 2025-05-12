@@ -16,4 +16,61 @@
   .container {
     @apply px-4;
   }
+  
+  /* Mobile padding adjustments */
+  .py-20 {
+    @apply py-12;
+  }
+  
+  .py-16 {
+    @apply py-10;
+  }
+  
+  /* Better grid layouts for small screens */
+  .grid-cols-3 {
+    @apply grid-cols-1;
+  }
+  
+  .grid-cols-4 {
+    @apply grid-cols-2;
+  }
+  
+  /* Adjust spacing for mobile */
+  .gap-8 {
+    @apply gap-4;
+  }
+  
+  /* Improve card display on mobile */
+  .card {
+    width: 100%;
+    max-width: 252px;
+    margin: 0 auto;
+  }
+}
+
+/* Tablet responsiveness */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .container {
+    @apply px-6;
+  }
+  
+  .grid-cols-4 {
+    @apply grid-cols-3;
+  }
+  
+  .card {
+    width: 100%;
+  }
+}
+
+/* Fix bottom padding for pages with mobile nav */
+.has-mobile-nav {
+  padding-bottom: 70px;
+}
+
+/* Optimize images for better mobile performance */
+@media (max-width: 768px) {
+  img {
+    @apply max-w-full h-auto;
+  }
 }

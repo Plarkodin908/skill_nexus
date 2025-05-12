@@ -8,3 +8,48 @@
 @import './animations.css';
 @import './responsive.css';
 @import './delivery-animation.css';
+
+/* Performance optimizations */
+img {
+  content-visibility: auto;
+}
+
+/* Improve scroll performance */
+* {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Ensure content is always visible without horizontal scrolling on mobile */
+body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Add style for better touch feedback on mobile */
+.mobile-touch-feedback {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-touch-feedback:active {
+  opacity: 0.7;
+}
+
+/* Optimize text rendering */
+html {
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Make clickable areas larger on mobile */
+@media (max-width: 640px) {
+  button, 
+  .button,
+  a {
+    padding: 0.5rem;
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SearchBar from "@/components/marketplace/SearchBar";
 import FilterToggle from "@/components/marketplace/FilterToggle";
 import FilterPanel from "@/components/marketplace/FilterPanel";
@@ -17,6 +17,15 @@ const Marketplace = () => {
   const [showFilters, setShowFilters] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuth();
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // Check if device is mobile
+  useEffect(() => {
+    const checkIfMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
   
   const searchSuggestions = [
     "Web Development",
@@ -48,25 +57,28 @@ const Marketplace = () => {
   };
   
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex justify-between items-center mb-8">
+    <div className="container mx-auto px-4 py-8 has-mobile-nav">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
         <MarketplaceHeader />
-        <div className="flex gap-2">
-          <Button 
-            variant="outline" 
-            className="border-mint/20 text-white hover:bg-mint/10 flex items-center gap-2"
-            onClick={handleImportContent}
-          >
-            <Import className="h-4 w-4" />
-            Import Content
-          </Button>
-          <Link to="/">
-            <Button variant="outline" className="border-mint/20 text-white hover:bg-mint/10 flex items-center gap-2">
-              <Home className="h-4 w-4" />
-              Home
+        {!isMobile && (
+          <div className="flex gap-2">
+            <Button 
+              variant="outline" 
+              className="border-mint/20 text-white hover:bg-mint/10 flex items-center gap-2"
+              onClick={handleImportContent}
+            >
+              <Import className="h-4 w-4" />
+              <span className="hidden md:inline">Import Content</span>
+              <span className="md:hidden">Import</span>
             </Button>
-          </Link>
-        </div>
+            <Link to="/">
+              <Button variant="outline" className="border-mint/20 text-white hover:bg-mint/10 flex items-center gap-2">
+                <Home className="h-4 w-4" />
+                <span className="hidden md:inline">Home</span>
+              </Button>
+            </Link>
+          </div>
+        )}
       </div>
       
       <div className="flex flex-col md:flex-row gap-4 mb-8">
@@ -85,7 +97,7 @@ const Marketplace = () => {
       
       <CourseTabsSection />
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
         <EmptyCoursesState />
       </div>
     </div>
