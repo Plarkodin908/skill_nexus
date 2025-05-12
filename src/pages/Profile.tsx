@@ -44,9 +44,13 @@ const Profile = () => {
   };
 
   return (
-    <div className="bg-dark-purple min-h-screen">
+    <div className="bg-dark-purple min-h-screen relative">
+      {/* Grid pattern background */}
+      <div className="grid-pattern-container"></div>
+      <div className="grid-pattern-overlay"></div>
+      
       <Navbar />
-      <div className="container mx-auto py-20 px-4">
+      <div className="container mx-auto py-20 px-4 relative z-10">
         {/* Cover Image (only visible when not editing) */}
         {!isEditing && coverPicture && (
           <div className="w-full h-48 md:h-64 rounded-lg overflow-hidden mb-6">

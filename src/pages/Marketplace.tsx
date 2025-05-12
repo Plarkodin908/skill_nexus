@@ -57,7 +57,11 @@ const Marketplace = () => {
   };
   
   return (
-    <div className="container mx-auto px-4 py-8 has-mobile-nav">
+    <div className="container mx-auto px-4 py-8 has-mobile-nav relative">
+      {/* Grid pattern background */}
+      <div className="grid-pattern-container"></div>
+      <div className="grid-pattern-overlay"></div>
+      
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
         <MarketplaceHeader />
         {!isMobile && (
