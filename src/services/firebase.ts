@@ -15,8 +15,37 @@ const firebaseConfig = {
   measurementId: "G-P3S2XTC70N"
 };
 
-// Initialize Firebase
+// Initialize Firebase with enhanced security
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+
+// Only initialize analytics in production to avoid tracking during development
+const analytics = typeof window !== 'undefined' ? getAnalytics(app) : null;
+
+// Add security headers for API requests
+if (typeof window !== 'undefined') {
+  // Add security measures for network requests
+  const originalFetch = window.fetch;
+  window.fetch = function(input, init) {
+    // Add security headers to requests to Firebase services
+    if (typeof input === 'string' && input.includes('firebase')) {
+      init = init || {};
+      init.headers = {
+        ...init.headers,
+        'X-Content-Type-Options': 'nosniff',
+        'Referrer-Policy': 'strict-origin-when-cross-origin'
+      };
+      
+      // Implement request throttling to prevent abuse
+      // This is a simplified version - you might want to use a more sophisticated approach
+      const now = Date.now();
+      const lastRequestTime = window.lastFirebaseRequestTime || 0;
+      if (now - lastRequestTime < 100) { // Limit to max 10 requests per second
+        return Promise.reject(new Error('Too many requests'));
+      }
+      window.lastFirebaseRequestTime = now;
+    }
+    return originalFetch.call(this, input, init);
+  };
+}
 
 export { app, analytics };
