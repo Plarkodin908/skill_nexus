@@ -49,17 +49,7 @@ const PageLoading = () => (
   </div>
 );
 
-// Track when route changes to scroll to top
-const ScrollToTop = () => {
-  const { pathname } = useLocation();
-  
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-  
-  return null;
-};
-
+// Create the QueryClient instance outside of the component 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -71,13 +61,24 @@ const queryClient = new QueryClient({
   }
 });
 
+// Track when route changes to scroll to top
+function ScrollToTopComponent() {
+  const { pathname } = useLocation();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  
+  return null;
+}
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
         <AuthProvider>
-          <ScrollToTop />
           <div className="skill-exchange-theme">
+            <ScrollToTopComponent />
             <Toaster />
             <Suspense fallback={<PageLoading />}>
               <Routes>
