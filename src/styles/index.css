@@ -10,6 +10,7 @@
 @import './delivery-animation.css';
 @import './animated-pattern.css';
 @import './grid-pattern.css';
+@import './loaders.css';
 
 /* Performance optimizations */
 img {

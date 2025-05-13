@@ -7,6 +7,7 @@ import { Toaster } from "./components/ui/toaster";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "./contexts/AuthContext";
 import MobileNavBar from "./components/MobileNavBar";
+import Loading from "./components/ui/loading";
 
 // Import the Index page directly since it's the first page users see
 import Index from "./pages/Index";
@@ -43,8 +44,7 @@ const ImportContent = lazy(() => import("./pages/ImportContent"));
 const PageLoading = () => (
   <div className="flex items-center justify-center min-h-screen">
     <div className="flex flex-col items-center">
-      <div className="w-12 h-12 border-4 border-primary-purple rounded-full border-t-transparent animate-spin mb-4"></div>
-      <p className="text-white/70">Loading content...</p>
+      <Loading variant="words" />
     </div>
   </div>
 );
