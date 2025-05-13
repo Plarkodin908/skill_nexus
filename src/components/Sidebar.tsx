@@ -13,9 +13,7 @@ import {
   Settings,
   Menu,
   X,
-  GraduationCap,
-  BookText,
-  Brain
+  GraduationCap
 } from "lucide-react";
 
 const Sidebar = () => {
@@ -103,7 +101,12 @@ const Sidebar = () => {
           
           <Link 
             to="/settings" 
-            className="flex items-center gap-3 px-3 py-2 rounded-lg text-white/80 hover:bg-mint/10 hover:text-mint hover:translate-x-1 transition-all duration-200"
+            className={`
+              flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200
+              ${location.pathname === "/settings" 
+                ? 'bg-mint text-forest font-medium translate-x-1' 
+                : 'text-white/80 hover:bg-mint/10 hover:text-mint hover:translate-x-1'}
+            `}
             onClick={scrollToTop}
           >
             <Settings className="h-5 w-5" />

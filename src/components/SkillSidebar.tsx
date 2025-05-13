@@ -39,7 +39,7 @@ const SkillSidebar = () => {
   ];
   
   return (
-    <div className="skill-sidebar">
+    <div className="skill-sidebar hidden lg:block">
       <div className="flex flex-col items-center pb-6 pt-4">
         <img 
           src="/lovable-uploads/609db0c7-2e29-405b-ad44-bee4b401e14e.png" 
@@ -52,10 +52,10 @@ const SkillSidebar = () => {
           <Link 
             key={item.path} 
             to={item.path}
-            className={`sidebar-item ${location.pathname === item.path ? 'active' : ''}`}
+            className={`sidebar-item flex items-center gap-3 px-4 py-3 ${location.pathname === item.path ? 'active bg-gray-800/50 border-l-2 border-primary-purple' : ''}`}
           >
-            {item.icon}
-            <span>{item.label}</span>
+            <span className="text-gray-400">{item.icon}</span>
+            <span className="text-gray-200">{item.label}</span>
           </Link>
         ))}
       </div>

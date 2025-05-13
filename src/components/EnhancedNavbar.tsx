@@ -27,50 +27,51 @@ const EnhancedNavbar = () => {
           <span className="text-2xl font-bold text-white">SKILL NEXUS</span>
         </Link>
         
-        <div className="hidden md:flex flex-col justify-center items-center relative transition-all duration-450 ease-in-out">
-          <article className="border border-solid border-primary-purple/50 ease-in-out duration-500 rounded-2xl inline-block shadow-lg shadow-black/15 bg-dark-purple/80">
-            <div className="flex">
-              <Link to="/dashboard" onClick={() => setActiveTab('dashboard')}>
-                <label className={`relative w-full h-16 p-4 ease-in-out duration-300 border-solid border-primary-purple/10 flex flex-row gap-3 items-center justify-center rounded-xl ${activeTab === 'dashboard' ? 'shadow-lg border text-primary-purple' : 'text-white/80 hover:text-primary-purple'}`}>
-                  <input className="hidden peer/expand" type="radio" name="path" id="dashboard" checked={activeTab === 'dashboard'} readOnly />
-                  <LayoutDashboard className={`peer-hover/expand:scale-125 peer-hover/expand:text-primary-purple text-2xl ${activeTab === 'dashboard' ? 'text-primary-purple scale-125' : ''} ease-in-out duration-300`} />
-                  <span className="hidden lg:inline">Dashboard</span>
-                </label>
-              </Link>
-
-              <Link to="/profile" onClick={() => setActiveTab('profile')}>
-                <label className={`relative w-full h-16 p-4 ease-in-out duration-300 border-solid border-primary-purple/10 flex flex-row gap-3 items-center justify-center rounded-xl ${activeTab === 'profile' ? 'shadow-lg border text-primary-purple' : 'text-white/80 hover:text-primary-purple'}`}>
-                  <input className="hidden peer/expand" type="radio" name="path" id="profile" checked={activeTab === 'profile'} readOnly />
-                  <User className={`peer-hover/expand:scale-125 peer-hover/expand:text-primary-purple text-2xl ${activeTab === 'profile' ? 'text-primary-purple scale-125' : ''} ease-in-out duration-300`} />
-                  <span className="hidden lg:inline">Profile</span>
-                </label>
-              </Link>
-
-              <Link to="/messages" onClick={() => setActiveTab('messages')}>
-                <label className={`relative w-full h-16 p-4 ease-in-out duration-300 border-solid border-primary-purple/10 flex flex-row gap-3 items-center justify-center rounded-xl ${activeTab === 'messages' ? 'shadow-lg border text-primary-purple' : 'text-white/80 hover:text-primary-purple'}`}>
-                  <input className="hidden peer/expand" type="radio" name="path" id="messages" checked={activeTab === 'messages'} readOnly />
-                  <MessageSquare className={`peer-hover/expand:scale-125 peer-hover/expand:text-primary-purple text-2xl ${activeTab === 'messages' ? 'text-primary-purple scale-125' : ''} ease-in-out duration-300`} />
-                  <span className="hidden lg:inline">Messages</span>
-                </label>
-              </Link>
-
-              <Link to="/tutorials" onClick={() => setActiveTab('help')}>
-                <label className={`relative w-full h-16 p-4 ease-in-out duration-300 border-solid border-primary-purple/10 flex flex-row gap-3 items-center justify-center rounded-xl ${activeTab === 'help' ? 'shadow-lg border text-primary-purple' : 'text-white/80 hover:text-primary-purple'}`}>
-                  <input className="hidden peer/expand" type="radio" name="path" id="help" checked={activeTab === 'help'} readOnly />
-                  <HelpCircle className={`peer-hover/expand:scale-125 peer-hover/expand:text-primary-purple text-2xl ${activeTab === 'help' ? 'text-primary-purple scale-125' : ''} ease-in-out duration-300`} />
-                  <span className="hidden lg:inline">Help</span>
-                </label>
-              </Link>
-
-              <Link to="/settings" onClick={() => setActiveTab('settings')}>
-                <label className={`relative w-full h-16 p-4 ease-in-out duration-300 border-solid border-primary-purple/10 flex flex-row gap-3 items-center justify-center rounded-xl ${activeTab === 'settings' ? 'shadow-lg border text-primary-purple' : 'text-white/80 hover:text-primary-purple'}`}>
-                  <input className="hidden peer/expand" type="radio" name="path" id="settings" checked={activeTab === 'settings'} readOnly />
-                  <Settings className={`peer-hover/expand:scale-125 peer-hover/expand:text-primary-purple text-2xl ${activeTab === 'settings' ? 'text-primary-purple scale-125' : ''} ease-in-out duration-300`} />
-                  <span className="hidden lg:inline">Settings</span>
-                </label>
-              </Link>
-            </div>
-          </article>
+        <div className="hidden lg:flex flex-row justify-center items-center space-x-2 transition-all duration-300">
+          <Link 
+            to="/dashboard" 
+            onClick={() => setActiveTab('dashboard')}
+            className={`px-4 py-2 rounded-lg flex items-center gap-2 ${activeTab === 'dashboard' ? 'bg-primary-purple text-white' : 'text-white/80 hover:bg-primary-purple/20'}`}
+          >
+            <LayoutDashboard className="h-5 w-5" />
+            <span>Dashboard</span>
+          </Link>
+          
+          <Link 
+            to="/profile" 
+            onClick={() => setActiveTab('profile')}
+            className={`px-4 py-2 rounded-lg flex items-center gap-2 ${activeTab === 'profile' ? 'bg-primary-purple text-white' : 'text-white/80 hover:bg-primary-purple/20'}`}
+          >
+            <User className="h-5 w-5" />
+            <span>Profile</span>
+          </Link>
+          
+          <Link 
+            to="/messages" 
+            onClick={() => setActiveTab('messages')}
+            className={`px-4 py-2 rounded-lg flex items-center gap-2 ${activeTab === 'messages' ? 'bg-primary-purple text-white' : 'text-white/80 hover:bg-primary-purple/20'}`}
+          >
+            <MessageSquare className="h-5 w-5" />
+            <span>Messages</span>
+          </Link>
+          
+          <Link 
+            to="/tutorials" 
+            onClick={() => setActiveTab('help')}
+            className={`px-4 py-2 rounded-lg flex items-center gap-2 ${activeTab === 'help' ? 'bg-primary-purple text-white' : 'text-white/80 hover:bg-primary-purple/20'}`}
+          >
+            <HelpCircle className="h-5 w-5" />
+            <span>Help</span>
+          </Link>
+          
+          <Link 
+            to="/settings" 
+            onClick={() => setActiveTab('settings')}
+            className={`px-4 py-2 rounded-lg flex items-center gap-2 ${activeTab === 'settings' ? 'bg-primary-purple text-white' : 'text-white/80 hover:bg-primary-purple/20'}`}
+          >
+            <Settings className="h-5 w-5" />
+            <span>Settings</span>
+          </Link>
         </div>
 
         <Link to="/marketplace">
