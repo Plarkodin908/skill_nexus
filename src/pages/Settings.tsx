@@ -3,14 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { 
-  Card, 
-  CardContent, 
-  CardDescription, 
-  CardFooter, 
-  CardHeader, 
-  CardTitle 
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -18,40 +11,15 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { toast } from "sonner";
-import {
-  User,
-  Lock,
-  Bell,
-  Eye,
-  Globe,
-  Palette,
-  Shield,
-  UserPlus,
-  List,
-  Database,
-  Upload,
-  Download,
-  LogOut,
-  Trash2,
-  Moon,
-  Sun,
-  ImagePlus,
-  CheckCircle,
-  Save,
-  RefreshCw,
-  Home,
-  Search,
-  ShoppingCart
-} from "lucide-react";
+import { User, Lock, Bell, Eye, Globe, Palette, Shield, UserPlus, List, Database, Upload, Download, LogOut, Trash2, Moon, Sun, ImagePlus, CheckCircle, Save, RefreshCw, Home, Search, ShoppingCart } from "lucide-react";
 import EnhancedNavbar from "@/components/EnhancedNavbar";
 import SettingsSidebar from "@/components/settings/SettingsSidebar";
 import { Link } from "react-router-dom";
-
 const Settings = () => {
   // Page load animation
   const [isPageLoaded, setIsPageLoaded] = useState(false);
   const [activeTab, setActiveTab] = useState("account");
-  
+
   // State for various settings
   const [profileImage, setProfileImage] = useState("/lovable-uploads/971a0525-9509-4c96-9f90-66e481b188bc.png");
   const [darkMode, setDarkMode] = useState(false);
@@ -70,15 +38,10 @@ const Settings = () => {
   const [visibility, setVisibility] = useState("connections");
   const [twoFactorEnabled, setTwoFactorEnabled] = useState(false);
   const [language, setLanguage] = useState("english");
-  const [userSkills, setUserSkills] = useState([
-    "JavaScript", "React", "UI/UX Design"
-  ]);
-  const [userInterests, setUserInterests] = useState([
-    "Web Development", "Mobile Apps", "Machine Learning"
-  ]);
+  const [userSkills, setUserSkills] = useState(["JavaScript", "React", "UI/UX Design"]);
+  const [userInterests, setUserInterests] = useState(["Web Development", "Mobile Apps", "Machine Learning"]);
   const [isSaving, setIsSaving] = useState(false);
   const [activeAccentColor, setActiveAccentColor] = useState("mint");
-
   useEffect(() => {
     setIsPageLoaded(true);
   }, []);
@@ -90,7 +53,7 @@ const Settings = () => {
       setIsSaving(true);
       // In a real app, you'd upload this to a server
       const reader = new FileReader();
-      reader.onload = (e) => {
+      reader.onload = e => {
         if (e.target?.result) {
           setTimeout(() => {
             setProfileImage(e.target.result as string);
@@ -132,7 +95,6 @@ const Settings = () => {
       });
     }, 1000);
   };
-
   const handleChangePassword = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);
@@ -144,7 +106,6 @@ const Settings = () => {
       });
     }, 1000);
   };
-
   const handle2FAToggle = () => {
     setIsSaving(true);
     setTimeout(() => {
@@ -156,7 +117,6 @@ const Settings = () => {
       });
     }, 800);
   };
-
   const handleDeleteAccount = () => {
     // In a real app, this would show a confirmation dialog
     toast.error("This action would delete your account permanently.", {
@@ -164,7 +124,6 @@ const Settings = () => {
       duration: 5000
     });
   };
-
   const handleExportData = () => {
     setIsSaving(true);
     setTimeout(() => {
@@ -175,7 +134,6 @@ const Settings = () => {
       });
     }, 1500);
   };
-
   const handleLogoutOtherDevices = () => {
     setIsSaving(true);
     setTimeout(() => {
@@ -186,7 +144,6 @@ const Settings = () => {
       });
     }, 1000);
   };
-
   const handleAccentColorChange = (color: string) => {
     setIsSaving(true);
     setTimeout(() => {
@@ -205,12 +162,10 @@ const Settings = () => {
     setUserSkills(userSkills.filter(s => s !== skill));
     toast.success(`Skill "${skill}" removed.`);
   };
-
   const removeInterest = (interest: string) => {
     setUserInterests(userInterests.filter(i => i !== interest));
     toast.success(`Interest "${interest}" removed.`);
   };
-
   const handleSaveLanguage = () => {
     setIsSaving(true);
     setTimeout(() => {
@@ -221,7 +176,6 @@ const Settings = () => {
       });
     }, 1000);
   };
-
   const handleSaveNotifications = (type: 'email' | 'app') => {
     setIsSaving(true);
     setTimeout(() => {
@@ -232,7 +186,6 @@ const Settings = () => {
       });
     }, 1000);
   };
-
   const handleSaveVisibility = () => {
     setIsSaving(true);
     setTimeout(() => {
@@ -243,7 +196,6 @@ const Settings = () => {
       });
     }, 1000);
   };
-
   const handleAddSkill = () => {
     const input = document.getElementById('add-skill') as HTMLInputElement;
     if (input.value) {
@@ -255,7 +207,6 @@ const Settings = () => {
       });
     }
   };
-
   const handleAddInterest = () => {
     const input = document.getElementById('add-interest') as HTMLInputElement;
     if (input.value) {
@@ -267,9 +218,7 @@ const Settings = () => {
       });
     }
   };
-
-  return (
-    <>
+  return <>
       <EnhancedNavbar />
       <div className={`container mx-auto px-4 py-16 max-w-6xl transition-opacity duration-500 ${isPageLoaded ? 'opacity-100' : 'opacity-0'}`}>
         <div className="flex flex-col items-center mb-8">
@@ -278,15 +227,15 @@ const Settings = () => {
         </div>
 
         {/* Bottom navigation bar */}
-        <div className="button-container mb-8">
+        <div className="button-container mb-8 px-[10px]">
           <Link to="/">
             <button className="button">
-              <Home size={24} />
+              <Home size={24} className="py-0 px-0 mx-[5px]" />
             </button>
           </Link>
           <Link to="/marketplace">
             <button className="button">
-              <Search size={24} />
+              <Search size={24} className="mx-[5px]" />
             </button>
           </Link>
           <Link to="/profile">
@@ -296,19 +245,17 @@ const Settings = () => {
           </Link>
           <Link to="/marketplace">
             <button className="button">
-              <ShoppingCart size={24} />
+              <ShoppingCart size={24} className="mx-[5px]" />
             </button>
           </Link>
         </div>
 
-        {isSaving && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        {isSaving && <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
             <div className="bg-forest p-6 rounded-xl flex items-center space-x-4">
               <RefreshCw className="h-6 w-6 text-mint animate-spin" />
               <span className="text-white font-medium">Saving changes...</span>
             </div>
-          </div>
-        )}
+          </div>}
 
         <div className="flex flex-col md:flex-row gap-8">
           {/* GitHub style sidebar */}
@@ -350,13 +297,7 @@ const Settings = () => {
                                   <ImagePlus className="h-4 w-4 mr-2" />
                                   Upload Picture
                                 </Label>
-                                <Input 
-                                  id="profile-image" 
-                                  type="file" 
-                                  accept="image/*" 
-                                  className="hidden" 
-                                  onChange={handleImageUpload}
-                                />
+                                <Input id="profile-image" type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
                                 <p className="text-xs text-white/60 mt-2">JPG, PNG or GIF. 2MB max.</p>
                               </div>
                             </div>
@@ -365,39 +306,34 @@ const Settings = () => {
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="space-y-2">
                                   <Label htmlFor="first-name">First Name</Label>
-                                  <Input id="first-name" defaultValue="John" className="bg-forest-dark border-mint/10" />
+                                  <Input id="first-name" defaultValue="John" className="bg-forest-dark border-mint/10 bg-slate-900" />
                                 </div>
                                 <div className="space-y-2">
                                   <Label htmlFor="last-name">Last Name</Label>
-                                  <Input id="last-name" defaultValue="Doe" className="bg-forest-dark border-mint/10" />
+                                  <Input id="last-name" defaultValue="Doe" className="bg-forest-dark border-mint/10 bg-slate-900" />
                                 </div>
                               </div>
                               
                               <div className="space-y-2">
                                 <Label htmlFor="email">Email</Label>
-                                <Input id="email" type="email" defaultValue="john.doe@example.com" className="bg-forest-dark border-mint/10" />
+                                <Input id="email" type="email" defaultValue="john.doe@example.com" className="bg-forest-dark border-mint/10 bg-slate-900" />
                               </div>
                               
                               <div className="space-y-2">
                                 <Label htmlFor="username">Username</Label>
-                                <Input id="username" defaultValue="johndoe" className="bg-forest-dark border-mint/10" />
+                                <Input id="username" defaultValue="johndoe" className="bg-forest-dark border-mint/10 bg-slate-900" />
                               </div>
                               
                               <div className="space-y-2">
                                 <Label htmlFor="bio">Bio</Label>
-                                <Textarea 
-                                  id="bio" 
-                                  placeholder="Tell us about yourself..." 
-                                  className="h-24 bg-forest-dark border-mint/10" 
-                                  defaultValue="Educator specializing in web development and design. Passionate about helping others learn to code!"
-                                />
+                                <Textarea id="bio" placeholder="Tell us about yourself..." defaultValue="Educator specializing in web development and design. Passionate about helping others learn to code!" className="h-24 bg-forest-dark border-mint/10 bg-slate-900" />
                               </div>
                             </div>
                           </div>
                           
                           <div className="flex justify-end">
-                            <Button type="submit" className="bg-mint text-forest hover:bg-mint/90 flex items-center gap-2">
-                              <Save className="h-4 w-4" />
+                            <Button type="submit" className="bg-mint hover:bg-mint/90 flex items-center gap-2 text-gray-900">
+                              <Save className="h-4 w-4 bg-gray-500" />
                               Save Changes
                             </Button>
                           </div>
@@ -466,15 +402,10 @@ const Settings = () => {
                             <div className="font-medium">Enable Two-Factor Authentication</div>
                             <div className="text-sm text-white/60">Use an authentication app to enhance your account security</div>
                           </div>
-                          <Switch 
-                            checked={twoFactorEnabled} 
-                            onCheckedChange={handle2FAToggle} 
-                            className="data-[state=checked]:bg-mint"
-                          />
+                          <Switch checked={twoFactorEnabled} onCheckedChange={handle2FAToggle} className="data-[state=checked]:bg-mint" />
                         </div>
                         
-                        {twoFactorEnabled && (
-                          <div className="bg-forest-dark p-4 rounded-lg border border-mint/10 mt-4 animate-in fade-in duration-300">
+                        {twoFactorEnabled && <div className="bg-forest-dark p-4 rounded-lg border border-mint/10 mt-4 animate-in fade-in duration-300">
                             <div className="text-sm mb-2">Scan this QR code with your authentication app:</div>
                             <div className="w-40 h-40 mx-auto bg-white p-2 rounded-md mb-4">
                               {/* This would be a real QR code in a production app */}
@@ -492,18 +423,13 @@ const Settings = () => {
                             <div className="space-y-2">
                               <Label htmlFor="verification-code">Enter verification code from your app</Label>
                               <div className="flex space-x-2">
-                                <Input 
-                                  id="verification-code" 
-                                  className="bg-forest-dark border-mint/10" 
-                                  placeholder="000000"
-                                />
+                                <Input id="verification-code" className="bg-forest-dark border-mint/10" placeholder="000000" />
                                 <Button className="bg-mint text-forest hover:bg-mint/90">
                                   Verify
                                 </Button>
                               </div>
                             </div>
-                          </div>
-                        )}
+                          </div>}
                       </CardContent>
                     </Card>
                   </TabsContent>
@@ -527,12 +453,10 @@ const Settings = () => {
                               <div className="font-medium">Messages</div>
                               <div className="text-sm text-white/60">Receive emails when you get new messages</div>
                             </Label>
-                            <Switch 
-                              id="email-messages" 
-                              checked={emailNotifications.messages} 
-                              onCheckedChange={(checked) => setEmailNotifications({...emailNotifications, messages: checked})}
-                              className="data-[state=checked]:bg-mint"
-                            />
+                            <Switch id="email-messages" checked={emailNotifications.messages} onCheckedChange={checked => setEmailNotifications({
+                            ...emailNotifications,
+                            messages: checked
+                          })} className="data-[state=checked]:bg-mint" />
                           </div>
                           
                           <div className="flex items-center justify-between">
@@ -540,12 +464,10 @@ const Settings = () => {
                               <div className="font-medium">Platform Updates</div>
                               <div className="text-sm text-white/60">Receive emails about new features and updates</div>
                             </Label>
-                            <Switch 
-                              id="email-updates" 
-                              checked={emailNotifications.updates} 
-                              onCheckedChange={(checked) => setEmailNotifications({...emailNotifications, updates: checked})}
-                              className="data-[state=checked]:bg-mint"
-                            />
+                            <Switch id="email-updates" checked={emailNotifications.updates} onCheckedChange={checked => setEmailNotifications({
+                            ...emailNotifications,
+                            updates: checked
+                          })} className="data-[state=checked]:bg-mint" />
                           </div>
                           
                           <div className="flex items-center justify-between">
@@ -553,12 +475,10 @@ const Settings = () => {
                               <div className="font-medium">New Courses</div>
                               <div className="text-sm text-white/60">Receive emails about new courses in your areas of interest</div>
                             </Label>
-                            <Switch 
-                              id="email-courses" 
-                              checked={emailNotifications.newCourses} 
-                              onCheckedChange={(checked) => setEmailNotifications({...emailNotifications, newCourses: checked})}
-                              className="data-[state=checked]:bg-mint"
-                            />
+                            <Switch id="email-courses" checked={emailNotifications.newCourses} onCheckedChange={checked => setEmailNotifications({
+                            ...emailNotifications,
+                            newCourses: checked
+                          })} className="data-[state=checked]:bg-mint" />
                           </div>
                           
                           <div className="flex items-center justify-between">
@@ -566,19 +486,14 @@ const Settings = () => {
                               <div className="font-medium">Skill Matching</div>
                               <div className="text-sm text-white/60">Receive emails when you match with potential learning partners</div>
                             </Label>
-                            <Switch 
-                              id="email-matching" 
-                              checked={emailNotifications.matching} 
-                              onCheckedChange={(checked) => setEmailNotifications({...emailNotifications, matching: checked})}
-                              className="data-[state=checked]:bg-mint"
-                            />
+                            <Switch id="email-matching" checked={emailNotifications.matching} onCheckedChange={checked => setEmailNotifications({
+                            ...emailNotifications,
+                            matching: checked
+                          })} className="data-[state=checked]:bg-mint" />
                           </div>
                         </div>
                         
-                        <Button 
-                          onClick={() => handleSaveNotifications('email')}
-                          className="bg-mint text-forest hover:bg-mint/90 mt-4 flex items-center gap-2"
-                        >
+                        <Button onClick={() => handleSaveNotifications('email')} className="bg-mint text-forest hover:bg-mint/90 mt-4 flex items-center gap-2">
                           <Save className="h-4 w-4" />
                           Save Email Preferences
                         </Button>
@@ -602,12 +517,10 @@ const Settings = () => {
                               <div className="font-medium">Messages</div>
                               <div className="text-sm text-white/60">Show notifications for new messages</div>
                             </Label>
-                            <Switch 
-                              id="app-messages" 
-                              checked={inAppNotifications.messages} 
-                              onCheckedChange={(checked) => setInAppNotifications({...inAppNotifications, messages: checked})}
-                              className="data-[state=checked]:bg-mint"
-                            />
+                            <Switch id="app-messages" checked={inAppNotifications.messages} onCheckedChange={checked => setInAppNotifications({
+                            ...inAppNotifications,
+                            messages: checked
+                          })} className="data-[state=checked]:bg-mint" />
                           </div>
                           
                           <div className="flex items-center justify-between">
@@ -615,12 +528,10 @@ const Settings = () => {
                               <div className="font-medium">Platform Updates</div>
                               <div className="text-sm text-white/60">Show notifications about new features</div>
                             </Label>
-                            <Switch 
-                              id="app-updates" 
-                              checked={inAppNotifications.updates} 
-                              onCheckedChange={(checked) => setInAppNotifications({...inAppNotifications, updates: checked})}
-                              className="data-[state=checked]:bg-mint"
-                            />
+                            <Switch id="app-updates" checked={inAppNotifications.updates} onCheckedChange={checked => setInAppNotifications({
+                            ...inAppNotifications,
+                            updates: checked
+                          })} className="data-[state=checked]:bg-mint" />
                           </div>
                           
                           <div className="flex items-center justify-between">
@@ -628,12 +539,10 @@ const Settings = () => {
                               <div className="font-medium">New Courses</div>
                               <div className="text-sm text-white/60">Show notifications about new courses</div>
                             </Label>
-                            <Switch 
-                              id="app-courses" 
-                              checked={inAppNotifications.newCourses} 
-                              onCheckedChange={(checked) => setInAppNotifications({...inAppNotifications, newCourses: checked})}
-                              className="data-[state=checked]:bg-mint"
-                            />
+                            <Switch id="app-courses" checked={inAppNotifications.newCourses} onCheckedChange={checked => setInAppNotifications({
+                            ...inAppNotifications,
+                            newCourses: checked
+                          })} className="data-[state=checked]:bg-mint" />
                           </div>
                           
                           <div className="flex items-center justify-between">
@@ -641,19 +550,14 @@ const Settings = () => {
                               <div className="font-medium">Skill Matching</div>
                               <div className="text-sm text-white/60">Show notifications for potential learning partnerships</div>
                             </Label>
-                            <Switch 
-                              id="app-matching" 
-                              checked={inAppNotifications.matching} 
-                              onCheckedChange={(checked) => setInAppNotifications({...inAppNotifications, matching: checked})}
-                              className="data-[state=checked]:bg-mint"
-                            />
+                            <Switch id="app-matching" checked={inAppNotifications.matching} onCheckedChange={checked => setInAppNotifications({
+                            ...inAppNotifications,
+                            matching: checked
+                          })} className="data-[state=checked]:bg-mint" />
                           </div>
                         </div>
                         
-                        <Button 
-                          onClick={() => handleSaveNotifications('app')}
-                          className="bg-mint text-forest hover:bg-mint/90 mt-4 flex items-center gap-2"
-                        >
+                        <Button onClick={() => handleSaveNotifications('app')} className="bg-mint text-forest hover:bg-mint/90 mt-4 flex items-center gap-2">
                           <Save className="h-4 w-4" />
                           Save In-App Preferences
                         </Button>
@@ -678,19 +582,11 @@ const Settings = () => {
                           <div>
                             <div className="font-medium mb-2">Dark / Light Mode</div>
                             <div className="flex items-center gap-4">
-                              <Button
-                                variant="outline"
-                                onClick={toggleDarkMode}
-                                className={`flex items-center gap-2 transition-all duration-300 ${!darkMode ? 'border-mint text-mint bg-mint/10 ring-2 ring-mint/20' : 'border-white/10'}`}
-                              >
+                              <Button variant="outline" onClick={toggleDarkMode} className={`flex items-center gap-2 transition-all duration-300 ${!darkMode ? 'border-mint text-mint bg-mint/10 ring-2 ring-mint/20' : 'border-white/10'}`}>
                                 <Sun className="h-4 w-4" />
                                 Light
                               </Button>
-                              <Button
-                                variant="outline"
-                                onClick={toggleDarkMode}
-                                className={`flex items-center gap-2 transition-all duration-300 ${darkMode ? 'border-mint text-mint bg-mint/10 ring-2 ring-mint/20' : 'border-white/10'}`}
-                              >
+                              <Button variant="outline" onClick={toggleDarkMode} className={`flex items-center gap-2 transition-all duration-300 ${darkMode ? 'border-mint text-mint bg-mint/10 ring-2 ring-mint/20' : 'border-white/10'}`}>
                                 <Moon className="h-4 w-4" />
                                 Dark
                               </Button>
@@ -702,18 +598,14 @@ const Settings = () => {
                           <div>
                             <div className="font-medium mb-2">Accent Color</div>
                             <div className="grid grid-cols-4 gap-4">
-                              {["mint", "blue", "purple", "orange", "pink", "red", "green", "yellow"].map((color) => (
-                                <div key={color} className="flex flex-col items-center space-y-2">
-                                  <button 
-                                    className={`w-10 h-10 rounded-full border-2 transition-all duration-300 transform hover:scale-110 ${color === activeAccentColor ? 'border-white ring-2 ring-white/30' : 'border-transparent'}`}
-                                    style={{ backgroundColor: colorMapping[color] }}
-                                    onClick={() => handleAccentColorChange(color)}
-                                  >
+                              {["mint", "blue", "purple", "orange", "pink", "red", "green", "yellow"].map(color => <div key={color} className="flex flex-col items-center space-y-2">
+                                  <button className={`w-10 h-10 rounded-full border-2 transition-all duration-300 transform hover:scale-110 ${color === activeAccentColor ? 'border-white ring-2 ring-white/30' : 'border-transparent'}`} style={{
+                                backgroundColor: colorMapping[color]
+                              }} onClick={() => handleAccentColorChange(color)}>
                                     {color === activeAccentColor && <CheckCircle className="h-5 w-5 text-white" />}
                                   </button>
                                   <span className="text-xs capitalize">{color}</span>
-                                </div>
-                              ))}
+                                </div>)}
                             </div>
                           </div>
                         </div>
@@ -737,12 +629,7 @@ const Settings = () => {
                         <div className="space-y-4">
                           <div>
                             <Label htmlFor="language-select" className="font-medium">Language</Label>
-                            <select 
-                              id="language-select"
-                              className="w-full mt-2 rounded-md border border-mint/10 bg-forest-dark px-3 py-2 text-white"
-                              value={language}
-                              onChange={(e) => setLanguage(e.target.value)}
-                            >
+                            <select id="language-select" className="w-full mt-2 rounded-md border border-mint/10 bg-forest-dark px-3 py-2 text-white" value={language} onChange={e => setLanguage(e.target.value)}>
                               <option value="english">English</option>
                               <option value="spanish">Spanish</option>
                               <option value="french">French</option>
@@ -755,10 +642,7 @@ const Settings = () => {
                           
                           <div>
                             <Label htmlFor="timezone" className="font-medium">Time Zone</Label>
-                            <select 
-                              id="timezone"
-                              className="w-full mt-2 rounded-md border border-mint/10 bg-forest-dark px-3 py-2 text-white"
-                            >
+                            <select id="timezone" className="w-full mt-2 rounded-md border border-mint/10 bg-forest-dark px-3 py-2 text-white">
                               <option value="utc-8">(UTC-08:00) Pacific Time (US & Canada)</option>
                               <option value="utc-7">(UTC-07:00) Mountain Time (US & Canada)</option>
                               <option value="utc-6">(UTC-06:00) Central Time (US & Canada)</option>
@@ -776,10 +660,7 @@ const Settings = () => {
                           
                           <div>
                             <Label htmlFor="date-format" className="font-medium">Date Format</Label>
-                            <select 
-                              id="date-format"
-                              className="w-full mt-2 rounded-md border border-mint/10 bg-forest-dark px-3 py-2 text-white"
-                            >
+                            <select id="date-format" className="w-full mt-2 rounded-md border border-mint/10 bg-forest-dark px-3 py-2 text-white">
                               <option value="mm-dd-yyyy">MM/DD/YYYY (US)</option>
                               <option value="dd-mm-yyyy">DD/MM/YYYY (UK, Europe)</option>
                               <option value="yyyy-mm-dd">YYYY-MM-DD (ISO)</option>
@@ -787,10 +668,7 @@ const Settings = () => {
                           </div>
                         </div>
                         
-                        <Button 
-                          onClick={handleSaveLanguage}
-                          className="bg-mint text-forest hover:bg-mint/90 mt-4 flex items-center gap-2"
-                        >
+                        <Button onClick={handleSaveLanguage} className="bg-mint text-forest hover:bg-mint/90 mt-4 flex items-center gap-2">
                           <Save className="h-4 w-4" />
                           Save Language & Region
                         </Button>
@@ -888,11 +766,7 @@ const Settings = () => {
                           </div>
                         </div>
                         
-                        <Button 
-                          onClick={handleLogoutOtherDevices}
-                          variant="destructive"
-                          className="w-full mt-4 flex items-center justify-center gap-2"
-                        >
+                        <Button onClick={handleLogoutOtherDevices} variant="destructive" className="w-full mt-4 flex items-center justify-center gap-2">
                           <LogOut className="h-4 w-4" />
                           Sign Out From All Other Devices
                         </Button>
@@ -916,32 +790,17 @@ const Settings = () => {
                         <div>
                           <Label htmlFor="add-skill" className="font-medium">Your Skills</Label>
                           <div className="flex flex-wrap gap-2 my-3">
-                            {userSkills.map((skill) => (
-                              <div 
-                                key={skill} 
-                                className="bg-mint/10 text-mint px-3 py-1 rounded-full text-sm flex items-center transition-all duration-300 hover:bg-mint/20"
-                              >
+                            {userSkills.map(skill => <div key={skill} className="bg-mint/10 text-mint px-3 py-1 rounded-full text-sm flex items-center transition-all duration-300 hover:bg-mint/20">
                                 {skill}
-                                <button 
-                                  onClick={() => removeSkill(skill)}
-                                  className="ml-2 text-white/60 hover:text-white"
-                                >
+                                <button onClick={() => removeSkill(skill)} className="ml-2 text-white/60 hover:text-white">
                                   &times;
                                 </button>
-                              </div>
-                            ))}
+                              </div>)}
                           </div>
                           
                           <div className="flex gap-2">
-                            <Input 
-                              id="add-skill" 
-                              placeholder="Add a skill..." 
-                              className="bg-forest-dark border-mint/10" 
-                            />
-                            <Button 
-                              onClick={handleAddSkill}
-                              className="bg-mint text-forest hover:bg-mint/90"
-                            >
+                            <Input id="add-skill" placeholder="Add a skill..." className="bg-forest-dark border-mint/10" />
+                            <Button onClick={handleAddSkill} className="bg-mint text-forest hover:bg-mint/90">
                               Add
                             </Button>
                           </div>
@@ -956,32 +815,17 @@ const Settings = () => {
                         <div>
                           <Label htmlFor="add-interest" className="font-medium">Learning Interests</Label>
                           <div className="flex flex-wrap gap-2 my-3">
-                            {userInterests.map((interest) => (
-                              <div 
-                                key={interest} 
-                                className="bg-white/10 text-white px-3 py-1 rounded-full text-sm flex items-center transition-all duration-300 hover:bg-white/20"
-                              >
+                            {userInterests.map(interest => <div key={interest} className="bg-white/10 text-white px-3 py-1 rounded-full text-sm flex items-center transition-all duration-300 hover:bg-white/20">
                                 {interest}
-                                <button 
-                                  onClick={() => removeInterest(interest)}
-                                  className="ml-2 text-white/60 hover:text-white"
-                                >
+                                <button onClick={() => removeInterest(interest)} className="ml-2 text-white/60 hover:text-white">
                                   &times;
                                 </button>
-                              </div>
-                            ))}
+                              </div>)}
                           </div>
                           
                           <div className="flex gap-2">
-                            <Input 
-                              id="add-interest" 
-                              placeholder="Add an interest..." 
-                              className="bg-forest-dark border-mint/10" 
-                            />
-                            <Button 
-                              onClick={handleAddInterest}
-                              className="bg-mint text-forest hover:bg-mint/90"
-                            >
+                            <Input id="add-interest" placeholder="Add an interest..." className="bg-forest-dark border-mint/10" />
+                            <Button onClick={handleAddInterest} className="bg-mint text-forest hover:bg-mint/90">
                               Add
                             </Button>
                           </div>
@@ -991,10 +835,7 @@ const Settings = () => {
                           </p>
                         </div>
                         
-                        <Button 
-                          onClick={() => toast.success("Skills and interests saved!")}
-                          className="bg-mint text-forest hover:bg-mint/90 mt-4 flex items-center gap-2"
-                        >
+                        <Button onClick={() => toast.success("Skills and interests saved!")} className="bg-mint text-forest hover:bg-mint/90 mt-4 flex items-center gap-2">
                           <Save className="h-4 w-4" />
                           Save Skills & Interests
                         </Button>
@@ -1032,10 +873,7 @@ const Settings = () => {
                             Your data will be exported as a ZIP file containing JSON files. The export process may take a few minutes.
                           </p>
                           
-                          <Button 
-                            onClick={handleExportData}
-                            className="bg-mint text-forest hover:bg-mint/90 flex items-center"
-                          >
+                          <Button onClick={handleExportData} className="bg-mint text-forest hover:bg-mint/90 flex items-center">
                             <Download className="h-4 w-4 mr-2" />
                             Export My Data
                           </Button>
@@ -1073,11 +911,7 @@ const Settings = () => {
                             <Input id="delete-confirmation" className="bg-forest-dark border-mint/10" />
                           </div>
                           
-                          <Button 
-                            onClick={handleDeleteAccount}
-                            variant="destructive"
-                            className="w-full"
-                          >
+                          <Button onClick={handleDeleteAccount} variant="destructive" className="w-full">
                             <Trash2 className="h-4 w-4 mr-2" />
                             Permanently Delete My Account
                           </Button>
@@ -1091,8 +925,7 @@ const Settings = () => {
           </div>
         </div>
       </div>
-    </>
-  );
+    </>;
 };
 
 // Color mapping for accent colors
@@ -1106,5 +939,4 @@ const colorMapping: Record<string, string> = {
   green: '#22c55e',
   yellow: '#eab308'
 };
-
 export default Settings;
