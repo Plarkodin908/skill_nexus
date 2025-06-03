@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -6,8 +7,10 @@ import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useAuth } from '@/contexts/AuthContext';
 import VerifiedBadge from '@/components/profile/VerifiedBadge';
-import { Mail, UserPlus, UserMinus, Flag } from 'lucide-react';
+import { Mail, UserPlus, UserMinus, Flag, ArrowUp, ArrowDown, MessageCircle, Share2, Trophy, Calendar, MapPin, Building, Link as LinkIcon } from 'lucide-react';
 import { toast } from 'sonner';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 interface UserProfile {
   id: string;
@@ -15,11 +18,22 @@ interface UserProfile {
   avatar?: string;
   coverImage?: string;
   role: string;
+  company?: string;
+  location?: string;
   bio: string;
   verificationStatus: "unverified" | "pending" | "verified";
   memberSince: string;
   following: number;
   followers: number;
+  karma: number;
+  posts: number;
+  comments: number;
+  skills: string[];
+  experience: Array<{
+    title: string;
+    company: string;
+    duration: string;
+  }>;
 }
 
 // Mock user data
@@ -27,22 +41,42 @@ const mockUsers: UserProfile[] = [
   {
     id: "1",
     name: "Sarah Johnson",
-    role: "Web Designer",
-    bio: "Creative designer with 5+ years of experience in UI/UX and web design. Passionate about creating intuitive and beautiful user experiences.",
+    role: "Senior Web Designer",
+    company: "TechCorp Inc.",
+    location: "San Francisco, CA",
+    bio: "Creative designer with 5+ years of experience in UI/UX and web design. Passionate about creating intuitive and beautiful user experiences that solve real problems.",
     verificationStatus: "verified",
     memberSince: "May 2023",
     following: 127,
-    followers: 312
+    followers: 312,
+    karma: 2847,
+    posts: 43,
+    comments: 158,
+    skills: ["UI/UX Design", "Figma", "Adobe Creative Suite", "React", "CSS"],
+    experience: [
+      { title: "Senior Web Designer", company: "TechCorp Inc.", duration: "2022 - Present" },
+      { title: "UI Designer", company: "StartupXYZ", duration: "2020 - 2022" }
+    ]
   },
   {
     id: "2",
     name: "Michael Chen",
     role: "Front-end Developer",
+    company: "DevStudio",
+    location: "New York, NY",
     bio: "Front-end developer specializing in React and modern JavaScript frameworks. Building responsive and accessible web applications.",
     verificationStatus: "verified",
     memberSince: "January 2024",
     following: 85,
-    followers: 143
+    followers: 143,
+    karma: 1923,
+    posts: 28,
+    comments: 94,
+    skills: ["React", "TypeScript", "Node.js", "GraphQL", "AWS"],
+    experience: [
+      { title: "Front-end Developer", company: "DevStudio", duration: "2023 - Present" },
+      { title: "Junior Developer", company: "CodeCraft", duration: "2021 - 2023" }
+    ]
   }
 ];
 
@@ -53,7 +87,6 @@ const ProfileDetail = () => {
   const { user } = useAuth();
   
   useEffect(() => {
-    // In a real app, this would be an API call
     const foundUser = mockUsers.find(u => u.id === id);
     if (foundUser) {
       setProfile(foundUser);
@@ -64,7 +97,6 @@ const ProfileDetail = () => {
     return (
       <>
         <div className="relative">
-          {/* Grid pattern background */}
           <div className="grid-pattern-container"></div>
           <div className="grid-pattern-overlay"></div>
           
@@ -94,6 +126,14 @@ const ProfileDetail = () => {
   const handleReport = () => {
     toast.info("Report submitted. We'll review this profile.");
   };
+
+  const handleUpvote = () => {
+    toast.success("Upvoted!");
+  };
+
+  const handleDownvote = () => {
+    toast.success("Downvoted!");
+  };
   
   const courses = [
     {
@@ -116,63 +156,99 @@ const ProfileDetail = () => {
   
   return (
     <>
-      <div className="relative">
-        {/* Grid pattern background */}
+      <div className="relative bg-black min-h-screen">
         <div className="grid-pattern-container"></div>
         <div className="grid-pattern-overlay"></div>
         
         <Navbar />
-        <div className="container mx-auto py-20 px-4 relative z-10">
-          {/* Cover Image */}
-          {profile.coverImage && (
-            <div className="w-full h-48 md:h-64 rounded-lg overflow-hidden mb-6">
+        
+        {/* LinkedIn-style cover section */}
+        <div className="relative pt-16">
+          <div className="h-48 bg-gradient-to-r from-mint/20 to-forest/40 relative">
+            {profile.coverImage && (
               <img 
                 src={profile.coverImage} 
                 alt="Cover" 
                 className="w-full h-full object-cover" 
               />
-            </div>
-          )}
-
-          <div className="flex flex-col md:flex-row gap-8">
-            {/* Profile Sidebar */}
-            <div className="w-full md:w-1/3">
-              <div className="bg-forest-light border border-mint/10 rounded-lg p-6 space-y-6">
-                <div className="flex flex-col items-center text-center">
-                  <Avatar className="h-24 w-24 border-2 border-mint/30 mb-4">
+            )}
+          </div>
+          
+          {/* Profile header with LinkedIn layout */}
+          <div className="container mx-auto px-4 relative">
+            <div className="bg-forest-light border border-mint/10 rounded-lg -mt-20 relative z-10 p-6">
+              <div className="flex flex-col md:flex-row gap-6">
+                {/* Profile picture and basic info */}
+                <div className="flex flex-col md:flex-row gap-4 flex-1">
+                  <Avatar className="h-32 w-32 border-4 border-mint/30">
                     {profile.avatar ? (
                       <AvatarImage src={profile.avatar} alt={profile.name} />
                     ) : (
-                      <AvatarFallback className="bg-forest text-2xl">
+                      <AvatarFallback className="bg-forest text-3xl">
                         {profile.name.substring(0, 2)}
                       </AvatarFallback>
                     )}
                   </Avatar>
                   
-                  <h2 className="text-xl font-bold text-white flex items-center gap-2">
-                    {profile.name}
-                    {profile.verificationStatus === "verified" && (
-                      <VerifiedBadge size="md" />
-                    )}
-                  </h2>
-                  
-                  <p className="text-mint mt-1">{profile.role}</p>
-                  
-                  <div className="flex justify-center gap-4 mt-3">
-                    <div className="text-center">
-                      <p className="text-white font-semibold">{profile.followers}</p>
-                      <p className="text-white/60 text-sm">Followers</p>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-2">
+                      <h1 className="text-2xl font-bold text-white">{profile.name}</h1>
+                      {profile.verificationStatus === "verified" && (
+                        <VerifiedBadge size="md" />
+                      )}
                     </div>
-                    <div className="text-center">
-                      <p className="text-white font-semibold">{profile.following}</p>
-                      <p className="text-white/60 text-sm">Following</p>
+                    
+                    <p className="text-mint text-lg mb-2">{profile.role}</p>
+                    
+                    <div className="flex flex-wrap gap-4 text-white/60 text-sm mb-3">
+                      {profile.company && (
+                        <div className="flex items-center gap-1">
+                          <Building className="h-4 w-4" />
+                          {profile.company}
+                        </div>
+                      )}
+                      {profile.location && (
+                        <div className="flex items-center gap-1">
+                          <MapPin className="h-4 w-4" />
+                          {profile.location}
+                        </div>
+                      )}
+                      <div className="flex items-center gap-1">
+                        <Calendar className="h-4 w-4" />
+                        Member since {profile.memberSince}
+                      </div>
+                    </div>
+                    
+                    {/* Reddit-style stats */}
+                    <div className="flex flex-wrap gap-6 mb-4">
+                      <div className="text-center">
+                        <p className="text-xl font-bold text-white">{profile.karma.toLocaleString()}</p>
+                        <p className="text-white/60 text-sm">Karma</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-xl font-bold text-white">{profile.followers}</p>
+                        <p className="text-white/60 text-sm">Followers</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-xl font-bold text-white">{profile.following}</p>
+                        <p className="text-white/60 text-sm">Following</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-xl font-bold text-white">{profile.posts}</p>
+                        <p className="text-white/60 text-sm">Posts</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-xl font-bold text-white">{profile.comments}</p>
+                        <p className="text-white/60 text-sm">Comments</p>
+                      </div>
                     </div>
                   </div>
                 </div>
                 
-                <div className="space-y-2">
+                {/* Action buttons */}
+                <div className="flex flex-col gap-3 min-w-[200px]">
                   <Button
-                    className={isFollowing ? 'w-full border border-mint/20 text-white bg-transparent hover:bg-white/5' : 'w-full bg-mint hover:bg-mint/90 text-forest'}
+                    className={isFollowing ? 'border border-mint/20 text-white bg-transparent hover:bg-white/5' : 'bg-mint hover:bg-mint/90 text-forest'}
                     onClick={handleFollow}
                   >
                     {isFollowing ? (
@@ -189,38 +265,101 @@ const ProfileDetail = () => {
                   </Button>
                   
                   <Button
-                    className="w-full border border-mint/20 text-mint hover:bg-mint/10 bg-transparent"
+                    variant="outline"
+                    className="border-mint/20 text-mint hover:bg-mint/10"
                     onClick={handleMessage}
                   >
                     <Mail className="h-4 w-4 mr-2" />
                     Message
                   </Button>
-                </div>
-                
-                <div className="pt-4 border-t border-mint/10">
-                  <h3 className="text-white text-lg font-medium mb-2">About</h3>
-                  <p className="text-white/70 text-sm">{profile.bio}</p>
-                </div>
-                
-                <div className="pt-4 border-t border-mint/10">
-                  <div className="flex justify-between items-center">
-                    <p className="text-white/60 text-sm">Member since {profile.memberSince}</p>
+                  
+                  {/* Reddit-style voting buttons */}
+                  <div className="flex gap-2">
                     <Button
-                      variant="ghost"
+                      variant="outline"
                       size="sm"
-                      className="text-white/50 hover:text-white/80 hover:bg-white/5"
+                      className="border-green-500/20 text-green-500 hover:bg-green-500/10 flex-1"
+                      onClick={handleUpvote}
+                    >
+                      <ArrowUp className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="border-red-500/20 text-red-500 hover:bg-red-500/10 flex-1"
+                      onClick={handleDownvote}
+                    >
+                      <ArrowDown className="h-4 w-4" />
+                    </Button>
+                  </div>
+                  
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="border-mint/20 text-mint hover:bg-mint/10 flex-1"
+                    >
+                      <Share2 className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="border-white/20 text-white/60 hover:bg-white/5 flex-1"
                       onClick={handleReport}
                     >
-                      <Flag className="h-3.5 w-3.5 mr-1" />
-                      Report
+                      <Flag className="h-4 w-4" />
                     </Button>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+        
+        {/* Main content area */}
+        <div className="container mx-auto px-4 py-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Left sidebar - LinkedIn style */}
+            <div className="space-y-6">
+              {/* About section */}
+              <Card className="bg-forest-light border border-mint/10 p-6">
+                <h3 className="text-lg font-semibold text-white mb-3">About</h3>
+                <p className="text-white/70 text-sm leading-relaxed">{profile.bio}</p>
+              </Card>
+              
+              {/* Skills section */}
+              <Card className="bg-forest-light border border-mint/10 p-6">
+                <h3 className="text-lg font-semibold text-white mb-3">Skills</h3>
+                <div className="flex flex-wrap gap-2">
+                  {profile.skills.map((skill, index) => (
+                    <Badge 
+                      key={index} 
+                      variant="secondary" 
+                      className="bg-mint/20 text-mint hover:bg-mint/30"
+                    >
+                      {skill}
+                    </Badge>
+                  ))}
+                </div>
+              </Card>
+              
+              {/* Experience section */}
+              <Card className="bg-forest-light border border-mint/10 p-6">
+                <h3 className="text-lg font-semibold text-white mb-3">Experience</h3>
+                <div className="space-y-4">
+                  {profile.experience.map((exp, index) => (
+                    <div key={index} className="border-l-2 border-mint/30 pl-4">
+                      <h4 className="font-medium text-white">{exp.title}</h4>
+                      <p className="text-mint text-sm">{exp.company}</p>
+                      <p className="text-white/60 text-xs">{exp.duration}</p>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            </div>
             
-            {/* Content area */}
-            <div className="w-full md:w-2/3">
+            {/* Main content - Reddit style posts */}
+            <div className="lg:col-span-2">
               <ProfileTabs courses={courses} />
             </div>
           </div>
