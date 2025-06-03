@@ -1,12 +1,17 @@
 
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import ProfileSidebar from '@/components/profile/ProfileSidebar';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { toast } from 'sonner';
 import VerificationModal from '@/components/profile/VerificationModal';
+import VerifiedBadge from '@/components/profile/VerifiedBadge';
+import { Calendar, MapPin, ArrowUp, ArrowDown, MessageCircle, Share2, Bookmark, Trophy } from 'lucide-react';
 
 const Profile = () => {
   const { user } = useAuth();
@@ -19,19 +24,16 @@ const Profile = () => {
 
   const handleProfilePictureChange = (url: string) => {
     setProfilePicture(url);
-    // In a real app, you would update the user's profile picture in the backend
   };
 
   const handleCoverPictureChange = (url: string) => {
     setCoverPicture(url);
-    // In a real app, you would update the user's cover picture in the backend
   };
 
   const handleSaveChanges = () => {
     toast.success("Profile updated successfully!");
     setIsEditing(false);
     
-    // If this is the first time completing the profile, redirect to pricing
     if (!user?.completedProfile) {
       setTimeout(() => {
         navigate('/pricing');
@@ -43,56 +45,151 @@ const Profile = () => {
     setIsVerificationModalOpen(true);
   };
 
+  // Mock user stats - Reddit style
+  const userStats = {
+    karma: 2847,
+    posts: 43,
+    comments: 158,
+    followers: 312,
+    following: 127
+  };
+
+  // Mock user data
+  const userInfo = {
+    name: user?.name || "Anonymous User",
+    role: "Learning Enthusiast",
+    location: "Learning Community",
+    memberSince: "May 2023",
+    bio: "Passionate learner exploring new skills and connecting with the community. Always eager to share knowledge and learn from others.",
+    skills: ["JavaScript", "React", "UI/UX Design", "Problem Solving", "Communication"],
+    experience: [
+      { title: "Active Community Member", duration: "2023 - Present" },
+      { title: "Skill Learner", duration: "2022 - Present" }
+    ]
+  };
+
+  // Mock recent activity
+  const recentPosts = [
+    {
+      id: 1,
+      title: "Just completed my first React project!",
+      content: "After weeks of learning, I finally built my first React application. The journey was challenging but incredibly rewarding...",
+      upvotes: 42,
+      comments: 8,
+      timeAgo: "2 hours ago",
+      category: "Achievement"
+    },
+    {
+      id: 2,
+      title: "Looking for study partners for JavaScript",
+      content: "Anyone interested in forming a study group for advanced JavaScript concepts?",
+      upvotes: 23,
+      comments: 12,
+      timeAgo: "1 day ago",
+      category: "Study Group"
+    }
+  ];
+
   return (
     <div className="bg-dark-purple min-h-screen relative">
-      {/* Grid pattern background */}
       <div className="grid-pattern-container"></div>
       <div className="grid-pattern-overlay"></div>
       
       <Navbar />
-      <div className="container mx-auto py-20 px-4 relative z-10">
-        {/* Cover Image (only visible when not editing) */}
-        {!isEditing && coverPicture && (
-          <div className="w-full h-48 md:h-64 rounded-lg overflow-hidden mb-6">
+      
+      {/* LinkedIn-style cover section */}
+      <div className="relative pt-16">
+        <div className="h-48 bg-gradient-to-r from-mint/20 to-forest/40 relative">
+          {coverPicture && (
             <img 
               src={coverPicture} 
               alt="Cover" 
               className="w-full h-full object-cover" 
             />
-          </div>
-        )}
-
-        <div className="flex flex-col md:flex-row gap-8">
-          <ProfileSidebar 
-            selectedGender={selectedGender}
-            onGenderChange={setSelectedGender}
-            isEditing={isEditing}
-            onProfilePictureChange={handleProfilePictureChange}
-            onCoverPictureChange={handleCoverPictureChange}
-          />
-          <div className="w-full md:w-2/3">
-            {isEditing ? (
-              <div className="bg-forest-light p-6 rounded-lg border border-mint/20 mb-6">
-                <h2 className="text-xl font-bold mb-4">Complete Your Profile</h2>
-                <p className="text-white/70 mb-6">
-                  Personalize your profile to get the most out of Skill Nexus. This helps us match you with relevant courses and community members.
-                </p>
-                <Button 
-                  className="bg-mint hover:bg-mint/90 text-forest"
-                  onClick={handleSaveChanges}
-                >
-                  Save Changes
-                </Button>
+          )}
+        </div>
+        
+        {/* Profile header with LinkedIn layout */}
+        <div className="container mx-auto px-4 relative">
+          <div className="bg-forest-light border border-mint/10 rounded-lg -mt-20 relative z-10 p-6">
+            <div className="flex flex-col md:flex-row gap-6">
+              {/* Profile picture and basic info */}
+              <div className="flex flex-col md:flex-row gap-4 flex-1">
+                <Avatar className="h-32 w-32 border-4 border-mint/30">
+                  {profilePicture ? (
+                    <AvatarImage src={profilePicture} alt={userInfo.name} />
+                  ) : (
+                    <AvatarFallback className="bg-forest text-3xl">
+                      {userInfo.name.substring(0, 2)}
+                    </AvatarFallback>
+                  )}
+                </Avatar>
+                
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <h1 className="text-2xl font-bold text-white">{userInfo.name}</h1>
+                    {user?.verificationStatus === "verified" && (
+                      <VerifiedBadge size="md" />
+                    )}
+                  </div>
+                  
+                  <p className="text-mint text-lg mb-2">{userInfo.role}</p>
+                  
+                  <div className="flex flex-wrap gap-4 text-white/60 text-sm mb-3">
+                    <div className="flex items-center gap-1">
+                      <MapPin className="h-4 w-4" />
+                      {userInfo.location}
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Calendar className="h-4 w-4" />
+                      Member since {userInfo.memberSince}
+                    </div>
+                  </div>
+                  
+                  {/* Reddit-style stats */}
+                  <div className="flex flex-wrap gap-6 mb-4">
+                    <div className="text-center">
+                      <p className="text-xl font-bold text-white">{userStats.karma.toLocaleString()}</p>
+                      <p className="text-white/60 text-sm">Karma</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-xl font-bold text-white">{userStats.followers}</p>
+                      <p className="text-white/60 text-sm">Followers</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-xl font-bold text-white">{userStats.following}</p>
+                      <p className="text-white/60 text-sm">Following</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-xl font-bold text-white">{userStats.posts}</p>
+                      <p className="text-white/60 text-sm">Posts</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-xl font-bold text-white">{userStats.comments}</p>
+                      <p className="text-white/60 text-sm">Comments</p>
+                    </div>
+                  </div>
+                </div>
               </div>
-            ) : (
-              <div className="flex justify-between items-center mb-6">
-                <Button 
-                  variant="outline" 
-                  className="border-mint/20 text-white hover:bg-mint/10"
-                  onClick={() => setIsEditing(true)}
-                >
-                  Edit Profile
-                </Button>
+              
+              {/* Action buttons */}
+              <div className="flex flex-col gap-3 min-w-[200px]">
+                {!isEditing ? (
+                  <Button 
+                    variant="outline" 
+                    className="border-mint/20 text-white hover:bg-mint/10"
+                    onClick={() => setIsEditing(true)}
+                  >
+                    Edit Profile
+                  </Button>
+                ) : (
+                  <Button 
+                    className="bg-mint hover:bg-mint/90 text-forest"
+                    onClick={handleSaveChanges}
+                  >
+                    Save Changes
+                  </Button>
+                )}
                 
                 {user?.verificationStatus === "unverified" && (
                   <Button 
@@ -103,7 +200,143 @@ const Profile = () => {
                   </Button>
                 )}
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Main content area */}
+      <div className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Left sidebar - LinkedIn style */}
+          <div className="space-y-6">
+            {/* Profile sidebar for editing */}
+            {isEditing && (
+              <ProfileSidebar 
+                selectedGender={selectedGender}
+                onGenderChange={setSelectedGender}
+                isEditing={isEditing}
+                onProfilePictureChange={handleProfilePictureChange}
+                onCoverPictureChange={handleCoverPictureChange}
+              />
             )}
+            
+            {/* About section */}
+            <Card className="bg-forest-light border border-mint/10 p-6">
+              <h3 className="text-lg font-semibold text-white mb-3">About</h3>
+              <p className="text-white/70 text-sm leading-relaxed">{userInfo.bio}</p>
+            </Card>
+            
+            {/* Skills section */}
+            <Card className="bg-forest-light border border-mint/10 p-6">
+              <h3 className="text-lg font-semibold text-white mb-3">Skills</h3>
+              <div className="flex flex-wrap gap-2">
+                {userInfo.skills.map((skill, index) => (
+                  <Badge 
+                    key={index} 
+                    variant="secondary" 
+                    className="bg-mint/20 text-mint hover:bg-mint/30"
+                  >
+                    {skill}
+                  </Badge>
+                ))}
+              </div>
+            </Card>
+            
+            {/* Experience section */}
+            <Card className="bg-forest-light border border-mint/10 p-6">
+              <h3 className="text-lg font-semibold text-white mb-3">Experience</h3>
+              <div className="space-y-4">
+                {userInfo.experience.map((exp, index) => (
+                  <div key={index} className="border-l-2 border-mint/30 pl-4">
+                    <h4 className="font-medium text-white">{exp.title}</h4>
+                    <p className="text-white/60 text-xs">{exp.duration}</p>
+                  </div>
+                ))}
+              </div>
+            </Card>
+
+            {/* Privacy Notice */}
+            <Card className="bg-forest-light border border-mint/10 p-4">
+              <h4 className="text-sm font-medium text-white/80 mb-2">Privacy & Content</h4>
+              <p className="text-white/60 text-xs mb-2">
+                All content and personal information shared on this profile is subject to our privacy policy.
+              </p>
+              <p className="text-white/60 text-xs">
+                © {new Date().getFullYear()} SKILL NEXUS. User-generated content remains property of respective creators.
+              </p>
+              <div className="mt-2">
+                <Link to="/legal" className="text-mint text-xs hover:underline">
+                  Privacy Policy & Terms
+                </Link>
+              </div>
+            </Card>
+          </div>
+          
+          {/* Main content - Reddit style posts */}
+          <div className="lg:col-span-2 space-y-4">
+            <h3 className="text-xl font-semibold text-white mb-4">Recent Activity</h3>
+            
+            {recentPosts.map((post) => (
+              <Card key={post.id} className="bg-forest-light border border-mint/10 p-6 hover:border-mint/20 transition-colors">
+                <div className="flex gap-4">
+                  {/* Reddit-style voting */}
+                  <div className="flex flex-col items-center gap-1 min-w-[40px]">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="p-1 h-auto text-green-500 hover:text-green-400 hover:bg-green-500/10"
+                    >
+                      <ArrowUp className="h-5 w-5" />
+                    </Button>
+                    <span className="text-white font-medium text-sm">
+                      {post.upvotes}
+                    </span>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="p-1 h-auto text-red-500 hover:text-red-400 hover:bg-red-500/10"
+                    >
+                      <ArrowDown className="h-5 w-5" />
+                    </Button>
+                  </div>
+                  
+                  {/* Post content */}
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Badge variant="outline" className="border-mint/30 text-mint text-xs">
+                        {post.category}
+                      </Badge>
+                      <span className="text-white/60 text-sm">{post.timeAgo}</span>
+                    </div>
+                    
+                    <h3 className="text-lg font-semibold text-white mb-2 hover:text-mint cursor-pointer">
+                      {post.title}
+                    </h3>
+                    
+                    <p className="text-white/70 text-sm mb-3 line-clamp-2">
+                      {post.content}
+                    </p>
+                    
+                    {/* Reddit-style action buttons */}
+                    <div className="flex items-center gap-4">
+                      <Button variant="ghost" size="sm" className="text-white/60 hover:text-white hover:bg-white/5 p-2 h-auto">
+                        <MessageCircle className="h-4 w-4 mr-1" />
+                        {post.comments}
+                      </Button>
+                      <Button variant="ghost" size="sm" className="text-white/60 hover:text-white hover:bg-white/5 p-2 h-auto">
+                        <Share2 className="h-4 w-4 mr-1" />
+                        Share
+                      </Button>
+                      <Button variant="ghost" size="sm" className="text-white/60 hover:text-white hover:bg-white/5 p-2 h-auto">
+                        <Bookmark className="h-4 w-4 mr-1" />
+                        Save
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            ))}
           </div>
         </div>
       </div>
