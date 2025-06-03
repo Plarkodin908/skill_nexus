@@ -1,19 +1,21 @@
-
 import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Award, Star, Zap, Trophy, Crown } from "lucide-react";
 
 // Define the allowed badge types
 export type BadgeType = "beginner" | "intermediate" | "advanced" | "expert" | "master" | "legend";
-
 interface AchievementBadgeProps {
   type: BadgeType;
   title: string;
   description: string;
   earned: boolean;
 }
-
-const AchievementBadge = ({ type, title, description, earned }: AchievementBadgeProps) => {
+const AchievementBadge = ({
+  type,
+  title,
+  description,
+  earned
+}: AchievementBadgeProps) => {
   // Badge configuration based on type
   const config = {
     beginner: {
@@ -47,29 +49,21 @@ const AchievementBadge = ({ type, title, description, earned }: AchievementBadge
       earnedColor: "bg-gray-700/20 text-gray-300"
     }
   };
-
   const BadgeIcon = config[type].icon;
-  
-  return (
-    <TooltipProvider>
+  return <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <div 
-            className={`
+          <div className={`
               flex flex-col items-center justify-center p-3 rounded-lg cursor-pointer
-              ${earned 
-                ? config[type].earnedColor
-                : 'bg-white/10 text-white/40'
-              }
+              ${earned ? config[type].earnedColor : 'bg-white/10 text-white/40'}
               transition-all duration-300
               ${earned ? 'hover:scale-110' : 'opacity-50'}
-            `}
-          >
+            `}>
             <BadgeIcon className="h-6 w-6 mb-1" />
             <span className="text-xs text-center font-medium">{title}</span>
           </div>
         </TooltipTrigger>
-        <TooltipContent>
+        <TooltipContent className="bg-gray-900">
           <div className="text-sm">
             <p className="font-bold">{title}</p>
             <p>{description}</p>
@@ -77,8 +71,6 @@ const AchievementBadge = ({ type, title, description, earned }: AchievementBadge
           </div>
         </TooltipContent>
       </Tooltip>
-    </TooltipProvider>
-  );
+    </TooltipProvider>;
 };
-
 export default AchievementBadge;
