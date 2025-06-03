@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -7,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useAuth } from '@/contexts/AuthContext';
 import VerifiedBadge from '@/components/profile/VerifiedBadge';
-import { Mail, UserPlus, UserMinus, Flag, ArrowUp, ArrowDown, MessageCircle, Share2, Trophy, Calendar, MapPin, Building, Link as LinkIcon } from 'lucide-react';
+import { Mail, UserPlus, UserMinus, Flag, ArrowUp, ArrowDown, MessageCircle, Share2, Trophy, Calendar, MapPin, Link as LinkIcon } from 'lucide-react';
 import { toast } from 'sonner';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -18,7 +17,6 @@ interface UserProfile {
   avatar?: string;
   coverImage?: string;
   role: string;
-  company?: string;
   location?: string;
   bio: string;
   verificationStatus: "unverified" | "pending" | "verified";
@@ -31,18 +29,16 @@ interface UserProfile {
   skills: string[];
   experience: Array<{
     title: string;
-    company: string;
     duration: string;
   }>;
 }
 
-// Mock user data
+// Mock user data - company references removed
 const mockUsers: UserProfile[] = [
   {
     id: "1",
     name: "Sarah Johnson",
     role: "Senior Web Designer",
-    company: "TechCorp Inc.",
     location: "San Francisco, CA",
     bio: "Creative designer with 5+ years of experience in UI/UX and web design. Passionate about creating intuitive and beautiful user experiences that solve real problems.",
     verificationStatus: "verified",
@@ -54,15 +50,14 @@ const mockUsers: UserProfile[] = [
     comments: 158,
     skills: ["UI/UX Design", "Figma", "Adobe Creative Suite", "React", "CSS"],
     experience: [
-      { title: "Senior Web Designer", company: "TechCorp Inc.", duration: "2022 - Present" },
-      { title: "UI Designer", company: "StartupXYZ", duration: "2020 - 2022" }
+      { title: "Senior Web Designer", duration: "2022 - Present" },
+      { title: "UI Designer", duration: "2020 - 2022" }
     ]
   },
   {
     id: "2",
     name: "Michael Chen",
     role: "Front-end Developer",
-    company: "DevStudio",
     location: "New York, NY",
     bio: "Front-end developer specializing in React and modern JavaScript frameworks. Building responsive and accessible web applications.",
     verificationStatus: "verified",
@@ -74,8 +69,8 @@ const mockUsers: UserProfile[] = [
     comments: 94,
     skills: ["React", "TypeScript", "Node.js", "GraphQL", "AWS"],
     experience: [
-      { title: "Front-end Developer", company: "DevStudio", duration: "2023 - Present" },
-      { title: "Junior Developer", company: "CodeCraft", duration: "2021 - 2023" }
+      { title: "Front-end Developer", duration: "2023 - Present" },
+      { title: "Junior Developer", duration: "2021 - 2023" }
     ]
   }
 ];
@@ -201,12 +196,6 @@ const ProfileDetail = () => {
                     <p className="text-mint text-lg mb-2">{profile.role}</p>
                     
                     <div className="flex flex-wrap gap-4 text-white/60 text-sm mb-3">
-                      {profile.company && (
-                        <div className="flex items-center gap-1">
-                          <Building className="h-4 w-4" />
-                          {profile.company}
-                        </div>
-                      )}
                       {profile.location && (
                         <div className="flex items-center gap-1">
                           <MapPin className="h-4 w-4" />
@@ -350,10 +339,25 @@ const ProfileDetail = () => {
                   {profile.experience.map((exp, index) => (
                     <div key={index} className="border-l-2 border-mint/30 pl-4">
                       <h4 className="font-medium text-white">{exp.title}</h4>
-                      <p className="text-mint text-sm">{exp.company}</p>
                       <p className="text-white/60 text-xs">{exp.duration}</p>
                     </div>
                   ))}
+                </div>
+              </Card>
+
+              {/* Privacy Notice */}
+              <Card className="bg-forest-light border border-mint/10 p-4">
+                <h4 className="text-sm font-medium text-white/80 mb-2">Privacy & Content</h4>
+                <p className="text-white/60 text-xs mb-2">
+                  All content and personal information shared on this profile is subject to our privacy policy.
+                </p>
+                <p className="text-white/60 text-xs">
+                  © {new Date().getFullYear()} SKILL NEXUS. User-generated content remains property of respective creators.
+                </p>
+                <div className="mt-2">
+                  <Link to="/legal" className="text-mint text-xs hover:underline">
+                    Privacy Policy & Terms
+                  </Link>
                 </div>
               </Card>
             </div>
