@@ -14,14 +14,14 @@ const HeaderSection = ({ onAddResource, searchQuery, onSearchChange }: HeaderSec
   return (
     <>
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
-        <h1 className="text-4xl font-bold text-white">Tutorials & Resources</h1>
+        <h1 className="text-4xl font-bold text-white">Posts & Resources</h1>
         <div className="flex gap-2">
           <Button 
             className="bg-mint hover:bg-mint/90 text-forest flex items-center gap-2 hover-scale transition-transform" 
-            onClick={() => onAddResource("Tutorial")}
+            onClick={() => onAddResource("Post")}
           >
             <Plus className="h-4 w-4" />
-            Add Tutorial
+            Add Post
           </Button>
           
           <Button 
@@ -38,7 +38,7 @@ const HeaderSection = ({ onAddResource, searchQuery, onSearchChange }: HeaderSec
       <div className="mb-8">
         <Input
           className="max-w-md bg-forest-light border-mint/20 text-white"
-          placeholder="Search tutorials and resources..."
+          placeholder="Search posts and resources..."
           value={searchQuery}
           onChange={onSearchChange}
         />

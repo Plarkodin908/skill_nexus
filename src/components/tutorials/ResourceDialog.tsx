@@ -39,7 +39,7 @@ const ResourceDialog = ({ type, isOpen, onOpenChange, onSubmit }: ResourceDialog
     }
   };
 
-  const needsVideoUpload = type === "Tutorial" || type === "videos";
+  const needsVideoUpload = type === "Post" || type === "videos";
   const uploadId = `${type}-upload`;
   
   return (

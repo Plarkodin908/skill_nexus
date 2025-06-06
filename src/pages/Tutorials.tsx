@@ -34,10 +34,10 @@ const Tutorials = () => {
       
       <TabsSection onResourceAdd={handleAddResource} />
       
-      {/* Resource Dialog for Tutorial */}
+      {/* Resource Dialog for Post */}
       <ResourceDialog
-        type="Tutorial"
-        isOpen={activeDialog === "Tutorial"}
+        type="Post"
+        isOpen={activeDialog === "Post"}
         onOpenChange={(open) => !open && setActiveDialog(null)}
         onSubmit={handleSubmitResource}
       />
@@ -50,10 +50,10 @@ const Tutorials = () => {
         onSubmit={handleSubmitResource}
       />
       
-      {/* Resource Dialog for tutorials tab */}
+      {/* Resource Dialog for posts tab */}
       <ResourceDialog
-        type="tutorials"
-        isOpen={activeDialog === "tutorials"}
+        type="posts"
+        isOpen={activeDialog === "posts"}
         onOpenChange={(open) => !open && setActiveDialog(null)}
         onSubmit={handleSubmitResource}
       />

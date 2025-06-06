@@ -1,3 +1,4 @@
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BookText, FileText, Video } from "lucide-react";
 import { useState, useRef } from "react";
@@ -61,10 +62,10 @@ const TabsSection = ({ onResourceAdd }: TabsSectionProps) => {
 
   // Empty states for different resource types
   const emptyStates = {
-    tutorials: {
+    posts: {
       icon: <BookText className="h-16 w-16 text-mint mx-auto mb-4 opacity-80" />,
-      title: "No Tutorials Available Yet",
-      description: "Be the first to share your knowledge with step-by-step tutorials."
+      title: "No Posts Available Yet",
+      description: "Be the first to share your knowledge with step-by-step posts."
     },
     articles: {
       icon: <FileText className="h-16 w-16 text-mint mx-auto mb-4 opacity-80" />,
@@ -73,13 +74,13 @@ const TabsSection = ({ onResourceAdd }: TabsSectionProps) => {
     },
     videos: {
       icon: <Video className="h-16 w-16 text-mint mx-auto mb-4 opacity-80" />,
-      title: "No Video Tutorials Yet",
+      title: "No Video Posts Yet",
       description: "Create engaging video content to help others learn more effectively."
     },
     bookmarks: {
       icon: <BackpackIcon className="h-16 w-16 text-mint mx-auto mb-4 opacity-80" />,
       title: "Your Backpack is Empty",
-      description: "Save tutorials, articles, and videos here for quick access later."
+      description: "Save posts, articles, and videos here for quick access later."
     }
   };
 
@@ -87,23 +88,23 @@ const TabsSection = ({ onResourceAdd }: TabsSectionProps) => {
   const hasBookmarks = bookmarkedResources.length > 0;
 
   return (
-    <Tabs defaultValue="tutorials" className="w-full">
+    <Tabs defaultValue="posts" className="w-full">
       <TabsList className="bg-forest border border-mint/10 mb-6">
-        <TabsTrigger value="tutorials" className="data-[state=active]:bg-mint data-[state=active]:text-forest">
-          Tutorials
+        <TabsTrigger value="posts" className="data-[state=active]:bg-mint data-[state=active]:text-forest">
+          Posts
         </TabsTrigger>
         <TabsTrigger value="articles" className="data-[state=active]:bg-mint data-[state=active]:text-forest">
           Articles
         </TabsTrigger>
         <TabsTrigger value="videos" className="data-[state=active]:bg-mint data-[state=active]:text-forest">
-          Video Tutorials
+          Video Posts
         </TabsTrigger>
         <TabsTrigger value="bookmarks" className="data-[state=active]:bg-mint data-[state=active]:text-forest">
           Backpack
         </TabsTrigger>
       </TabsList>
       
-      {['tutorials', 'articles', 'videos'].map(tab => (
+      {['posts', 'articles', 'videos'].map(tab => (
         <TabsContent key={tab} value={tab} className="mt-0">
           {resources.filter(r => r.type === tab).length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -171,7 +172,7 @@ const TabsSection = ({ onResourceAdd }: TabsSectionProps) => {
           <EmptyState
             icon={emptyStates.bookmarks.icon}
             title="Your Backpack is Empty"
-            description="Save tutorials, articles, and videos here for quick access later."
+            description="Save posts, articles, and videos here for quick access later."
             actionLabel="Browse Content"
             onAction={() => {}} // No specific action for now
           />
