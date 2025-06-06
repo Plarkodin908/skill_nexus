@@ -15,6 +15,19 @@ import { User, Lock, Bell, Eye, Globe, Palette, Shield, UserPlus, List, Database
 import EnhancedNavbar from "@/components/EnhancedNavbar";
 import SettingsSidebar from "@/components/settings/SettingsSidebar";
 import { Link } from "react-router-dom";
+
+// Color mapping for accent colors
+const colorMapping: Record<string, string> = {
+  mint: '#64ffda',
+  blue: '#0ea5e9',
+  purple: '#8b5cf6',
+  orange: '#f97316',
+  pink: '#ec4899',
+  red: '#ef4444',
+  green: '#22c55e',
+  yellow: '#eab308'
+};
+
 const Settings = () => {
   // Page load animation
   const [isPageLoaded, setIsPageLoaded] = useState(false);
@@ -42,6 +55,7 @@ const Settings = () => {
   const [userInterests, setUserInterests] = useState(["Web Development", "Mobile Apps", "Machine Learning"]);
   const [isSaving, setIsSaving] = useState(false);
   const [activeAccentColor, setActiveAccentColor] = useState("mint");
+
   useEffect(() => {
     setIsPageLoaded(true);
   }, []);
@@ -51,9 +65,8 @@ const Settings = () => {
     const file = event.target.files?.[0];
     if (file) {
       setIsSaving(true);
-      // In a real app, you'd upload this to a server
       const reader = new FileReader();
-      reader.onload = e => {
+      reader.onload = (e) => {
         if (e.target?.result) {
           setTimeout(() => {
             setProfileImage(e.target.result as string);
@@ -79,7 +92,6 @@ const Settings = () => {
         description: `Your theme preference has been saved.`,
         icon: !darkMode ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />
       });
-      // In a real app, this would update the theme in the DOM
     }, 800);
   };
 
@@ -95,6 +107,7 @@ const Settings = () => {
       });
     }, 1000);
   };
+
   const handleChangePassword = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);
@@ -106,6 +119,7 @@ const Settings = () => {
       });
     }, 1000);
   };
+
   const handle2FAToggle = () => {
     setIsSaving(true);
     setTimeout(() => {
@@ -117,13 +131,14 @@ const Settings = () => {
       });
     }, 800);
   };
+
   const handleDeleteAccount = () => {
-    // In a real app, this would show a confirmation dialog
     toast.error("This action would delete your account permanently.", {
       description: "Please contact support if you really want to delete your account.",
       duration: 5000
     });
   };
+
   const handleExportData = () => {
     setIsSaving(true);
     setTimeout(() => {
@@ -134,6 +149,7 @@ const Settings = () => {
       });
     }, 1500);
   };
+
   const handleLogoutOtherDevices = () => {
     setIsSaving(true);
     setTimeout(() => {
@@ -144,6 +160,7 @@ const Settings = () => {
       });
     }, 1000);
   };
+
   const handleAccentColorChange = (color: string) => {
     setIsSaving(true);
     setTimeout(() => {
@@ -153,19 +170,20 @@ const Settings = () => {
         description: "Your color preference has been saved.",
         icon: <Palette className="h-4 w-4" />
       });
-      // In a real app, this would update the accent color in the app
     }, 800);
   };
 
-  // Add/Remove skills and interests
+  // Add/Remove skills and interests functions
   const removeSkill = (skill: string) => {
     setUserSkills(userSkills.filter(s => s !== skill));
     toast.success(`Skill "${skill}" removed.`);
   };
+
   const removeInterest = (interest: string) => {
     setUserInterests(userInterests.filter(i => i !== interest));
     toast.success(`Interest "${interest}" removed.`);
   };
+
   const handleSaveLanguage = () => {
     setIsSaving(true);
     setTimeout(() => {
@@ -176,6 +194,7 @@ const Settings = () => {
       });
     }, 1000);
   };
+
   const handleSaveNotifications = (type: 'email' | 'app') => {
     setIsSaving(true);
     setTimeout(() => {
@@ -186,6 +205,7 @@ const Settings = () => {
       });
     }, 1000);
   };
+
   const handleSaveVisibility = () => {
     setIsSaving(true);
     setTimeout(() => {
@@ -196,6 +216,7 @@ const Settings = () => {
       });
     }, 1000);
   };
+
   const handleAddSkill = () => {
     const input = document.getElementById('add-skill') as HTMLInputElement;
     if (input.value) {
@@ -207,6 +228,7 @@ const Settings = () => {
       });
     }
   };
+
   const handleAddInterest = () => {
     const input = document.getElementById('add-interest') as HTMLInputElement;
     if (input.value) {
@@ -218,7 +240,9 @@ const Settings = () => {
       });
     }
   };
-  return <>
+
+  return (
+    <>
       <EnhancedNavbar />
       <div className={`container mx-auto px-4 py-16 max-w-6xl transition-opacity duration-500 ${isPageLoaded ? 'opacity-100' : 'opacity-0'}`}>
         <div className="flex flex-col items-center mb-8">
@@ -250,12 +274,14 @@ const Settings = () => {
           </Link>
         </div>
 
-        {isSaving && <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        {isSaving && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
             <div className="bg-forest p-6 rounded-xl flex items-center space-x-4">
               <RefreshCw className="h-6 w-6 text-mint animate-spin" />
               <span className="text-white font-medium">Saving changes...</span>
             </div>
-          </div>}
+          </div>
+        )}
 
         <div className="flex flex-col md:flex-row gap-8">
           {/* GitHub style sidebar */}
@@ -297,7 +323,13 @@ const Settings = () => {
                                   <ImagePlus className="h-4 w-4 mr-2" />
                                   Upload Picture
                                 </Label>
-                                <Input id="profile-image" type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
+                                <Input 
+                                  id="profile-image" 
+                                  type="file" 
+                                  accept="image/*" 
+                                  className="hidden" 
+                                  onChange={handleImageUpload} 
+                                />
                                 <p className="text-xs text-white/60 mt-2">JPG, PNG or GIF. 2MB max.</p>
                               </div>
                             </div>
@@ -326,7 +358,12 @@ const Settings = () => {
                               
                               <div className="space-y-2">
                                 <Label htmlFor="bio">Bio</Label>
-                                <Textarea id="bio" placeholder="Tell us about yourself..." defaultValue="Educator specializing in web development and design. Passionate about helping others learn to code!" className="h-24 bg-forest-dark border-mint/10 bg-slate-900" />
+                                <Textarea 
+                                  id="bio" 
+                                  placeholder="Tell us about yourself..." 
+                                  defaultValue="Educator specializing in web development and design. Passionate about helping others learn to code!" 
+                                  className="h-24 bg-forest-dark border-mint/10 bg-slate-900" 
+                                />
                               </div>
                             </div>
                           </div>
@@ -925,18 +962,8 @@ const Settings = () => {
           </div>
         </div>
       </div>
-    </>;
+    </>
+  );
 };
 
-// Color mapping for accent colors
-const colorMapping: Record<string, string> = {
-  mint: '#64ffda',
-  blue: '#0ea5e9',
-  purple: '#8b5cf6',
-  orange: '#f97316',
-  pink: '#ec4899',
-  red: '#ef4444',
-  green: '#22c55e',
-  yellow: '#eab308'
-};
 export default Settings;

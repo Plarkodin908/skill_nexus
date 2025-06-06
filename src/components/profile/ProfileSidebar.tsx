@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
@@ -8,13 +9,16 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Camera, Image } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { toast } from "sonner";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
 export interface ProfileSidebarProps {
   selectedGender: string;
   onGenderChange: (gender: string) => void;
-  isEditing?: boolean; // Make isEditing optional with a default value
+  isEditing?: boolean;
   onProfilePictureChange?: (url: string) => void;
   onCoverPictureChange?: (url: string) => void;
 }
+
 const ProfileSidebar = ({
   selectedGender,
   onGenderChange,
@@ -23,9 +27,7 @@ const ProfileSidebar = ({
   onCoverPictureChange
 }: ProfileSidebarProps) => {
   const navigate = useNavigate();
-  const {
-    user
-  } = useAuth();
+  const { user } = useAuth();
   const [socialLinks, setSocialLinks] = useState({
     twitter: "",
     github: "",
@@ -34,18 +36,19 @@ const ProfileSidebar = ({
   });
   const [profilePicture, setProfilePicture] = useState<string>(user?.avatar || "");
   const [coverPicture, setCoverPicture] = useState<string>("");
+
   const handleSaveChanges = () => {
     // Save profile changes logic here
-
-    // Navigate to pricing page after saving
     navigate("/pricing");
   };
+
   const handleSocialLinkChange = (platform: keyof typeof socialLinks, value: string) => {
     setSocialLinks(prev => ({
       ...prev,
       [platform]: value
     }));
   };
+
   const handleProfilePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -61,6 +64,7 @@ const ProfileSidebar = ({
       reader.readAsDataURL(file);
     }
   };
+
   const handleCoverPictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -76,6 +80,81 @@ const ProfileSidebar = ({
       reader.readAsDataURL(file);
     }
   };
-  return;
+
+  return (
+    <Card className="bg-forest-light border border-mint/10">
+      <CardHeader>
+        <CardTitle className="text-mint">Edit Profile</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        {/* Profile Picture Upload */}
+        <div className="flex flex-col items-center space-y-4">
+          <Avatar className="h-24 w-24">
+            <AvatarImage src={profilePicture} alt="Profile" />
+            <AvatarFallback className="bg-forest text-mint">
+              {user?.name?.substring(0, 2) || "UN"}
+            </AvatarFallback>
+          </Avatar>
+          <div className="flex space-x-2">
+            <label htmlFor="profile-upload" className="cursor-pointer">
+              <Button variant="outline" className="border-mint/20 text-mint hover:bg-mint/10" asChild>
+                <span>
+                  <Camera className="h-4 w-4 mr-2" />
+                  Profile
+                </span>
+              </Button>
+            </label>
+            <input
+              id="profile-upload"
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={handleProfilePictureChange}
+            />
+            
+            <label htmlFor="cover-upload" className="cursor-pointer">
+              <Button variant="outline" className="border-mint/20 text-mint hover:bg-mint/10" asChild>
+                <span>
+                  <Image className="h-4 w-4 mr-2" />
+                  Cover
+                </span>
+              </Button>
+            </label>
+            <input
+              id="cover-upload"
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={handleCoverPictureChange}
+            />
+          </div>
+        </div>
+
+        {/* Gender Selection */}
+        <GenderSelection
+          selectedGender={selectedGender}
+          onGenderChange={onGenderChange}
+        />
+
+        {/* Social Links */}
+        <SocialLinksBadges
+          socialLinks={socialLinks}
+          onSocialLinkChange={handleSocialLinkChange}
+        />
+
+        {/* Verification Section */}
+        <VerificationSection />
+
+        {/* Save Button */}
+        <Button 
+          onClick={handleSaveChanges}
+          className="w-full bg-mint hover:bg-mint/90 text-forest"
+        >
+          Save Changes
+        </Button>
+      </CardContent>
+    </Card>
+  );
 };
+
 export default ProfileSidebar;
