@@ -4,7 +4,7 @@ import ChatHeader from "./ChatHeader";
 import MessageList from "./MessageList";
 import MessageInput from "./MessageInput";
 import { Chat } from "./ChatList";
-import { MessageSquare, CreditCard } from "lucide-react";
+import { MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { PlanType } from "@/components/pricing/types";
@@ -50,7 +50,6 @@ const ChatContainer = ({
                   className="bg-mint hover:bg-mint/90 text-forest w-full flex items-center justify-center gap-2"
                   onClick={() => navigate('/pricing')}
                 >
-                  <CreditCard className="h-4 w-4" />
                   Upgrade Now
                 </Button>
               </div>

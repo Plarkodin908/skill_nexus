@@ -26,7 +26,6 @@ const Matches = lazy(() => import("./pages/Matches"));
 const MatchActionPage = lazy(() => import("./pages/matches/MatchActionPage"));
 const Tutorials = lazy(() => import("./pages/Tutorials"));
 const Pricing = lazy(() => import("./pages/Pricing"));
-const Profile = lazy(() => import("./pages/Profile"));
 const ProfileDetail = lazy(() => import("./pages/ProfileDetail"));
 const Settings = lazy(() => import("./pages/Settings"));
 const CalendarPage = lazy(() => import("./pages/CalendarPage"));
@@ -98,7 +97,6 @@ function App() {
                 <Route path="/matches/:action" element={<MatchActionPage />} />
                 <Route path="/tutorials" element={<Tutorials />} />
                 <Route path="/pricing" element={<Pricing />} />
-                <Route path="/profile" element={<Profile />} />
                 <Route path="/profile/:id" element={<ProfileDetail />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/calendar" element={<CalendarPage />} />

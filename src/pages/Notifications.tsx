@@ -2,11 +2,12 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
-import { Bell, CheckCheck, Trash2, Filter } from "lucide-react";
+import { MessageSquare, CheckCheck, Trash2, Filter } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Link } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import VerifiedBadge from "@/components/profile/VerifiedBadge";
+import { toast } from "sonner";
 
 interface Notification {
   id: string;
@@ -60,7 +61,7 @@ const mockNotifications: Notification[] = [
     description: "Your account verification is in progress",
     time: "1 day ago",
     read: true,
-    link: "/profile"
+    link: "/settings"
   },
   {
     id: "4",
@@ -96,7 +97,7 @@ const NotificationItem = ({
           </Avatar>
         ) : (
           <div className="h-10 w-10 rounded-full bg-gray-800 flex items-center justify-center">
-            <Bell className="h-5 w-5 text-mint" />
+            <MessageSquare className="h-5 w-5 text-mint" />
           </div>
         )}
         
@@ -164,7 +165,7 @@ const Notifications = () => {
         <Navbar />
         <div className="container mx-auto pt-24 pb-16 px-4">
           <div className="flex flex-col items-center justify-center h-[50vh]">
-            <Bell className="h-12 w-12 text-white/30 mb-4" />
+            <MessageSquare className="h-12 w-12 text-white/30 mb-4" />
             <h2 className="text-white text-xl font-medium">Sign in to view your notifications</h2>
             <p className="text-white/70 mt-2">Create an account or sign in to see your notifications</p>
             <div className="flex gap-3 mt-6">
@@ -193,14 +194,17 @@ const Notifications = () => {
     setNotifications(prev => 
       prev.map(n => n.id === id ? { ...n, read: true } : n)
     );
+    toast.success("Notification marked as read");
   };
   
   const handleDelete = (id: string) => {
     setNotifications(prev => prev.filter(n => n.id !== id));
+    toast.success("Notification deleted");
   };
   
   const handleMarkAllAsRead = () => {
     setNotifications(prev => prev.map(n => ({ ...n, read: true })));
+    toast.success("All notifications marked as read");
   };
   
   return (
@@ -210,7 +214,7 @@ const Notifications = () => {
         <div className="max-w-3xl mx-auto">
           <div className="flex items-center justify-between mb-6">
             <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-              <Bell className="h-6 w-6" />
+              <MessageSquare className="h-6 w-6" />
               Notifications
             </h1>
             
@@ -248,7 +252,7 @@ const Notifications = () => {
               ))
             ) : (
               <div className="p-12 text-center">
-                <Bell className="h-12 w-12 text-white/30 mx-auto mb-4" />
+                <MessageSquare className="h-12 w-12 text-white/30 mx-auto mb-4" />
                 <h3 className="text-white text-lg font-medium">
                   {filter === "unread" ? "No unread notifications" : "No notifications yet"}
                 </h3>
