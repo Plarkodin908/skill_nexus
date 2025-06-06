@@ -84,7 +84,9 @@ const Profile = () => {
     timeAgo: "1 day ago",
     category: "Study Group"
   }];
-  return <div className="bg-dark-purple min-h-screen relative">
+
+  return (
+    <div className="bg-dark-purple min-h-screen relative">
       <div className="grid-pattern-container"></div>
       <div className="grid-pattern-overlay"></div>
       
@@ -93,7 +95,9 @@ const Profile = () => {
       {/* LinkedIn-style cover section */}
       <div className="relative pt-16">
         <div className="h-48 bg-gradient-to-r from-mint/20 to-forest/40 relative">
-          {coverPicture && <img src={coverPicture} alt="Cover" className="w-full h-full object-cover" />}
+          {coverPicture && (
+            <img src={coverPicture} alt="Cover" className="w-full h-full object-cover" />
+          )}
         </div>
         
         {/* Profile header with LinkedIn layout */}
@@ -103,15 +107,21 @@ const Profile = () => {
               {/* Profile picture and basic info */}
               <div className="flex flex-col md:flex-row gap-4 flex-1">
                 <Avatar className="h-32 w-32 border-4 border-mint/30">
-                  {profilePicture ? <AvatarImage src={profilePicture} alt={userInfo.name} /> : <AvatarFallback className="bg-forest text-3xl">
+                  {profilePicture ? (
+                    <AvatarImage src={profilePicture} alt={userInfo.name} />
+                  ) : (
+                    <AvatarFallback className="bg-forest text-3xl">
                       {userInfo.name.substring(0, 2)}
-                    </AvatarFallback>}
+                    </AvatarFallback>
+                  )}
                 </Avatar>
                 
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-2">
                     <h1 className="text-2xl font-bold text-white">{userInfo.name}</h1>
-                    {user?.verificationStatus === "verified" && <VerifiedBadge size="md" />}
+                    {user?.verificationStatus === "verified" && (
+                      <VerifiedBadge size="md" />
+                    )}
                   </div>
                   
                   <p className="text-mint text-lg mb-2">{userInfo.role}</p>
@@ -155,15 +165,31 @@ const Profile = () => {
               
               {/* Action buttons */}
               <div className="flex flex-col gap-3 min-w-[200px]">
-                {!isEditing ? <Button variant="outline" className="border-mint/20 text-white hover:bg-mint/10" onClick={() => setIsEditing(true)}>
+                {!isEditing ? (
+                  <Button 
+                    variant="outline" 
+                    className="border-mint/20 text-white hover:bg-mint/10" 
+                    onClick={() => setIsEditing(true)}
+                  >
                     Edit Profile
-                  </Button> : <Button className="bg-mint hover:bg-mint/90 text-forest" onClick={handleSaveChanges}>
+                  </Button>
+                ) : (
+                  <Button 
+                    className="bg-mint hover:bg-mint/90 text-forest" 
+                    onClick={handleSaveChanges}
+                  >
                     Save Changes
-                  </Button>}
+                  </Button>
+                )}
                 
-                {user?.verificationStatus === "unverified" && <Button className="bg-mint hover:bg-mint/90 text-forest" onClick={handleVerifyAccount}>
+                {user?.verificationStatus === "unverified" && (
+                  <Button 
+                    className="bg-mint hover:bg-mint/90 text-forest" 
+                    onClick={handleVerifyAccount}
+                  >
                     Verify Account
-                  </Button>}
+                  </Button>
+                )}
               </div>
             </div>
           </div>
@@ -176,7 +202,15 @@ const Profile = () => {
           {/* Left sidebar - LinkedIn style */}
           <div className="space-y-6">
             {/* Profile sidebar for editing */}
-            {isEditing && <ProfileSidebar selectedGender={selectedGender} onGenderChange={setSelectedGender} isEditing={isEditing} onProfilePictureChange={handleProfilePictureChange} onCoverPictureChange={handleCoverPictureChange} />}
+            {isEditing && (
+              <ProfileSidebar 
+                selectedGender={selectedGender} 
+                onGenderChange={setSelectedGender} 
+                isEditing={isEditing} 
+                onProfilePictureChange={handleProfilePictureChange} 
+                onCoverPictureChange={handleCoverPictureChange} 
+              />
+            )}
             
             {/* About section */}
             <Card className="bg-forest-light border border-mint/10 p-6">
@@ -188,9 +222,15 @@ const Profile = () => {
             <Card className="bg-forest-light border border-mint/10 p-6">
               <h3 className="text-lg font-semibold text-white mb-3">Skills</h3>
               <div className="flex flex-wrap gap-2">
-                {userInfo.skills.map((skill, index) => <Badge key={index} variant="secondary" className="bg-mint/20 text-mint hover:bg-mint/30">
+                {userInfo.skills.map((skill, index) => (
+                  <Badge 
+                    key={index} 
+                    variant="secondary" 
+                    className="bg-mint/20 text-mint hover:bg-mint/30"
+                  >
                     {skill}
-                  </Badge>)}
+                  </Badge>
+                ))}
               </div>
             </Card>
             
@@ -198,10 +238,12 @@ const Profile = () => {
             <Card className="bg-forest-light border border-mint/10 p-6">
               <h3 className="text-lg font-semibold text-white mb-3">Experience</h3>
               <div className="space-y-4">
-                {userInfo.experience.map((exp, index) => <div key={index} className="border-l-2 border-mint/30 pl-4">
+                {userInfo.experience.map((exp, index) => (
+                  <div key={index} className="border-l-2 border-mint/30 pl-4">
                     <h4 className="font-medium text-white">{exp.title}</h4>
                     <p className="text-white/60 text-xs">{exp.duration}</p>
-                  </div>)}
+                  </div>
+                ))}
               </div>
             </Card>
 
@@ -226,12 +268,58 @@ const Profile = () => {
           <div className="lg:col-span-2 space-y-4">
             <h3 className="text-xl font-semibold text-white mb-4">Recent Activity</h3>
             
-            {recentPosts.map(post => {})}
+            {recentPosts.map(post => (
+              <Card key={post.id} className="bg-forest-light border border-mint/10 p-6">
+                <div className="flex items-start gap-4">
+                  <div className="flex flex-col items-center gap-2">
+                    <button className="text-white/60 hover:text-mint transition-colors">
+                      <ArrowUp className="h-5 w-5" />
+                    </button>
+                    <span className="text-white font-medium">{post.upvotes}</span>
+                    <button className="text-white/60 hover:text-mint transition-colors">
+                      <ArrowDown className="h-5 w-5" />
+                    </button>
+                  </div>
+                  
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Badge variant="secondary" className="bg-mint/20 text-mint">
+                        {post.category}
+                      </Badge>
+                      <span className="text-white/60 text-sm">{post.timeAgo}</span>
+                    </div>
+                    
+                    <h4 className="text-lg font-semibold text-white mb-2">{post.title}</h4>
+                    <p className="text-white/70 mb-4">{post.content}</p>
+                    
+                    <div className="flex items-center gap-4 text-white/60">
+                      <button className="flex items-center gap-2 hover:text-mint transition-colors">
+                        <MessageCircle className="h-4 w-4" />
+                        {post.comments} comments
+                      </button>
+                      <button className="flex items-center gap-2 hover:text-mint transition-colors">
+                        <Share2 className="h-4 w-4" />
+                        Share
+                      </button>
+                      <button className="flex items-center gap-2 hover:text-mint transition-colors">
+                        <Bookmark className="h-4 w-4" />
+                        Save
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            ))}
           </div>
         </div>
       </div>
       
-      <VerificationModal isOpen={isVerificationModalOpen} onClose={() => setIsVerificationModalOpen(false)} />
-    </div>;
+      <VerificationModal 
+        isOpen={isVerificationModalOpen} 
+        onClose={() => setIsVerificationModalOpen(false)} 
+      />
+    </div>
+  );
 };
+
 export default Profile;

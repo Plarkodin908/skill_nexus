@@ -138,8 +138,9 @@ const ProfileSidebar = ({
 
         {/* Social Links */}
         <SocialLinksBadges
-          socialLinks={socialLinks}
-          onSocialLinkChange={handleSocialLinkChange}
+          links={socialLinks}
+          onChange={handleSocialLinkChange}
+          readOnly={false}
         />
 
         {/* Verification Section */}

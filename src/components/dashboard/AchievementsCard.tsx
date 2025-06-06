@@ -33,13 +33,10 @@ const AchievementsCard = ({ achievements }: AchievementsCardProps) => {
           <div key={index} className="flex flex-col items-center space-y-2">
             <AchievementBadge 
               type={achievement.type} 
-              size="sm"
+              title={achievement.title}
+              description={achievement.description}
               earned={achievement.earned}
             />
-            <div className="text-center">
-              <p className="text-xs font-medium text-white">{achievement.title}</p>
-              <p className="text-xs text-white/60">{achievement.description}</p>
-            </div>
           </div>
         ))}
       </div>
