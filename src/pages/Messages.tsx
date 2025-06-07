@@ -11,7 +11,6 @@ import { toast } from "sonner";
 import RequiresMembership from "@/components/membership/RequiresMembership";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { getSampleChats, getSampleMessages } from "@/services/messageService";
 
 export interface ChatUser {
   name: string;
@@ -51,12 +50,13 @@ const Messages = () => {
   const maxDailyMessages = MESSAGE_LIMITS[membership];
   const canSendMessage = messagesSentToday < maxDailyMessages;
   
-  // Load chats and messages from service
+  // Initialize with empty state - no fake messages
   useEffect(() => {
-    setChats(getSampleChats());
-    setMessages(getSampleMessages());
+    // Start with empty chats and messages for a clean, authentic experience
+    setChats([]);
+    setMessages([]);
     
-    // In a real app, we would load the message count from a database or localStorage
+    // Load message count from localStorage
     const storedCount = localStorage.getItem('messagesSentToday');
     const lastSentDate = localStorage.getItem('lastMessageSentDate');
     const today = new Date().toDateString();
@@ -126,7 +126,7 @@ const Messages = () => {
     }
 
     const newContact: Chat = {
-      id: Date.now(), // Use timestamp as a unique ID
+      id: Date.now(),
       user: {
         name: newContactName,
         avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(newContactName)}&background=0D8ABC&color=fff`,
@@ -151,7 +151,6 @@ const Messages = () => {
     chat.user.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Minimum membership required to access messaging feature
   const requiredMembership = "Free";
   
   return (
@@ -162,7 +161,6 @@ const Messages = () => {
         requiredMembership={requiredMembership}
         fallbackText="Messaging features are available to all users. Free users can send up to 5 messages per day. Upgrade your plan to unlock unlimited messaging with our community of experts and learners."
       >
-        {/* Message Restriction Banner */}
         <MessageRestriction 
           membership={membership}
           messagesSent={messagesSentToday}
