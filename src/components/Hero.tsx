@@ -3,12 +3,19 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, BookOpen, Users, GraduationCap, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { useSiteStats } from "@/hooks/useSiteStats";
 import ScrollReveal from "./ScrollReveal";
 
 const Hero = () => {
-  const {
-    user
-  } = useAuth();
+  const { user } = useAuth();
+  const { stats, isLoading } = useSiteStats();
+  
+  const formatNumber = (num: number) => {
+    if (num >= 1000) {
+      return `${(num / 1000).toFixed(1)}k+`;
+    }
+    return `${num}+`;
+  };
   
   return (
     <section className="relative pt-24 md:pt-32 pb-16 px-4 overflow-hidden">
@@ -56,11 +63,15 @@ const Hero = () => {
             <div className="flex flex-wrap items-center gap-4 pt-6">
               <div className="flex items-center gap-2">
                 <BookOpen className="text-gray-400 h-4 w-4 md:h-5 md:w-5" />
-                <span className="text-gray-300 text-sm md:text-base">500+ Courses</span>
+                <span className="text-gray-300 text-sm md:text-base">
+                  {isLoading ? "..." : `${formatNumber(stats.totalCourses)} Courses`}
+                </span>
               </div>
               <div className="flex items-center gap-2 py-0 px-0 my-[15px]">
                 <Users className="text-gray-400 h-4 w-4 md:h-5 md:w-5" />
-                <span className="text-gray-300 text-sm md:text-base">10k+ Members</span>
+                <span className="text-gray-300 text-sm md:text-base">
+                  {isLoading ? "..." : `${formatNumber(stats.totalUsers)} Members`}
+                </span>
               </div>
               <div className="flex items-center gap-2">
                 <GraduationCap className="text-gray-400 h-4 w-4 md:h-5 md:w-5" />
