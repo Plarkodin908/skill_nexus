@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useAuth } from '@/contexts/AuthContext';
 import VerifiedBadge from '@/components/profile/VerifiedBadge';
-import { Mail, UserPlus, UserMinus, Flag, ArrowUp, ArrowDown, MessageCircle, Share2, Trophy, Calendar, MapPin, Link as LinkIcon } from 'lucide-react';
+import { Mail, UserPlus, UserMinus, Flag, ArrowUp, ArrowDown, MessageCircle, Share2, Trophy, Calendar, MapPin, Link as LinkIcon, Globe } from 'lucide-react';
 import { toast } from 'sonner';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -18,6 +18,7 @@ interface UserProfile {
   coverImage?: string;
   role: string;
   location?: string;
+  website?: string;
   bio: string;
   verificationStatus: "unverified" | "pending" | "verified";
   memberSince: string;
@@ -33,13 +34,14 @@ interface UserProfile {
   }>;
 }
 
-// Mock user data - company references removed
+// Mock user data - updated with location and website
 const mockUsers: UserProfile[] = [
   {
     id: "1",
     name: "Sarah Johnson",
     role: "Senior Web Designer",
     location: "San Francisco, CA",
+    website: "https://sarahdesigns.com",
     bio: "Creative designer with 5+ years of experience in UI/UX and web design. Passionate about creating intuitive and beautiful user experiences that solve real problems.",
     verificationStatus: "verified",
     memberSince: "May 2023",
@@ -59,6 +61,7 @@ const mockUsers: UserProfile[] = [
     name: "Michael Chen",
     role: "Front-end Developer",
     location: "New York, NY",
+    website: "https://michaelchen.dev",
     bio: "Front-end developer specializing in React and modern JavaScript frameworks. Building responsive and accessible web applications.",
     verificationStatus: "verified",
     memberSince: "January 2024",
@@ -202,6 +205,19 @@ const ProfileDetail = () => {
                           {profile.location}
                         </div>
                       )}
+                      {profile.website && (
+                        <div className="flex items-center gap-1">
+                          <Globe className="h-4 w-4" />
+                          <a 
+                            href={profile.website} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-mint hover:text-mint/80 hover:underline"
+                          >
+                            Visit Website
+                          </a>
+                        </div>
+                      )}
                       <div className="flex items-center gap-1">
                         <Calendar className="h-4 w-4" />
                         Member since {profile.memberSince}
@@ -314,6 +330,34 @@ const ProfileDetail = () => {
               <Card className="bg-forest-light border border-mint/10 p-6">
                 <h3 className="text-lg font-semibold text-white mb-3">About</h3>
                 <p className="text-white/70 text-sm leading-relaxed">{profile.bio}</p>
+                
+                {/* Contact Information */}
+                {(profile.location || profile.website) && (
+                  <div className="mt-4 pt-4 border-t border-mint/10">
+                    <h4 className="text-sm font-medium text-white/80 mb-2">Contact Information</h4>
+                    <div className="space-y-2">
+                      {profile.location && (
+                        <div className="flex items-center gap-2 text-white/70 text-sm">
+                          <MapPin className="h-4 w-4 text-mint" />
+                          <span>{profile.location}</span>
+                        </div>
+                      )}
+                      {profile.website && (
+                        <div className="flex items-center gap-2 text-white/70 text-sm">
+                          <LinkIcon className="h-4 w-4 text-mint" />
+                          <a 
+                            href={profile.website} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-mint hover:text-mint/80 hover:underline"
+                          >
+                            {profile.website.replace(/^https?:\/\//, '')}
+                          </a>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
               </Card>
               
               {/* Skills section */}

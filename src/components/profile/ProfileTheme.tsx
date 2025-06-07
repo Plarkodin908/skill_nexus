@@ -4,10 +4,13 @@ import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import VerifiedBadge from './VerifiedBadge';
 import { useAuth } from '@/contexts/AuthContext';
+import { MapPin, Globe } from 'lucide-react';
 
 interface ProfileThemeProps {
   name: string;
   role?: string;
+  location?: string;
+  website?: string;
   avatarUrl?: string;
   customStyles?: {
     gradientFrom?: string;
@@ -22,6 +25,8 @@ interface ProfileThemeProps {
 const ProfileTheme = ({
   name,
   role = "Learning Enthusiast",
+  location,
+  website,
   avatarUrl,
   customStyles = {
     gradientFrom: "primary-purple",
@@ -39,7 +44,7 @@ const ProfileTheme = ({
   
   return (
     <div className={cn(
-      "group before:hover:scale-95 before:hover:h-72 before:hover:rounded-b-2xl before:transition-all before:duration-500 before:content-[''] before:w-80 before:h-24 before:rounded-t-2xl before:absolute before:top-0 w-80 h-72 relative bg-dark-purple flex flex-col items-center justify-center gap-2 text-center rounded-2xl overflow-hidden",
+      "group before:hover:scale-95 before:hover:h-80 before:hover:rounded-b-2xl before:transition-all before:duration-500 before:content-[''] before:w-80 before:h-24 before:rounded-t-2xl before:absolute before:top-0 w-80 h-80 relative bg-dark-purple flex flex-col items-center justify-center gap-2 text-center rounded-2xl overflow-hidden",
       gradientClasses,
       className
     )}>
@@ -54,12 +59,36 @@ const ProfileTheme = ({
           </div>
         )}
       </div>
-      <div className="z-10 group-hover:-translate-y-10 transition-all duration-500">
+      <div className="z-10 group-hover:-translate-y-10 transition-all duration-500 px-4">
         <div className="flex items-center justify-center gap-1">
           <span className="text-2xl font-semibold text-white">{name}</span>
           {isVerified && <VerifiedBadge size="sm" className="mt-1" />}
         </div>
         <p className="text-white/80">{role}</p>
+        
+        {/* Location and Website */}
+        <div className="mt-2 space-y-1">
+          {location && (
+            <div className="flex items-center justify-center gap-1 text-white/60 text-sm">
+              <MapPin className="h-3 w-3" />
+              <span className="truncate">{location}</span>
+            </div>
+          )}
+          {website && (
+            <div className="flex items-center justify-center gap-1 text-white/60 text-sm">
+              <Globe className="h-3 w-3" />
+              <a 
+                href={website} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className={`text-${customStyles.buttonColor} hover:text-${customStyles.buttonHoverColor} hover:underline truncate`}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {website.replace(/^https?:\/\//, '')}
+              </a>
+            </div>
+          )}
+        </div>
       </div>
       <Link 
         to="#" 
