@@ -1,6 +1,8 @@
 
 /* Main CSS entry point - imports all modular CSS files */
 @import './base.css';
+@import './performance.css';
+@import './modern-animations.css';
 @import './backgrounds.css';
 @import './buttons.css';
 @import './cards.css';
@@ -55,4 +57,21 @@ html {
     align-items: center;
     justify-content: center;
   }
+}
+
+/* Professional theme improvements */
+.theme-professional {
+  --primary: #6366f1;
+  --secondary: #4f46e5;
+  --background: #0f172a;
+  --surface: #1e293b;
+  --text: #f1f5f9;
+}
+
+.theme-playful {
+  --primary: #8b5cf6;
+  --secondary: #a855f7;
+  --background: #1e1b4b;
+  --surface: #312e81;
+  --text: #f1f5f9;
 }

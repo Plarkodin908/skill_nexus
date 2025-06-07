@@ -1,0 +1,61 @@
+
+/* Performance optimizations for slow connections */
+
+/* Preload critical fonts */
+@font-face {
+  font-family: 'Inter';
+  font-display: swap;
+  src: local('Inter');
+}
+
+/* Optimize scrolling performance */
+.smooth-scroll {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Lazy loading placeholders */
+.image-placeholder {
+  @apply bg-slate-800 animate-pulse;
+  min-height: 200px;
+  background-image: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+/* Optimize heavy animations */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Content loading states */
+.content-loading {
+  @apply opacity-60 pointer-events-none;
+}
+
+.content-loaded {
+  @apply opacity-100 transition-opacity duration-300;
+}
+
+/* Optimize layout shifts */
+.aspect-preserve {
+  content-visibility: auto;
+  contain-intrinsic-size: 300px 200px;
+}
+
+/* Network-aware loading */
+@media (max-width: 640px) {
+  .heavy-animation {
+    animation: none !important;
+  }
+  
+  .blur-effect {
+    backdrop-filter: none !important;
+  }
+}
