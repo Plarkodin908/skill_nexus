@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import SettingsSidebar from "@/components/settings/SettingsSidebar";
@@ -9,15 +8,52 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 import { useAuth } from "@/contexts/AuthContext";
-import { Trash2, Download, Eye, EyeOff } from "lucide-react";
+import { Trash2, Download, Eye, EyeOff, Check, ChevronsUpDown } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+// Comprehensive list of world locations
+const LOCATIONS = [
+  "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan",
+  "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia",
+  "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi",
+  "Cambodia", "Cameroon", "Canada", "Cape Verde", "Central African Republic", "Chad", "Chile", "China", "Colombia",
+  "Comoros", "Congo", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic",
+  "Denmark", "Djibouti", "Dominica", "Dominican Republic",
+  "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia",
+  "Fiji", "Finland", "France",
+  "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana",
+  "Haiti", "Honduras", "Hungary",
+  "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Ivory Coast",
+  "Jamaica", "Japan", "Jordan",
+  "Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan",
+  "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg",
+  "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius",
+  "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar",
+  "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia", "Norway",
+  "Oman",
+  "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal",
+  "Qatar",
+  "Romania", "Russia", "Rwanda",
+  "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe",
+  "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands",
+  "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria",
+  "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu",
+  "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan",
+  "Vanuatu", "Vatican City", "Venezuela", "Vietnam",
+  "Yemen",
+  "Zambia", "Zimbabwe"
+];
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState("account");
   const { user } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
+  const [locationOpen, setLocationOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: user?.name || "",
     email: user?.email || "",
@@ -44,6 +80,37 @@ const Settings = () => {
 
   const handlePreferenceChange = (field: string, value: boolean | string) => {
     setPreferences(prev => ({ ...prev, [field]: value }));
+    
+    // Apply theme changes immediately
+    if (field === "theme") {
+      applyTheme(value as string);
+    }
+  };
+
+  const applyTheme = (theme: string) => {
+    const root = document.documentElement;
+    
+    switch (theme) {
+      case "light":
+        root.style.setProperty('--background', '255 255 255');
+        root.style.setProperty('--foreground', '0 0 0');
+        root.style.setProperty('--card', '255 255 255');
+        root.style.setProperty('--card-foreground', '0 0 0');
+        break;
+      case "dark":
+        root.style.setProperty('--background', '8 47 73');
+        root.style.setProperty('--foreground', '248 250 252');
+        root.style.setProperty('--card', '15 58 87');
+        root.style.setProperty('--card-foreground', '248 250 252');
+        break;
+      case "auto":
+        // Use system preference
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        applyTheme(prefersDark ? "dark" : "light");
+        break;
+    }
+    
+    toast.success(`Theme changed to ${theme}`);
   };
 
   const handleSave = () => {
@@ -108,12 +175,51 @@ const Settings = () => {
           </div>
           <div>
             <Label htmlFor="location" className="text-white">Location</Label>
-            <Input
-              id="location"
-              value={formData.location}
-              onChange={(e) => handleInputChange("location", e.target.value)}
-              className="bg-forest-light border-mint/20 text-white"
-            />
+            <Popover open={locationOpen} onOpenChange={setLocationOpen}>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  role="combobox"
+                  aria-expanded={locationOpen}
+                  className="w-full justify-between bg-forest-light border-mint/20 text-white hover:bg-forest hover:text-white"
+                >
+                  {formData.location || "Select location..."}
+                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-full p-0 bg-forest-light border-mint/20">
+                <Command className="bg-forest-light">
+                  <CommandInput 
+                    placeholder="Search location..." 
+                    className="text-white"
+                  />
+                  <CommandEmpty className="text-white/60">No location found.</CommandEmpty>
+                  <CommandGroup>
+                    <CommandList>
+                      {LOCATIONS.map((location) => (
+                        <CommandItem
+                          key={location}
+                          value={location}
+                          onSelect={(currentValue) => {
+                            handleInputChange("location", currentValue === formData.location ? "" : currentValue);
+                            setLocationOpen(false);
+                          }}
+                          className="text-white hover:bg-mint/10"
+                        >
+                          <Check
+                            className={cn(
+                              "mr-2 h-4 w-4",
+                              formData.location === location ? "opacity-100" : "opacity-0"
+                            )}
+                          />
+                          {location}
+                        </CommandItem>
+                      ))}
+                    </CommandList>
+                  </CommandGroup>
+                </Command>
+              </PopoverContent>
+            </Popover>
           </div>
           <div>
             <Label htmlFor="website" className="text-white">Website</Label>
@@ -223,10 +329,10 @@ const Settings = () => {
               <SelectTrigger className="bg-forest-light border-mint/20 text-white w-48">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="dark">Dark</SelectItem>
-                <SelectItem value="light">Light</SelectItem>
-                <SelectItem value="auto">Auto</SelectItem>
+              <SelectContent className="bg-forest-light border-mint/20">
+                <SelectItem value="dark" className="text-white hover:bg-mint/10">Dark</SelectItem>
+                <SelectItem value="light" className="text-white hover:bg-mint/10">Light</SelectItem>
+                <SelectItem value="auto" className="text-white hover:bg-mint/10">Auto</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -246,11 +352,11 @@ const Settings = () => {
               <SelectTrigger className="bg-forest-light border-mint/20 text-white w-48">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="en">English</SelectItem>
-                <SelectItem value="es">Spanish</SelectItem>
-                <SelectItem value="fr">French</SelectItem>
-                <SelectItem value="de">German</SelectItem>
+              <SelectContent className="bg-forest-light border-mint/20">
+                <SelectItem value="en" className="text-white hover:bg-mint/10">English</SelectItem>
+                <SelectItem value="es" className="text-white hover:bg-mint/10">Spanish</SelectItem>
+                <SelectItem value="fr" className="text-white hover:bg-mint/10">French</SelectItem>
+                <SelectItem value="de" className="text-white hover:bg-mint/10">German</SelectItem>
               </SelectContent>
             </Select>
           </div>
