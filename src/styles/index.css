@@ -1,4 +1,3 @@
-
 /* Main CSS entry point - imports all modular CSS files */
 @import './base.css';
 @import './performance.css';
@@ -13,6 +12,7 @@
 @import './animated-pattern.css';
 @import './grid-pattern.css';
 @import './loaders.css';
+@import './earth-loader.css';
 
 /* Performance optimizations */
 img {

@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { useAuth } from "@/contexts/AuthContext";
 import { ArrowLeft, Eye, EyeOff, Mail, Lock, User } from "lucide-react";
 import { toast } from "sonner";
+import Loading from "@/components/ui/loading";
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -17,6 +18,7 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState("");
+  const [isCreating, setIsCreating] = useState(false);
   const {
     signUp,
     isLoading
@@ -44,15 +46,29 @@ const SignUp = () => {
     }
     
     try {
+      setIsCreating(true);
+      // Show earth loader for a bit longer to demonstrate the animation
+      await new Promise(resolve => setTimeout(resolve, 2000));
       await signUp(email, password, name);
       toast.success("Account created successfully!");
     } catch (error: any) {
       setError(error.message || "Failed to create account");
+    } finally {
+      setIsCreating(false);
     }
   };
 
   const toggleShowPassword = () => setShowPassword(!showPassword);
   const toggleShowConfirmPassword = () => setShowConfirmPassword(!showConfirmPassword);
+
+  // Show earth loader during account creation
+  if (isCreating || isLoading) {
+    return (
+      <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4">
+        <Loading variant="earth" text="Creating your account..." />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">

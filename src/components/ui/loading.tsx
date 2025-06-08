@@ -1,12 +1,12 @@
-
 import React from "react";
 import { cn } from "@/lib/utils";
+import EarthLoader from "./earth-loader";
 
 export interface LoadingProps {
   size?: "small" | "medium" | "large";
   text?: string;
   className?: string;
-  variant?: "lava-lamp" | "words" | "spinner";
+  variant?: "lava-lamp" | "words" | "spinner" | "earth";
 }
 
 const Loading = ({ 
@@ -29,6 +29,10 @@ const Loading = ({
   return (
     <div className={cn("loading-wrapper", className)}>
       <div className="flex flex-col items-center">
+        {variant === "earth" && (
+          <EarthLoader text={text} />
+        )}
+        
         {variant === "lava-lamp" && (
           <div className={`lava-lamp ${getSizeClass()}`}>
             <div className="bubble"></div>
@@ -70,7 +74,7 @@ const Loading = ({
           </div>
         )}
         
-        {text && <p className="mt-4 text-white/70 text-sm">{text}</p>}
+        {text && variant !== "earth" && <p className="mt-4 text-white/70 text-sm">{text}</p>}
       </div>
     </div>
   );
