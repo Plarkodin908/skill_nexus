@@ -10,6 +10,7 @@ import { Mail, UserPlus, UserMinus, Flag, ArrowUp, ArrowDown, MessageCircle, Sha
 import { toast } from 'sonner';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import EditProfileDialog from '@/components/profile/EditProfileDialog';
 
 interface UserProfile {
   id: string;
@@ -152,6 +153,15 @@ const ProfileDetail = () => {
     }
   ];
   
+  const handleProfileUpdate = (updatedData: any) => {
+    if (profile) {
+      setProfile({
+        ...profile,
+        ...updatedData
+      });
+    }
+  };
+  
   return (
     <>
       <div className="relative bg-black min-h-screen">
@@ -252,22 +262,33 @@ const ProfileDetail = () => {
                 
                 {/* Action buttons */}
                 <div className="flex flex-col gap-3 min-w-[200px]">
-                  <Button
-                    className={isFollowing ? 'border border-mint/20 text-white bg-transparent hover:bg-white/5' : 'bg-mint hover:bg-mint/90 text-forest'}
-                    onClick={handleFollow}
-                  >
-                    {isFollowing ? (
-                      <>
-                        <UserMinus className="h-4 w-4 mr-2" />
-                        Unfollow
-                      </>
-                    ) : (
-                      <>
-                        <UserPlus className="h-4 w-4 mr-2" />
-                        Follow
-                      </>
-                    )}
-                  </Button>
+                  {/* Show Edit Profile button only for current user */}
+                  {user?.name === profile.name && (
+                    <EditProfileDialog 
+                      profile={profile}
+                      onProfileUpdate={handleProfileUpdate}
+                    />
+                  )}
+                  
+                  {/* Show Follow button only for other users */}
+                  {user?.name !== profile.name && (
+                    <Button
+                      className={isFollowing ? 'border border-mint/20 text-white bg-transparent hover:bg-white/5' : 'bg-mint hover:bg-mint/90 text-forest'}
+                      onClick={handleFollow}
+                    >
+                      {isFollowing ? (
+                        <>
+                          <UserMinus className="h-4 w-4 mr-2" />
+                          Unfollow
+                        </>
+                      ) : (
+                        <>
+                          <UserPlus className="h-4 w-4 mr-2" />
+                          Follow
+                        </>
+                      )}
+                    </Button>
+                  )}
                   
                   <Button
                     variant="outline"
