@@ -11,6 +11,7 @@ import { toast } from 'sonner';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import EditProfileDialog from '@/components/profile/EditProfileDialog';
+import SocialMediaSection from '@/components/profile/SocialMediaSection';
 
 interface UserProfile {
   id: string;
@@ -161,6 +162,11 @@ const ProfileDetail = () => {
       });
     }
   };
+
+  const handleSocialMediaSave = (links: any) => {
+    // Save social media links logic here
+    console.log('Saving social media links:', links);
+  };
   
   return (
     <>
@@ -200,23 +206,23 @@ const ProfileDetail = () => {
                   
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
-                      <h1 className="text-2xl font-bold text-white">{profile.name}</h1>
+                      <h1 className="text-2xl font-bold text-white mobile-high-contrast md:text-shadow-none">{profile.name}</h1>
                       {profile.verificationStatus === "verified" && (
                         <VerifiedBadge size="md" />
                       )}
                     </div>
                     
-                    <p className="text-mint text-lg mb-2">{profile.role}</p>
+                    <p className="text-mint text-lg mb-2 text-readable md:text-shadow-none md:bg-transparent">{profile.role}</p>
                     
                     <div className="flex flex-wrap gap-4 text-white/60 text-sm mb-3">
                       {profile.location && (
-                        <div className="flex items-center gap-1">
+                        <div className="flex items-center gap-1 text-readable md:bg-transparent">
                           <MapPin className="h-4 w-4" />
                           {profile.location}
                         </div>
                       )}
                       {profile.website && (
-                        <div className="flex items-center gap-1">
+                        <div className="flex items-center gap-1 text-readable md:bg-transparent">
                           <Globe className="h-4 w-4" />
                           <a 
                             href={profile.website} 
@@ -228,7 +234,7 @@ const ProfileDetail = () => {
                           </a>
                         </div>
                       )}
-                      <div className="flex items-center gap-1">
+                      <div className="flex items-center gap-1 text-readable md:bg-transparent">
                         <Calendar className="h-4 w-4" />
                         Member since {profile.memberSince}
                       </div>
@@ -237,24 +243,24 @@ const ProfileDetail = () => {
                     {/* Reddit-style stats */}
                     <div className="flex flex-wrap gap-6 mb-4">
                       <div className="text-center">
-                        <p className="text-xl font-bold text-white">{profile.karma.toLocaleString()}</p>
-                        <p className="text-white/60 text-sm">Karma</p>
+                        <p className="text-xl font-bold text-white mobile-high-contrast md:text-shadow-none">{profile.karma.toLocaleString()}</p>
+                        <p className="text-white/60 text-sm text-readable md:bg-transparent">Karma</p>
                       </div>
                       <div className="text-center">
-                        <p className="text-xl font-bold text-white">{profile.followers}</p>
-                        <p className="text-white/60 text-sm">Followers</p>
+                        <p className="text-xl font-bold text-white mobile-high-contrast md:text-shadow-none">{profile.followers}</p>
+                        <p className="text-white/60 text-sm text-readable md:bg-transparent">Followers</p>
                       </div>
                       <div className="text-center">
-                        <p className="text-xl font-bold text-white">{profile.following}</p>
-                        <p className="text-white/60 text-sm">Following</p>
+                        <p className="text-xl font-bold text-white mobile-high-contrast md:text-shadow-none">{profile.following}</p>
+                        <p className="text-white/60 text-sm text-readable md:bg-transparent">Following</p>
                       </div>
                       <div className="text-center">
-                        <p className="text-xl font-bold text-white">{profile.posts}</p>
-                        <p className="text-white/60 text-sm">Posts</p>
+                        <p className="text-xl font-bold text-white mobile-high-contrast md:text-shadow-none">{profile.posts}</p>
+                        <p className="text-white/60 text-sm text-readable md:bg-transparent">Posts</p>
                       </div>
                       <div className="text-center">
-                        <p className="text-xl font-bold text-white">{profile.comments}</p>
-                        <p className="text-white/60 text-sm">Comments</p>
+                        <p className="text-xl font-bold text-white mobile-high-contrast md:text-shadow-none">{profile.comments}</p>
+                        <p className="text-white/60 text-sm text-readable md:bg-transparent">Comments</p>
                       </div>
                     </div>
                   </div>
@@ -380,6 +386,18 @@ const ProfileDetail = () => {
                   </div>
                 )}
               </Card>
+
+              {/* Social Media Section */}
+              <SocialMediaSection
+                isOwner={user?.name === profile.name}
+                initialLinks={{
+                  instagram: '',
+                  facebook: '',
+                  whatsapp: '',
+                  gmail: profile.id === '1' ? 'sarah@sarahdesigns.com' : 'michael@michaelchen.dev'
+                }}
+                onSave={handleSocialMediaSave}
+              />
               
               {/* Skills section */}
               <Card className="bg-forest-light border border-mint/10 p-6">

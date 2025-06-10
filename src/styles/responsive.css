@@ -2,19 +2,45 @@
 /* Mobile responsiveness enhancements */
 @media (max-width: 640px) {
   h1 {
-    @apply text-3xl;
+    @apply text-3xl font-bold;
+    color: #ffffff !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
   }
   h2 {
-    @apply text-2xl;
+    @apply text-2xl font-semibold;
+    color: #ffffff !important;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
   }
   h3 {
-    @apply text-xl;
+    @apply text-xl font-medium;
+    color: #ffffff !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
   }
   p {
     @apply text-sm;
+    color: #f1f5f9 !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   }
   .container {
     @apply px-4;
+  }
+  
+  /* High contrast text for mobile */
+  .mobile-high-contrast {
+    color: #ffffff !important;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+  }
+  
+  /* Enhanced button visibility on mobile */
+  button, .button {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+    font-weight: 600 !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
   }
   
   /* Mobile padding adjustments */
@@ -45,6 +71,18 @@
     width: 100%;
     max-width: 252px;
     margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.9) !important;
+    border: 1px solid #ffffff !important;
+  }
+  
+  /* Enhanced text readability */
+  .text-readable {
+    color: #ffffff !important;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
   }
 }
 
@@ -60,6 +98,11 @@
   
   .card {
     width: 100%;
+  }
+  
+  /* Improved text contrast for tablets */
+  h1, h2, h3 {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
   }
 }
 
