@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
 import { Bell, User as UserIcon, Menu, X, Shield } from "lucide-react";
@@ -6,6 +7,8 @@ import { useAuth } from "@/contexts/AuthContext";
 import VerifiedBadge from "./profile/VerifiedBadge";
 import { toast } from "sonner";
 import UserSearch from "./UserSearch";
+import NotificationDropdown from "./notifications/NotificationDropdown";
+
 const Navbar = () => {
   const {
     user,
@@ -14,6 +17,8 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [secureNavigation, setSecureNavigation] = useState(true);
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+  const notificationButtonRef = useRef<HTMLButtonElement>(null);
   const isVerified = user?.verificationStatus === "verified";
   const location = useLocation();
 
@@ -36,17 +41,20 @@ const Navbar = () => {
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
+
   const handleNotificationsClick = () => {
     if (user) {
-      window.location.href = "/notifications";
+      setIsNotificationOpen(!isNotificationOpen);
     } else {
       toast.info("Please sign in to view notifications");
     }
   };
+
   const toggleSecureNavigation = () => {
     setSecureNavigation(!secureNavigation);
     toast.success(secureNavigation ? "Standard navigation mode enabled" : "Secure navigation mode enabled");
   };
+
   return <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-gray-900/90 backdrop-blur-lg shadow-lg" : "bg-transparent"}`}>
       <div className="container mx-auto px-4 py-2 md:py-4 bg-gray-900">
         <div className="flex items-center justify-between">
@@ -73,10 +81,22 @@ const Navbar = () => {
             <UserSearch />
             
             {user ? <>
-                <button onClick={handleNotificationsClick} className="p-1 md:p-2 rounded-full hover:bg-white/5 transition-colors relative">
-                  <Bell className="h-4 w-4 md:h-5 md:w-5 text-white" />
-                  <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-                </button>
+                <div className="relative">
+                  <button 
+                    ref={notificationButtonRef}
+                    onClick={handleNotificationsClick} 
+                    className="p-1 md:p-2 rounded-full hover:bg-white/5 transition-colors relative"
+                  >
+                    <Bell className="h-4 w-4 md:h-5 md:w-5 text-white" />
+                    <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                  </button>
+                  
+                  <NotificationDropdown 
+                    isOpen={isNotificationOpen}
+                    onClose={() => setIsNotificationOpen(false)}
+                    triggerRef={notificationButtonRef}
+                  />
+                </div>
                 
                 <Link to="/profile" className="flex items-center p-1 rounded-full hover:bg-white/5 transition-colors">
                   <div className="relative">
@@ -140,4 +160,5 @@ const Navbar = () => {
       </div>
     </nav>;
 };
+
 export default Navbar;

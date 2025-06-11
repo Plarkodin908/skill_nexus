@@ -1,77 +1,151 @@
-/* Main CSS entry point - imports all modular CSS files */
-@import './base.css';
-@import './performance.css';
-@import './modern-animations.css';
-@import './backgrounds.css';
-@import './buttons.css';
-@import './cards.css';
-@import './badges.css';
-@import './animations.css';
-@import './responsive.css';
-@import './delivery-animation.css';
-@import './animated-pattern.css';
-@import './grid-pattern.css';
-@import './loaders.css';
-@import './earth-loader.css';
 
-/* Performance optimizations */
-img {
-  content-visibility: auto;
-}
+@import url("./base.css");
+@import url("./animations.css");
+@import url("./modern-animations.css");
+@import url("./responsive.css");
+@import url("./notifications.css");
+@import url("./badges.css");
+@import url("./buttons.css");
+@import url("./cards.css");
+@import url("./backgrounds.css");
+@import url("./grid-pattern.css");
+@import url("./animated-pattern.css");
+@import url("./delivery-animation.css");
+@import url("./earth-loader.css");
+@import url("./loaders.css");
+@import url("./performance.css");
 
-/* Improve scroll performance */
-* {
-  -webkit-overflow-scrolling: touch;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* Ensure content is always visible without horizontal scrolling on mobile */
-body {
-  overflow-x: hidden;
-  width: 100%;
-}
+@layer base {
+  :root {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
 
-/* Add style for better touch feedback on mobile */
-.mobile-touch-feedback {
-  -webkit-tap-highlight-color: transparent;
-}
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
 
-.mobile-touch-feedback:active {
-  opacity: 0.7;
-}
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
 
-/* Optimize text rendering */
-html {
-  text-rendering: optimizeSpeed;
-  -webkit-font-smoothing: antialiased;
-}
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 84% 4.9%;
 
-/* Make clickable areas larger on mobile */
-@media (max-width: 640px) {
-  button, 
-  .button,
-  a {
-    padding: 0.5rem;
-    min-height: 44px;
-    min-width: 44px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+
+    --radius: 0.5rem;
+
+    /* Custom color variables */
+    --forest: #1a365d;
+    --forest-light: #2d3748;
+    --mint: #10b981;
+    --sage: #68d391;
+    --cream: #fef5e7;
+    --earth: #8b5a3c;
+    --sky: #0ea5e9;
+    --sunset: #f59e0b;
+    --lavender: #8b5cf6;
+    --coral: #f87171;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 84% 4.9%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
   }
 }
 
-/* Professional theme improvements */
-.theme-professional {
-  --primary: #6366f1;
-  --secondary: #4f46e5;
-  --background: #0f172a;
-  --surface: #1e293b;
-  --text: #f1f5f9;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
 
-.theme-playful {
-  --primary: #8b5cf6;
-  --secondary: #a855f7;
-  --background: #1e1b4b;
-  --surface: #312e81;
-  --text: #f1f5f9;
-}
+/* Custom utility classes */
+.text-forest { color: var(--forest); }
+.text-forest-light { color: var(--forest-light); }
+.text-mint { color: var(--mint); }
+.text-sage { color: var(--sage); }
+.text-cream { color: var(--cream); }
+.text-earth { color: var(--earth); }
+.text-sky { color: var(--sky); }
+.text-sunset { color: var(--sunset); }
+.text-lavender { color: var(--lavender); }
+.text-coral { color: var(--coral); }
+
+.bg-forest { background-color: var(--forest); }
+.bg-forest-light { background-color: var(--forest-light); }
+.bg-mint { background-color: var(--mint); }
+.bg-sage { background-color: var(--sage); }
+.bg-cream { background-color: var(--cream); }
+.bg-earth { background-color: var(--earth); }
+.bg-sky { background-color: var(--sky); }
+.bg-sunset { background-color: var(--sunset); }
+.bg-lavender { background-color: var(--lavender); }
+.bg-coral { background-color: var(--coral); }
+
+.border-forest { border-color: var(--forest); }
+.border-forest-light { border-color: var(--forest-light); }
+.border-mint { border-color: var(--mint); }
+.border-sage { border-color: var(--sage); }
+.border-cream { border-color: var(--cream); }
+.border-earth { border-color: var(--earth); }
+.border-sky { border-color: var(--sky); }
+.border-sunset { border-color: var(--sunset); }
+.border-lavender { border-color: var(--lavender); }
+.border-coral { border-color: var(--coral); }
