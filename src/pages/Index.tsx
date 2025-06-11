@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
@@ -14,6 +13,7 @@ import DashboardDemo from "@/components/DashboardDemo";
 import Testimonials from "@/components/Testimonials";
 import { useEffect } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
+import GeminiChat from "@/components/chat/GeminiChat";
 
 const Index = () => {
   const { user } = useAuth();
@@ -116,6 +116,9 @@ const Index = () => {
       </main>
       
       <Footer />
+      
+      {/* Add Gemini Chat Component */}
+      <GeminiChat />
     </div>
   );
 };
