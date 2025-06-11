@@ -25,8 +25,16 @@
   }
   
   body {
-    @apply text-slate-100 bg-slate-950 relative pb-16;
-    background: linear-gradient(135deg, #0a0a0f 0%, #1e1b4b 100%);
+    @apply text-slate-100 relative pb-16;
+    /* Radial gradient dot pattern background */
+    background: repeating-radial-gradient(
+      circle,
+      #000,
+      #000 5px,
+      transparent 6px
+    );
+    background-size: 20px 20px;
+    min-height: 100vh;
     font-display: swap;
     overscroll-behavior: none;
   }
