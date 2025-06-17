@@ -26,14 +26,25 @@
   
   body {
     @apply text-slate-100 relative pb-16;
-    /* Radial gradient dot pattern background */
-    background: repeating-radial-gradient(
-      circle,
-      #000,
-      #000 5px,
-      transparent 6px
-    );
-    background-size: 20px 20px;
+    /* Professional gradient background with subtle pattern */
+    background: 
+      radial-gradient(
+        circle at 25% 25%,
+        rgba(99, 102, 241, 0.1) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 75% 75%,
+        rgba(139, 92, 246, 0.1) 0%,
+        transparent 50%
+      ),
+      linear-gradient(
+        135deg,
+        #0a0a0f 0%,
+        #0f0f23 50%,
+        #1a1a2e 100%
+      );
+    background-attachment: fixed;
     min-height: 100vh;
     font-display: swap;
     overscroll-behavior: none;
@@ -55,17 +66,33 @@
     @apply bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 
            text-white font-medium px-6 py-3 rounded-lg transition-all duration-300 
            shadow-lg hover:shadow-xl hover:scale-105 active:scale-95;
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
   }
 
   .btn-secondary {
-    @apply bg-slate-800 hover:bg-slate-700 border border-slate-600 hover:border-slate-500
+    @apply bg-slate-800/80 hover:bg-slate-700/80 border border-slate-600/50 hover:border-slate-500/50
            text-slate-200 font-medium px-6 py-3 rounded-lg transition-all duration-300;
+    backdrop-filter: blur(10px);
   }
 
   /* Professional card styles */
   .card-modern {
     @apply bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 rounded-xl 
            shadow-lg hover:shadow-xl transition-all duration-300 hover:border-slate-600/50;
+    background: linear-gradient(
+      135deg,
+      rgba(15, 23, 42, 0.8) 0%,
+      rgba(30, 41, 59, 0.6) 100%
+    );
+    backdrop-filter: blur(20px);
+  }
+
+  /* Professional glass effect */
+  .glass-effect {
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   }
 }
 
@@ -76,4 +103,29 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* Professional hover effects */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
+}
+
+/* Professional text gradients */
+.text-gradient-primary {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-secondary {
+  background: linear-gradient(135deg, #f1f5f9, #cbd5e1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
