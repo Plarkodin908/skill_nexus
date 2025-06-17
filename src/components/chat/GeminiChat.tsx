@@ -22,7 +22,7 @@ const GeminiChat = ({ isOpen = true, onClose }: GeminiChatProps) => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "welcome",
-      text: "Hello! I'm here to help you learn about Skill Nexus. Ask me anything about our platform, features, or how to get started!",
+      text: "Hello! I'm here to help you learn about SkillTrick. Ask me anything about our platform, features, or how to get started!",
       isUser: false,
       timestamp: new Date()
     }
@@ -62,7 +62,7 @@ const GeminiChat = ({ isOpen = true, onClose }: GeminiChatProps) => {
         },
         body: JSON.stringify({
           message: inputText,
-          context: "Skill Nexus is a community-driven learning platform where users can exchange skills, take courses, connect with mentors, and build their professional network. The platform features a marketplace for courses, community forums, messaging system, achievements, and various membership plans."
+          context: "SkillTrick is a community-driven learning platform where users can exchange skills, take courses, connect with mentors, and build their professional network. The platform features a marketplace for courses, community forums, messaging system, achievements, and various membership plans."
         }),
       });
 
@@ -107,11 +107,11 @@ const GeminiChat = ({ isOpen = true, onClose }: GeminiChatProps) => {
   if (!isOpen) return null;
 
   return (
-    <Card className="fixed bottom-20 right-4 w-80 h-96 z-50 bg-slate-900 border-slate-700 flex flex-col shadow-2xl md:bottom-6 md:right-6 md:w-96">
+    <Card className="fixed bottom-24 right-4 w-80 h-96 z-[65] bg-slate-900/95 border-slate-700 flex flex-col shadow-2xl backdrop-blur-sm md:bottom-6 md:right-6 md:w-96">
       <div className="p-4 border-b border-slate-700">
         <div className="flex justify-between items-center">
           <div>
-            <h3 className="text-lg font-semibold text-white">Ask about Skill Nexus</h3>
+            <h3 className="text-lg font-semibold text-white">Ask about SkillTrick</h3>
             <p className="text-sm text-slate-400">Powered by Gemini AI</p>
           </div>
           {onClose && (
@@ -137,7 +137,7 @@ const GeminiChat = ({ isOpen = true, onClose }: GeminiChatProps) => {
             <div
               className={`max-w-[80%] p-3 rounded-lg ${
                 message.isUser
-                  ? 'bg-indigo-600 text-white'
+                  ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white'
                   : 'bg-slate-800 text-slate-200'
               }`}
             >
@@ -162,7 +162,7 @@ const GeminiChat = ({ isOpen = true, onClose }: GeminiChatProps) => {
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder="Ask anything about Skill Nexus..."
+            placeholder="Ask anything about SkillTrick..."
             className="bg-slate-800 border-slate-600 text-white placeholder-slate-400"
             disabled={isLoading}
           />
@@ -170,7 +170,7 @@ const GeminiChat = ({ isOpen = true, onClose }: GeminiChatProps) => {
             onClick={sendMessage}
             disabled={!inputText.trim() || isLoading}
             size="icon"
-            className="bg-indigo-600 hover:bg-indigo-700"
+            className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700"
           >
             <Send className="h-4 w-4" />
           </Button>
