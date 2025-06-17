@@ -38,7 +38,11 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden relative">
+      {/* Animated background pattern */}
+      <div className="animated-pattern-container"></div>
+      <div className="animated-pattern-overlay"></div>
+      
       <SEOHead 
         title="SkillTrick - Community-Driven Learning Platform" 
         description="Exchange skills that match your coding success with ease using our innovative learning marketplace." 
