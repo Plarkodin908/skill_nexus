@@ -445,7 +445,7 @@ const ProfileDetail = () => {
                 All content and personal information shared on this profile is subject to our privacy policy.
               </p>
               <p className="text-white/60 text-xs mb-3">
-                © {new Date().getFullYear()} SKILL NEXUS. User-generated content remains property of respective creators.
+                © {new Date().getFullYear()} SKILLTRICK. User-generated content remains property of respective creators.
               </p>
               <Link to="/legal" className="text-mint text-xs hover:underline transition-colors">
                 Privacy Policy & Terms

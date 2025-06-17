@@ -1,11 +1,11 @@
 
-Skill Nexus
+SkillTrick
 License
 Contributors
 Issues
 
 About the Project
-Skill Nexus is a platform designed to connect individuals who want to exchange skills, collaborate on projects, and share knowledge. Whether you're looking to teach something you're passionate about or learn a new skill, Skill Nexus makes it easy to find like-minded people.
+SkillTrick is a platform designed to connect individuals who want to exchange skills, collaborate on projects, and share knowledge. Whether you're looking to teach something you're passionate about or learn a new skill, SkillTrick makes it easy to find like-minded people.
 
 Key Features
 User Profiles : Create and customize profiles with bio, skills, and profile pictures.
@@ -13,16 +13,16 @@ Marketplace : List and browse skills or courses for sale in a wide range of cate
 Real-Time Messaging : Communicate with other users through a secure chat system.
 Gamification : Earn badges, points, and leaderboard rankings for active participation.
 Privacy and Security : Encrypted data and compliance with privacy regulations.
-Here's a quick look at what Skill Nexus offers:
+Here's a quick look at what SkillTrick offers:
 
 Dashboard
-The Skill Nexus dashboard provides an overview of your activity and recommendations.
+The SkillTrick dashboard provides an overview of your activity and recommendations.
 
 Marketplace
 The marketplace allows users to list and browse skills or courses.
 
 Getting Started
-Follow these steps to set up Skill Nexus locally on your machine.
+Follow these steps to set up SkillTrick locally on your machine.
 
 Prerequisites
 Node.js (v16 or higher)
@@ -34,8 +34,8 @@ bash
 Copy
 1
 2
-git clone https://github.com/Plarkodin/skill-nexus.git
-cd skill-nexus
+git clone https://github.com/Plarkodin/skilltrick.git
+cd skilltrick
 Install Dependencies :
 bash
 Copy
@@ -78,8 +78,8 @@ For questions, feedback, or collaboration opportunities, feel free to reach out:
 
 Email : plarkodin@gmail.com.
 GitHub : @Plarkodin908
-Project Link : https;//skillnexus00980.vercel.app
+Project Link : https;//skilltrick00980.vercel.app
 Acknowledgments.
 
-Thanks to all contributors and users who have helped make Skill Nexus better!
+Thanks to all contributors and users who have helped make SkillTrick better!
 Inspired by platforms like Reddit, LinkedIn, and Upwork.
