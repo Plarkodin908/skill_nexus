@@ -18,9 +18,19 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [secureNavigation, setSecureNavigation] = useState(true);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+  const [showShine, setShowShine] = useState(false);
   const notificationButtonRef = useRef<HTMLButtonElement>(null);
   const isVerified = user?.verificationStatus === "verified";
   const location = useLocation();
+
+  // Trigger shine animation on mount
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowShine(true);
+    }, 500);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   // Handle scroll events
   useEffect(() => {
@@ -64,7 +74,7 @@ const Navbar = () => {
           <div className="flex items-center">
             <Link to="/" className="mr-6">
               <div className="flex items-center gap-3">
-                <h1 className="text-lg md:text-xl font-bold text-gray-100">
+                <h1 className={`text-lg md:text-xl font-bold text-gray-100 ${showShine ? 'shine-animation' : ''}`}>
                   SKILL <span className="text-white">TRICK</span>
                 </h1>
               </div>
