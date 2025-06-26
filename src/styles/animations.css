@@ -24,35 +24,6 @@
   @apply transition-transform duration-300 hover:scale-105;
 }
 
-/* Shining animation for site title */
-.shine-animation {
-  background: linear-gradient(
-    90deg,
-    #9ca3af 0%,
-    #ffffff 25%,
-    #ffffff 50%,
-    #ffffff 75%,
-    #9ca3af 100%
-  );
-  background-size: 200% 100%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shine 3s ease-in-out;
-}
-
-@keyframes shine {
-  0% {
-    background-position: -200% 0;
-  }
-  50% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
 /* Scroll reveal animations */
 .reveal-on-scroll {
   opacity: 0;
