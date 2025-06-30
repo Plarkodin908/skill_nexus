@@ -38,13 +38,9 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen overflow-x-hidden relative">
-      {/* Animated background pattern */}
-      <div className="animated-pattern-container"></div>
-      <div className="animated-pattern-overlay"></div>
-      
+    <div className="min-h-screen overflow-x-hidden">
       <SEOHead 
-        title="SkillTrick - Community-Driven Learning Platform" 
+        title="Skill Nexus - Community-Driven Learning Platform" 
         description="Exchange skills that match your coding success with ease using our innovative learning marketplace." 
       />
       
@@ -53,17 +49,17 @@ const Index = () => {
         data={{
           "@context": "https://schema.org",
           "@type": "WebSite",
-          "name": "SkillTrick",
-          "url": "https://skilltrick.example.com/",
+          "name": "Skill Nexus",
+          "url": "https://skillnexus.example.com/",
           "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://skilltrick.example.com/marketplace?q={search_term_string}",
+            "target": "https://skillnexus.example.com/marketplace?q={search_term_string}",
             "query-input": "required name=search_term_string"
           },
           "sameAs": [
-            "https://twitter.com/skilltrick",
-            "https://www.facebook.com/skilltrick",
-            "https://www.linkedin.com/company/skilltrick"
+            "https://twitter.com/skillnexus",
+            "https://www.facebook.com/skillnexus",
+            "https://www.linkedin.com/company/skillnexus"
           ]
         }} 
       />

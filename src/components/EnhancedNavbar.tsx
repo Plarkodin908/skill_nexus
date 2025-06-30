@@ -24,10 +24,10 @@ const EnhancedNavbar = () => {
         <Link to="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
           <img 
             src="/lovable-uploads/609db0c7-2e29-405b-ad44-bee4b401e14e.png" 
-            alt="SKILLTRICK Logo" 
+            alt="SKILL NEXUS Logo" 
             className="h-12 w-auto animate-fade-in"
           />
-          <span className="text-2xl font-bold text-white">SKILLTRICK</span>
+          <span className="text-2xl font-bold text-white">SKILL NEXUS</span>
         </Link>
         
         {/* Desktop Navigation */}

@@ -60,7 +60,7 @@ const Legal = () => {
                   
                   <h3 className="text-xl font-semibold mt-6 mb-2">1. Acceptance of Terms</h3>
                   <p>
-                    By accessing or using SKILLTRICK, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this platform.
+                    By accessing or using SKILL SWAP, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this platform.
                   </p>
                   
                   <h3 className="text-xl font-semibold mt-6 mb-2">2. User Accounts</h3>
@@ -70,12 +70,12 @@ const Legal = () => {
                   
                   <h3 className="text-xl font-semibold mt-6 mb-2">3. Content and Conduct</h3>
                   <p>
-                    You may post, upload, or share content on SKILLTRICK, provided that you have the necessary rights to do so. You retain ownership of your content, but grant SKILLTRICK a license to use, reproduce, and display it in connection with the service.
+                    You may post, upload, or share content on SKILL SWAP, provided that you have the necessary rights to do so. You retain ownership of your content, but grant SKILL SWAP a license to use, reproduce, and display it in connection with the service.
                   </p>
                   
                   <h3 className="text-xl font-semibold mt-6 mb-2">4. Educational Content</h3>
                   <p>
-                    SKILLTRICK provides a platform for sharing educational content. We do not guarantee the accuracy, completeness, or usefulness of any information provided by users or content creators.
+                    SKILL SWAP provides a platform for sharing educational content. We do not guarantee the accuracy, completeness, or usefulness of any information provided by users or content creators.
                   </p>
                   
                   <h3 className="text-xl font-semibold mt-6 mb-2">5. Termination</h3>
@@ -169,7 +169,7 @@ const Legal = () => {
                     },
                     {
                       question: "How are disputes between users handled?",
-                      answer: "We have a dedicated team to mediate disputes between users. Please contact support@skilltrick.com with details of the issue, and we'll work to find a fair resolution."
+                      answer: "We have a dedicated team to mediate disputes between users. Please contact support@skillswap.com with details of the issue, and we'll work to find a fair resolution."
                     }
                   ].map((faq, index) => (
                     <Card key={index} className="bg-forest border border-mint/10 p-6">

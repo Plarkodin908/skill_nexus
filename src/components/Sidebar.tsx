@@ -65,10 +65,10 @@ const Sidebar = () => {
             <Link to="/" className="flex flex-col items-center hover:opacity-90 transition-opacity" onClick={scrollToTop}>
               <img 
                 src="/lovable-uploads/609db0c7-2e29-405b-ad44-bee4b401e14e.png" 
-                alt="SKILLTRICK Logo" 
+                alt="SKILL NEXUS Logo" 
                 className="h-16 w-auto hover-scale transition-transform"
               />
-              <h1 className="text-lg font-bold text-mint mt-2">SKILLTRICK</h1>
+              <h1 className="text-lg font-bold text-mint mt-2">SKILL NEXUS</h1>
             </Link>
           </div>
           

@@ -61,7 +61,7 @@ const Navbar = () => {
           <div className="flex items-center">
             <Link to="/" className="mr-6">
               <div className="flex items-center gap-3">
-                <h1 className="text-lg md:text-xl font-bold text-gray-400 text-gray-100">SKILL <span className="text-white">TRICK</span></h1>
+                <h1 className="text-lg md:text-xl font-bold text-gray-400 text-gray-100">SKILL <span className="text-white">NEXUS</span></h1>
               </div>
             </Link>
             
