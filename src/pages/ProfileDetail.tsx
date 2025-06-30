@@ -97,9 +97,8 @@ const ProfileDetail = () => {
   if (!profile) {
     return (
       <div className="relative min-h-screen bg-black">
-        {/* Animated background pattern */}
-        <div className="animated-pattern-container"></div>
-        <div className="animated-pattern-overlay"></div>
+        <div className="grid-pattern-container"></div>
+        <div className="grid-pattern-overlay"></div>
         
         <Navbar />
         <div className="container mx-auto pt-24 pb-16 px-4">
@@ -173,9 +172,8 @@ const ProfileDetail = () => {
   
   return (
     <div className="relative bg-black min-h-screen">
-      {/* Animated background pattern */}
-      <div className="animated-pattern-container"></div>
-      <div className="animated-pattern-overlay"></div>
+      <div className="grid-pattern-container"></div>
+      <div className="grid-pattern-overlay"></div>
       
       <Navbar />
       

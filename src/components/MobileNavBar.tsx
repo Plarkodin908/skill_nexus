@@ -1,21 +1,14 @@
 
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Home, BookOpen, ShoppingBag, User, CreditCard, Bell, Settings, MessageCircle, Shield, Search } from "lucide-react";
+import { Menu, X, Home, BookOpen, ShoppingBag, User, CreditCard, Bell, Settings, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import GeminiChat from "@/components/chat/GeminiChat";
-import { toast } from "sonner";
-import UserSearch from "@/components/UserSearch";
-import NotificationDropdown from "@/components/notifications/NotificationDropdown";
-import { useRef } from "react";
 
 const MobileNavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
-  const [secureNavigation, setSecureNavigation] = useState(true);
-  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
-  const notificationButtonRef = useRef<HTMLButtonElement>(null);
   const { user } = useAuth();
   const location = useLocation();
   const [visible, setVisible] = useState(true);
@@ -51,19 +44,6 @@ const MobileNavBar = () => {
   const toggleMenu = () => setIsOpen(!isOpen);
   const toggleChat = () => setIsChatOpen(!isChatOpen);
 
-  const toggleSecureNavigation = () => {
-    setSecureNavigation(!secureNavigation);
-    toast.success(secureNavigation ? "Standard navigation mode enabled" : "Secure navigation mode enabled");
-  };
-
-  const handleNotificationsClick = () => {
-    if (user) {
-      setIsNotificationOpen(!isNotificationOpen);
-    } else {
-      toast.info("Please sign in to view notifications");
-    }
-  };
-
   // Only show on mobile devices
   if (window.innerWidth > 768) {
     return null;
@@ -71,11 +51,11 @@ const MobileNavBar = () => {
 
   return (
     <>
-      <div className={`fixed bottom-0 left-0 right-0 z-[60] transition-transform duration-300 ${visible ? 'translate-y-0' : 'translate-y-full'}`}>
+      <div className={`fixed bottom-0 left-0 right-0 z-50 transition-transform duration-300 ${visible ? 'translate-y-0' : 'translate-y-full'}`}>
         {isOpen && (
-          <div className="bg-black/95 backdrop-blur-md border-t border-white/10 p-4 rounded-t-2xl shadow-2xl animate-slide-in-up">
-            <div className="flex justify-between items-center mb-4">
-              <p className="font-bold text-white text-lg">Navigation Menu</p>
+          <div className="bg-black/90 backdrop-blur-md border-t border-white/10 p-3 rounded-t-2xl shadow-lg animate-slide-in-up">
+            <div className="flex justify-between items-center mb-3">
+              <p className="font-bold text-white">Navigation</p>
               <Button
                 variant="ghost"
                 size="icon"
@@ -87,108 +67,60 @@ const MobileNavBar = () => {
               </Button>
             </div>
             
-            {/* Search Section */}
-            <div className="mb-4">
-              <p className="text-xs text-white/60 mb-2">Search Users</p>
-              <UserSearch />
-            </div>
-
-            {/* Security Toggle */}
-            <div className="flex items-center justify-between mb-4 p-3 bg-black/40 rounded-lg">
-              <span className="text-white font-medium">Secure Navigation</span>
-              <button 
-                onClick={toggleSecureNavigation} 
-                className="p-2 rounded-full hover:bg-white/10 transition-colors"
-              >
-                <Shield className={`h-5 w-5 ${secureNavigation ? "text-green-400" : "text-gray-400"}`} />
-              </button>
-            </div>
-
-            {/* Notifications */}
-            {user && (
-              <div className="mb-4">
-                <div className="relative">
-                  <button 
-                    ref={notificationButtonRef}
-                    onClick={handleNotificationsClick} 
-                    className="w-full flex items-center gap-3 p-3 rounded-lg bg-black/40 hover:bg-white/10 text-white"
-                  >
-                    <Bell className="h-5 w-5" />
-                    <span>Notifications</span>
-                    <span className="ml-auto w-2 h-2 bg-red-500 rounded-full"></span>
-                  </button>
-                  
-                  <NotificationDropdown 
-                    isOpen={isNotificationOpen}
-                    onClose={() => setIsNotificationOpen(false)}
-                    triggerRef={notificationButtonRef}
-                  />
-                </div>
-              </div>
-            )}
-            
-            {/* Main Navigation Grid */}
-            <div className="grid grid-cols-2 gap-3 mb-4">
+            <div className="grid grid-cols-2 gap-2">
               <Link
                 to="/tutorials"
-                className="flex items-center gap-3 p-3 rounded-lg bg-black/40 hover:bg-white/10 text-white transition-colors"
+                className="flex items-center gap-2 p-3 rounded-lg bg-black/40 hover:bg-white/10 text-white"
                 onClick={toggleMenu}
               >
-                <BookOpen className="h-5 w-5" strokeWidth={2} />
+                <BookOpen className="h-4 w-4 text-white" strokeWidth={3} />
                 <span>Tutorials</span>
               </Link>
               <Link
-                to="/marketplace"
-                className="flex items-center gap-3 p-3 rounded-lg bg-black/40 hover:bg-white/10 text-white transition-colors"
+                to="/notifications"
+                className="flex items-center gap-2 p-3 rounded-lg bg-black/40 hover:bg-white/10 text-white"
                 onClick={toggleMenu}
               >
-                <ShoppingBag className="h-5 w-5" strokeWidth={2} />
-                <span>Marketplace</span>
+                <Bell className="h-4 w-4 text-white" strokeWidth={3} />
+                <span>Notifications</span>
               </Link>
               <Link
                 to="/settings"
-                className="flex items-center gap-3 p-3 rounded-lg bg-black/40 hover:bg-white/10 text-white transition-colors"
+                className="flex items-center gap-2 p-3 rounded-lg bg-black/40 hover:bg-white/10 text-white"
                 onClick={toggleMenu}
               >
-                <Settings className="h-5 w-5" strokeWidth={2} />
+                <Settings className="h-4 w-4 text-white" strokeWidth={3} />
                 <span>Settings</span>
               </Link>
               <Link
                 to="/pricing"
-                className="flex items-center gap-3 p-3 rounded-lg bg-black/40 hover:bg-white/10 text-white transition-colors"
+                className="flex items-center gap-2 p-3 rounded-lg bg-black/40 hover:bg-white/10 text-white"
                 onClick={toggleMenu}
               >
-                <CreditCard className="h-5 w-5" strokeWidth={2} />
+                <CreditCard className="h-4 w-4 text-white" strokeWidth={3} />
                 <span>Pricing</span>
               </Link>
             </div>
             
-            {/* Account Section */}
-            <div className="pt-3 border-t border-white/10">
-              <p className="text-xs text-white/60 mb-3">Your Account</p>
+            <div className="mt-3 pt-2 border-t border-white/10">
+              <p className="text-xs text-white/60 mb-2">Your Account</p>
               {user ? (
-                <div className="flex items-center gap-3 p-3 bg-black/40 rounded-lg">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 flex items-center justify-center">
-                    <span className="text-white font-semibold">
-                      {user.name?.[0] || user.email?.[0] || <User className="h-5 w-5" />}
-                    </span>
+                <div className="flex items-center gap-3 p-2">
+                  <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center">
+                    {user.name?.[0] || user.email?.[0] || <User className="h-4 w-4" />}
                   </div>
-                  <div className="flex-1">
+                  <div className="text-sm">
                     <p className="text-white font-medium">{user.name || "User"}</p>
-                    <p className="text-white/60 text-sm">{user.membership || "Free Plan"}</p>
+                    <p className="text-white/60 text-xs">{user.membership || "Free"}</p>
                   </div>
                 </div>
               ) : (
-                <div className="grid grid-cols-2 gap-2">
+                <div className="flex gap-2">
                   <Link to="/auth/sign-in" className="flex-1">
-                    <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10" size="sm">
-                      Sign In
-                    </Button>
+                    <Button variant="outline" className="w-full" size="sm">Sign In</Button>
                   </Link>
                   <Link to="/auth/sign-up" className="flex-1">
-                    <Button className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700" size="sm">
-                      Sign Up
-                    </Button>
+                    <Button className="w-full" size="sm">Sign Up</Button>
                   </Link>
                 </div>
               )}
@@ -196,49 +128,39 @@ const MobileNavBar = () => {
           </div>
         )}
         
-        {/* Bottom Navigation Bar */}
-        <div className="flex justify-around items-center bg-black/95 backdrop-blur-md border-t border-white/10 p-2 shadow-2xl">
-          <Link to="/" className="p-2 text-white hover:text-indigo-400 flex flex-col items-center transition-colors">
-            <Home className="h-5 w-5" strokeWidth={2} />
-            <span className="text-xs mt-1">Home</span>
+        <div className="flex justify-around items-center bg-black/90 backdrop-blur-md border-t border-white/10 p-1 px-[12px] py-[2px]">
+          <Link to="/" className="p-1 text-white hover:text-white flex flex-col items-center">
+            <Home className="h-4 w-4" strokeWidth={3} />
+            <span className="text-xs">Home</span>
           </Link>
-          
-          <Link to="/marketplace" className="p-2 text-white hover:text-indigo-400 flex flex-col items-center transition-colors">
-            <ShoppingBag className="h-5 w-5" strokeWidth={2} />
-            <span className="text-xs mt-1">Market</span>
+          <Link to="/marketplace" className="p-1 text-white hover:text-white flex flex-col items-center">
+            <ShoppingBag className="h-4 w-4" strokeWidth={3} />
+            <span className="text-xs">Market</span>
           </Link>
-          
           <Button
             onClick={toggleMenu}
-            className="rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white p-3 -mt-4 shadow-lg transform hover:scale-105 transition-all duration-200"
+            className="rounded-full bg-black text-white p-2 -mt-4 shadow-lg hover:bg-black/90 my-0 py-[18px]"
             aria-label="Open menu"
           >
-            <Menu strokeWidth={2} className="h-5 w-5" />
+            <Menu strokeWidth={3} className="h-4 w-4 my-[3px] mx-[3px]" />
           </Button>
-          
           <Button
             onClick={toggleChat}
-            className="p-2 text-white hover:text-indigo-400 flex flex-col items-center bg-transparent hover:bg-transparent transition-colors"
+            className="p-1 text-white hover:text-white flex flex-col items-center bg-transparent hover:bg-transparent"
             aria-label="Open AI chat"
           >
-            <MessageCircle className="h-5 w-5" strokeWidth={2} />
-            <span className="text-xs mt-1">AI Chat</span>
+            <MessageCircle className="h-4 w-4" strokeWidth={3} />
+            <span className="text-xs">AI Chat</span>
           </Button>
-          
-          <Link to="/profile" className="p-2 text-white hover:text-indigo-400 flex flex-col items-center transition-colors">
-            <User className="h-5 w-5" strokeWidth={2} />
-            <span className="text-xs mt-1">Profile</span>
+          <Link to="/profile" className="p-1 text-white hover:text-white flex flex-col items-center">
+            <User className="h-4 w-4" strokeWidth={3} />
+            <span className="text-xs">Profile</span>
           </Link>
         </div>
       </div>
 
       {/* AI Chat Component */}
-      {isChatOpen && (
-        <GeminiChat 
-          isOpen={isChatOpen}
-          onClose={() => setIsChatOpen(false)}
-        />
-      )}
+      {isChatOpen && <GeminiChat />}
     </>
   );
 };
