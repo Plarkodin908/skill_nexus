@@ -80,7 +80,7 @@ const Profile = () => {
                 <div className="flex flex-col items-center md:items-start">
                   <Avatar className="h-32 w-32 md:h-36 md:w-36 border-4 border-mint/30 shadow-lg">
                     {user.avatar ? (
-                      <AvatarImage src={user.avatar} alt={user.name} />
+                      <AvatarImage src={user.avatar} alt={user.name || "User"} />
                     ) : (
                       <AvatarFallback className="bg-forest text-mint text-4xl font-bold">
                         {user.name?.substring(0, 2) || user.email?.substring(0, 2) || "UN"}
