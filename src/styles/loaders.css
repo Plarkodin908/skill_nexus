@@ -1,4 +1,76 @@
 
+/* Lava Lamp Loader */
+.lava-lamp {
+  position: relative;
+  background: linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%);
+  border-radius: 50px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lava-lamp .bubble,
+.lava-lamp .bubble1,
+.lava-lamp .bubble2,
+.lava-lamp .bubble3 {
+  position: absolute;
+  border-radius: 50%;
+  animation: float-bubble 4s ease-in-out infinite;
+}
+
+.lava-lamp .bubble {
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  animation-delay: 0s;
+  left: 25%;
+}
+
+.lava-lamp .bubble1 {
+  width: 15px;
+  height: 15px;
+  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+  animation-delay: 1s;
+  right: 25%;
+}
+
+.lava-lamp .bubble2 {
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  animation-delay: 2s;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.lava-lamp .bubble3 {
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  animation-delay: 3s;
+  right: 40%;
+}
+
+@keyframes float-bubble {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.7;
+  }
+  25% {
+    transform: translateY(-20px) scale(1.1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-30px) scale(0.9);
+    opacity: 0.8;
+  }
+  75% {
+    transform: translateY(-15px) scale(1.05);
+    opacity: 0.9;
+  }
+}
+
 /* Words Loader */
 .card {
   /* color used to softly clip top and bottom of the .words container */
