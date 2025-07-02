@@ -7,7 +7,7 @@ import ProfileTabs from '@/components/profile/ProfileTabs';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import VerifiedBadge from '@/components/profile/VerifiedBadge';
-import { Settings, Calendar, MapPin, Globe, Trophy } from 'lucide-react';
+import { Settings, Calendar, Trophy } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 
@@ -97,13 +97,13 @@ const Profile = () => {
                     )}
                   </div>
                   
-                  <p className="text-mint text-xl mb-4">{user.role || "Learning Enthusiast"}</p>
+                  <p className="text-mint text-xl mb-4">Learning Enthusiast</p>
                   
                   {/* Contact Info */}
                   <div className="flex flex-wrap justify-center md:justify-start gap-4 text-white/60 text-sm mb-4">
                     <div className="flex items-center gap-2">
                       <Calendar className="h-4 w-4 text-mint" />
-                      Member since {user.memberSince || "2024"}
+                      Member since 2024
                     </div>
                   </div>
                   
@@ -166,7 +166,7 @@ const Profile = () => {
                     About
                   </h3>
                   <p className="text-white/80 text-sm leading-relaxed mb-4">
-                    {user.bio || "Welcome to my profile! I'm passionate about learning and sharing knowledge with the community."}
+                    Welcome to my profile! I'm passionate about learning and sharing knowledge with the community.
                   </p>
                 </Card>
 
