@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Home, BookOpen, ShoppingBag, User, CreditCard, Bell, Settings, MessageCircle, Shield, Search } from "lucide-react";
@@ -8,11 +9,13 @@ import { toast } from "sonner";
 import UserSearch from "@/components/UserSearch";
 import NotificationDropdown from "@/components/notifications/NotificationDropdown";
 import { useRef } from "react";
+
 const MobileNavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [secureNavigation, setSecureNavigation] = useState(true);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const notificationButtonRef = useRef<HTMLButtonElement>(null);
   const {
     user
@@ -20,6 +23,18 @@ const MobileNavBar = () => {
   const location = useLocation();
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+
+  // Check if device is mobile
+  useEffect(() => {
+    const checkIfMobile = () => {
+      const mobile = window.innerWidth <= 768;
+      setIsMobile(mobile);
+    };
+    
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
 
   // Hide navigation on scroll down for better experience
   useEffect(() => {
@@ -45,6 +60,7 @@ const MobileNavBar = () => {
   useEffect(() => {
     setIsOpen(false);
   }, [location.pathname]);
+  
   const toggleMenu = () => setIsOpen(!isOpen);
   const toggleChat = () => setIsChatOpen(!isChatOpen);
   const toggleSecureNavigation = () => {
@@ -60,12 +76,15 @@ const MobileNavBar = () => {
   };
 
   // Only show on mobile devices
-  if (window.innerWidth > 768) {
+  if (!isMobile) {
     return null;
   }
-  return <>
+  
+  return (
+    <>
       <div className={`fixed bottom-0 left-0 right-0 z-[60] transition-transform duration-300 ${visible ? 'translate-y-0' : 'translate-y-full'}`}>
-        {isOpen && <div className="bg-black/95 backdrop-blur-md border-t border-white/10 p-4 rounded-t-2xl shadow-2xl animate-slide-in-up">
+        {isOpen && (
+          <div className="bg-black/95 backdrop-blur-md border-t border-white/10 p-4 rounded-t-2xl shadow-2xl animate-slide-in-up">
             <div className="flex justify-between items-center mb-4">
               <p className="font-bold text-white text-lg">Navigation Menu</p>
               <Button variant="ghost" size="icon" className="text-white hover:bg-white/10" onClick={toggleMenu} aria-label="Close menu">
@@ -88,13 +107,13 @@ const MobileNavBar = () => {
             </div>
 
             {/* Notifications */}
-            {user && <div className="mb-4">
+            {user && (
+              <div className="mb-4">
                 <div className="relative">
-                  
-                  
                   <NotificationDropdown isOpen={isNotificationOpen} onClose={() => setIsNotificationOpen(false)} triggerRef={notificationButtonRef} />
                 </div>
-              </div>}
+              </div>
+            )}
             
             {/* Main Navigation Grid */}
             <div className="grid grid-cols-2 gap-3 mb-4">
@@ -119,7 +138,8 @@ const MobileNavBar = () => {
             {/* Account Section */}
             <div className="pt-3 border-t border-white/10">
               <p className="text-xs text-white/60 mb-3">Your Account</p>
-              {user ? <div className="flex items-center gap-3 p-3 bg-black/40 rounded-lg">
+              {user ? (
+                <div className="flex items-center gap-3 p-3 bg-black/40 rounded-lg">
                   <div className="w-10 h-10 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 flex items-center justify-center">
                     <span className="text-white font-semibold">
                       {user.name?.[0] || user.email?.[0] || <User className="h-5 w-5" />}
@@ -129,7 +149,9 @@ const MobileNavBar = () => {
                     <p className="text-white font-medium">{user.name || "User"}</p>
                     <p className="text-white/60 text-sm">{user.membership || "Free Plan"}</p>
                   </div>
-                </div> : <div className="grid grid-cols-2 gap-2">
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 gap-2">
                   <Link to="/auth/sign-in" className="flex-1">
                     <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10" size="sm">
                       Sign In
@@ -140,9 +162,11 @@ const MobileNavBar = () => {
                       Sign Up
                     </Button>
                   </Link>
-                </div>}
+                </div>
+              )}
             </div>
-          </div>}
+          </div>
+        )}
         
         {/* Bottom Navigation Bar */}
         <div className="flex justify-around items-center bg-black/95 backdrop-blur-md border-t border-white/10 p-2 shadow-2xl">
@@ -174,6 +198,8 @@ const MobileNavBar = () => {
 
       {/* AI Chat Component */}
       {isChatOpen && <GeminiChat isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />}
-    </>;
+    </>
+  );
 };
+
 export default MobileNavBar;
