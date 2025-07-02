@@ -1,6 +1,5 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { toast } from "sonner";
 
 // Define user types and membership levels
@@ -21,8 +20,8 @@ export interface User {
 interface AuthContextType {
   user: User | null;
   isLoading: boolean;
-  signIn: (email: string, password: string) => Promise<void>;
-  signUp: (email: string, password: string, name: string) => Promise<void>;
+  signIn: (email: string, password: string) => Promise<{ shouldRedirect: boolean; redirectTo: string }>;
+  signUp: (email: string, password: string, name: string) => Promise<{ shouldRedirect: boolean; redirectTo: string }>;
   signOut: () => void;
   upgradeSubscription: (plan: MembershipType) => void;
   submitVerification: (idImageUrl: string) => Promise<void>;
@@ -48,7 +47,6 @@ const mockUsers = [
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const navigate = useNavigate();
 
   // Check for existing session on component mount
   useEffect(() => {
@@ -86,14 +84,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       
       toast.success('Successfully signed in!');
       
-      // Redirect based on profile completion
+      // Return redirect information instead of navigating
       if (!foundUser.completedProfile) {
-        navigate('/profile');
+        return { shouldRedirect: true, redirectTo: '/profile' };
       } else {
-        navigate('/dashboard');
+        return { shouldRedirect: true, redirectTo: '/dashboard' };
       }
     } catch (error) {
       toast.error(error.message || 'Failed to sign in');
+      throw error;
     } finally {
       setIsLoading(false);
     }
@@ -126,9 +125,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       localStorage.setItem('skillNexusUser', JSON.stringify(newUser));
       
       toast.success('Account created successfully!');
-      navigate('/profile');
+      return { shouldRedirect: true, redirectTo: '/profile' };
     } catch (error) {
       toast.error(error.message || 'Failed to create account');
+      throw error;
     } finally {
       setIsLoading(false);
     }
@@ -139,7 +139,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setUser(null);
     localStorage.removeItem('skillNexusUser');
     toast.info('You have been signed out');
-    navigate('/');
   };
 
   // Upgrade subscription function
