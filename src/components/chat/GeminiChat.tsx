@@ -22,7 +22,7 @@ const GeminiChat = ({ isOpen = true, onClose }: GeminiChatProps) => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "welcome",
-      text: "Hello! I'm here to help you learn about SkillTrick. Ask me anything about our platform, features, or how to get started!",
+      text: "Hello! I'm here to help you learn about Taskmason. Ask me anything about our platform, features, or how to get started!",
       isUser: false,
       timestamp: new Date()
     }
@@ -62,7 +62,7 @@ const GeminiChat = ({ isOpen = true, onClose }: GeminiChatProps) => {
         },
         body: JSON.stringify({
           message: inputText,
-          context: "SkillTrick is a community-driven learning platform where users can exchange skills, take courses, connect with mentors, and build their professional network. The platform features a marketplace for courses, community forums, messaging system, achievements, and various membership plans."
+          context: "Taskmason is a community-driven learning platform where users can exchange skills, take courses, connect with mentors, and build their professional network. The platform features a marketplace for courses, community forums, messaging system, achievements, and various membership plans."
         }),
       });
 
@@ -111,7 +111,7 @@ const GeminiChat = ({ isOpen = true, onClose }: GeminiChatProps) => {
       <div className="p-4 border-b border-slate-700">
         <div className="flex justify-between items-center">
           <div>
-            <h3 className="text-lg font-semibold text-white">Ask about SkillTrick</h3>
+            <h3 className="text-lg font-semibold text-white">Ask about Taskmason</h3>
             <p className="text-sm text-slate-400">Powered by Gemini AI</p>
           </div>
           {onClose && (
@@ -162,7 +162,7 @@ const GeminiChat = ({ isOpen = true, onClose }: GeminiChatProps) => {
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder="Ask anything about SkillTrick..."
+            placeholder="Ask anything about Taskmason..."
             className="bg-slate-800 border-slate-600 text-white placeholder-slate-400"
             disabled={isLoading}
           />

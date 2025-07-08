@@ -13,7 +13,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-12">
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <h3 className="text-2xl text-right px-[16px] py-[4px] font-semibold">SKILLTRICK</h3>
+              <h3 className="text-2xl text-right px-[16px] py-[4px] font-semibold">TASKMASON</h3>
             </div>
             <p className="text-white/60 max-w-xs py-[5px] px-0 mx-[21px] my-[24px]">
               Connecting learners and educators through a collaborative platform for knowledge exchange and skill development.
@@ -62,7 +62,7 @@ const Footer = () => {
             <Phone className="h-4 w-4 text-gray-400" />
           </div>
           <div className="md:col-span-2 text-center text-white/60 pt-4">
-            <p className="px-0 py-0 my-[51px]">&copy; {new Date().getFullYear()} SKILLTRICK. All rights reserved.</p>
+            <p className="px-0 py-0 my-[51px]">&copy; {new Date().getFullYear()} TASKMASON. All rights reserved.</p>
           </div>
         </div>
       </div>

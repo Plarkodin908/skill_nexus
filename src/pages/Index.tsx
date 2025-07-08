@@ -44,7 +44,7 @@ const Index = () => {
       <div className="animated-pattern-overlay"></div>
       
       <SEOHead 
-        title="SkillTrick - Community-Driven Learning Platform" 
+        title="Taskmason - Community-Driven Learning Platform" 
         description="Exchange skills that match your coding success with ease using our innovative learning marketplace." 
       />
       
@@ -53,17 +53,17 @@ const Index = () => {
         data={{
           "@context": "https://schema.org",
           "@type": "WebSite",
-          "name": "SkillTrick",
-          "url": "https://skilltrick.example.com/",
+          "name": "Taskmason",
+          "url": "https://taskmason.example.com/",
           "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://skilltrick.example.com/marketplace?q={search_term_string}",
+            "target": "https://taskmason.example.com/marketplace?q={search_term_string}",
             "query-input": "required name=search_term_string"
           },
           "sameAs": [
-            "https://twitter.com/skilltrick",
-            "https://www.facebook.com/skilltrick",
-            "https://www.linkedin.com/company/skilltrick"
+            "https://twitter.com/taskmason",
+            "https://www.facebook.com/taskmason",
+            "https://www.linkedin.com/company/taskmason"
           ]
         }} 
       />

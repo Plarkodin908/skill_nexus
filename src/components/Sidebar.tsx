@@ -68,7 +68,7 @@ const Sidebar = () => {
                 alt="SKILLTRICK Logo" 
                 className="h-16 w-auto hover-scale transition-transform"
               />
-              <h1 className="text-lg font-bold text-mint mt-2">SKILLTRICK</h1>
+              <h1 className="text-lg font-bold text-mint mt-2">TASKMASON</h1>
             </Link>
           </div>
           

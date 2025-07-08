@@ -56,7 +56,7 @@ const Company = () => {
             <div>
               <h2 className="text-3xl font-bold mb-6">Our Story</h2>
               <p className="text-white/80 mb-4">
-                SKILLTRICK began with a simple idea: what if we could create a platform where people could easily share their knowledge and skills with others who want to learn?
+                TASKMASON began with a simple idea: what if we could create a platform where people could easily share their knowledge and skills with others who want to learn?
               </p>
               <p className="text-white/80 mb-4">
                 Founded in 2023, we've grown from a small community of passionate educators and learners to a global platform connecting thousands of people through the power of knowledge exchange.
@@ -100,7 +100,7 @@ const Company = () => {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Meet Our Team</h2>
             <p className="text-white/70 max-w-2xl mx-auto">
-              The passionate individuals behind SKILLTRICK, dedicated to transforming how people learn and teach.
+              The passionate individuals behind TASKMASON, dedicated to transforming how people learn and teach.
             </p>
           </div>
           
@@ -134,7 +134,7 @@ const Company = () => {
             <div>
               <h2 className="text-3xl font-bold mb-6">Get in Touch</h2>
               <p className="text-white/80 mb-8">
-                Have questions about SKILLTRICK? We'd love to hear from you. Reach out to our team using any of the contact methods below.
+                Have questions about TASKMASON? We'd love to hear from you. Reach out to our team using any of the contact methods below.
               </p>
               
               <div className="space-y-6">
@@ -144,8 +144,8 @@ const Company = () => {
                   </div>
                   <div>
                     <h3 className="font-bold mb-1">Email Us</h3>
-                    <p className="text-white/70">hello@skilltrick.com</p>
-                    <p className="text-white/70">support@skilltrick.com</p>
+                    <p className="text-white/70">hello@taskmason.com</p>
+                    <p className="text-white/70">support@taskmason.com</p>
                   </div>
                 </div>
                 

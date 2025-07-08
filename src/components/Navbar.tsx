@@ -75,7 +75,7 @@ const Navbar = () => {
             <Link to="/" className="mr-6">
               <div className="flex items-center gap-3">
                 <h1 className={`text-lg md:text-xl font-bold text-gray-100 ${showShine ? 'shine-animation' : ''}`}>
-                  SKILL <span className="text-white">TRICK</span>
+                  TASK<span className="text-white">MASON</span>
                 </h1>
               </div>
             </Link>

@@ -90,7 +90,7 @@ const Legal = () => {
                         <div>
                           <h3 className="text-xl font-semibold mb-4 text-mint">1. Acceptance of Terms</h3>
                           <p className="mb-4 leading-7">
-                            By accessing or using SKILLTRICK, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this platform.
+                            By accessing or using TASKMASON, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this platform.
                           </p>
                         </div>
                         
@@ -104,14 +104,14 @@ const Legal = () => {
                         <div>
                           <h3 className="text-xl font-semibold mb-4 text-mint">3. Content and Conduct</h3>
                           <p className="mb-4 leading-7">
-                            You may post, upload, or share content on SKILLTRICK, provided that you have the necessary rights to do so. You retain ownership of your content, but grant SKILLTRICK a license to use, reproduce, and display it in connection with the service.
+                            You may post, upload, or share content on TASKMASON, provided that you have the necessary rights to do so. You retain ownership of your content, but grant TASKMASON a license to use, reproduce, and display it in connection with the service.
                           </p>
                         </div>
                         
                         <div>
                           <h3 className="text-xl font-semibold mb-4 text-mint">4. Educational Content</h3>
                           <p className="mb-4 leading-7">
-                            SKILLTRICK provides a platform for sharing educational content. We do not guarantee the accuracy, completeness, or usefulness of any information provided by users or content creators.
+                            TASKMASON provides a platform for sharing educational content. We do not guarantee the accuracy, completeness, or usefulness of any information provided by users or content creators.
                           </p>
                         </div>
                         
@@ -237,7 +237,7 @@ const Legal = () => {
                         },
                         {
                           question: "How are disputes between users handled?",
-                          answer: "We have a dedicated team to mediate disputes between users. Please contact support@skilltrick.com with details of the issue, and we'll work to find a fair resolution."
+                          answer: "We have a dedicated team to mediate disputes between users. Please contact support@taskmason.com with details of the issue, and we'll work to find a fair resolution."
                         }
                       ].map((faq, index) => (
                         <Card key={index} className="bg-gradient-to-r from-forest/80 to-forest-light/60 border border-mint/20 p-6 hover:border-mint/30 transition-all duration-300 hover:shadow-lg backdrop-blur-sm">
