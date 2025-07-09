@@ -252,22 +252,22 @@ const Settings = () => {
         <h3 className="text-lg font-medium text-white mb-4">Notification Preferences</h3>
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <div>
+            <div className="mx-[8px]">
               <Label className="text-white">Email Notifications</Label>
               <p className="text-sm text-white/60">Receive notifications via email</p>
             </div>
-            <Switch checked={preferences.emailNotifications} onCheckedChange={checked => handlePreferenceChange("emailNotifications", checked)} className="text-violet-100" />
+            <Switch checked={preferences.emailNotifications} onCheckedChange={checked => handlePreferenceChange("emailNotifications", checked)} className="text-purple-100" />
           </div>
-          <div className="flex items-center justify-between">
-            <div>
+          <div className="flex items-center justify-between mx-[7px]">
+            <div className="mx-0">
               <Label className="text-white">Push Notifications</Label>
               <p className="text-sm text-white/60">Receive browser notifications</p>
             </div>
             <Switch checked={preferences.pushNotifications} onCheckedChange={checked => handlePreferenceChange("pushNotifications", checked)} />
           </div>
           <div className="flex items-center justify-between">
-            <div>
-              <Label className="text-white">Marketing Emails</Label>
+            <div className="px-0 mx-0">
+              <Label className="text-white mx-0">Marketing Emails</Label>
               <p className="text-sm text-white/60">Receive updates and promotional content</p>
             </div>
             <Switch checked={preferences.marketingEmails} onCheckedChange={checked => handlePreferenceChange("marketingEmails", checked)} />
