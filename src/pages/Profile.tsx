@@ -69,11 +69,11 @@ const Profile = () => {
             
             {/* Profile Header */}
             <div className="container mx-auto px-4 relative my-px py-px">
-              <div className="bg-forest-light/95 backdrop-blur-sm border border-mint/20 rounded-xl -mt-24 relative z-10 p-6 md:p-8 shadow-2xl py-[25px] my-[10px]">
+              <div className="bg-forest-light/95 backdrop-blur-sm border border-mint/20 rounded-xl -mt-24 relative z-10 p-6 md:p-8 shadow-2xl py-[25px] my-0">
                 <div className="flex flex-col lg:flex-row gap-6">
                   {/* Profile Info Section */}
                   <div className="flex flex-col md:flex-row gap-6 flex-1">
-                    <div className="flex flex-col items-center md:items-start">
+                    <div className="flex flex-col items-center md:items-start my-0">
                       <Avatar className="h-32 w-32 md:h-36 md:w-36 border-4 border-mint/30 shadow-lg">
                         {user.avatar ? <AvatarImage src={user.avatar} alt={user.name || "User"} /> : <AvatarFallback className="bg-forest text-mint text-4xl font-bold">
                             {user.name?.substring(0, 2) || user.email?.substring(0, 2) || "UN"}
