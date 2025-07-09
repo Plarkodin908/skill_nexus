@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { GraduationCap, BookOpen, Users, MessageSquare, Mail, Phone } from "lucide-react";
 const Footer = () => {
@@ -8,7 +7,7 @@ const Footer = () => {
       behavior: "smooth"
     });
   };
-  return <footer className="py-20 px-4 border-t border-white/10 bg-black/50 backdrop-blur-md relative z-10">
+  return <footer className="px-4 border-t border-white/10 bg-black/50 backdrop-blur-md relative z-10 py-[98px]">
       <div className="container mx-auto rounded-sm">
         <div className="grid md:grid-cols-4 gap-12">
           <div className="space-y-4">
@@ -59,10 +58,10 @@ const Footer = () => {
         
         <div className="border-t border-white/10 mt-16 pt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="flex items-center gap-2 text-white/60">
-            <Phone className="h-4 w-4 text-gray-400" />
+            
           </div>
           <div className="md:col-span-2 text-center text-white/60 pt-4">
-            <p className="px-0 py-0 my-[51px]">&copy; {new Date().getFullYear()} TASKMASON. All rights reserved.</p>
+            <p className="px-0 my-[51px] py-[86px]">&copy; {new Date().getFullYear()} TASKMASON. All rights reserved.</p>
           </div>
         </div>
       </div>
