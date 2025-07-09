@@ -188,8 +188,8 @@ const Settings = () => {
   const renderPrivacySettings = () => <div className="space-y-6">
       <div>
         <h3 className="text-lg font-medium text-white mb-4">Privacy Preferences</h3>
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
+        <div className="space-y-4 py-[5px]">
+          <div className="flex items-center justify-between py-[5px]">
             <div>
               <Label className="text-white">Public Profile</Label>
               <p className="text-sm text-white/60">Make your profile visible to other users</p>
