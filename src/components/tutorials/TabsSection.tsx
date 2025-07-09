@@ -8,6 +8,7 @@ import BackpackIcon from "../icons/BackpackIcon";
 
 interface TabsSectionProps {
   onResourceAdd: (type: string) => void;
+  onStartQuiz?: (tutorialId: string) => void;
 }
 
 interface Resource {
@@ -19,7 +20,7 @@ interface Resource {
   bookmarked: boolean;
 }
 
-const TabsSection = ({ onResourceAdd }: TabsSectionProps) => {
+const TabsSection = ({ onResourceAdd, onStartQuiz }: TabsSectionProps) => {
   const [resources, setResources] = useState<Resource[]>([]);
   const [bookmarkedResources, setBookmarkedResources] = useState<Resource[]>([]);
   const bookmarkRefs = useRef<Record<string, HTMLButtonElement | null>>({});
@@ -124,7 +125,17 @@ const TabsSection = ({ onResourceAdd }: TabsSectionProps) => {
                     </button>
                   </div>
                   <p className="text-white/70 text-sm mb-3">{resource.description}</p>
-                  <div className="text-xs text-white/50">{resource.date}</div>
+                  <div className="flex justify-between items-center">
+                    <div className="text-xs text-white/50">{resource.date}</div>
+                    {onStartQuiz && (
+                      <button
+                        onClick={() => onStartQuiz(resource.id)}
+                        className="text-xs bg-mint/20 text-mint px-2 py-1 rounded hover:bg-mint/30 transition-colors"
+                      >
+                        Take Quiz
+                      </button>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>

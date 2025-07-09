@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import ChatHeader from "./ChatHeader";
 import MessageList from "./MessageList";
 import MessageInput from "./MessageInput";
+import TypingIndicator from "./TypingIndicator";
 import { Chat } from "./ChatList";
 import { MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -14,6 +15,8 @@ interface Message {
   senderId: number | string;
   text: string;
   timestamp: string;
+  isRead?: boolean;
+  isDelivered?: boolean;
 }
 
 interface ChatContainerProps {
@@ -22,6 +25,7 @@ interface ChatContainerProps {
   onSendMessage: (text: string) => void;
   canSendMessage?: boolean;
   membership: PlanType;
+  isTyping?: boolean;
 }
 
 const ChatContainer = ({ 
@@ -29,7 +33,8 @@ const ChatContainer = ({
   messages, 
   onSendMessage,
   canSendMessage = true,
-  membership
+  membership,
+  isTyping = false
 }: ChatContainerProps) => {
   const navigate = useNavigate();
   
@@ -39,6 +44,7 @@ const ChatContainer = ({
         <>
           <ChatHeader selectedChat={selectedChat} />
           <MessageList messages={messages} />
+          <TypingIndicator isTyping={isTyping} userName={selectedChat?.user.name} />
           
           {membership === "Free" && !canSendMessage ? (
             <div className="p-4 border-t border-mint/10 bg-forest">
