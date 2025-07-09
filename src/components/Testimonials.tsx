@@ -18,25 +18,6 @@ const Testimonials = () => {
     role: "Data Science Mentor",
     image: "/lovable-uploads/54ffc2eb-8b8d-4893-beca-68661a996ce4.png"
   }];
-  return <section className="gradient-rain-background py-20 px-4">
-      <div className="container mx-auto">
-        <ScrollReveal>
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">What Our Community Says</h2>
-            <p className="text-white/80">Join thousands of satisfied learners on their journey to success</p>
-          </div>
-        </ScrollReveal>
-        
-        <div className="grid md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => <ScrollReveal key={index} delay={index * 200}>
-              <div className="bg-gray-800/30 backdrop-blur-sm p-8 rounded-xl relative border border-gray-700/30 h-full transition-all duration-300 hover:transform hover:translate-y-[-5px]">
-                <Quote className="text-gray-500 w-8 h-8 mb-6" />
-                
-                
-              </div>
-            </ScrollReveal>)}
-        </div>
-      </div>
-    </section>;
+  return;
 };
 export default Testimonials;
