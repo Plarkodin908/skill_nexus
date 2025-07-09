@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import Navbar from '@/components/Navbar';
@@ -12,54 +11,44 @@ import VerifiedBadge from '@/components/profile/VerifiedBadge';
 import { Settings, Calendar, Trophy } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-
 const Profile = () => {
-  const { user } = useAuth();
+  const {
+    user
+  } = useAuth();
   const [selectedGender, setSelectedGender] = useState('prefer-not-to-say');
   const [isEditing, setIsEditing] = useState(false);
-  
   if (!user) {
-    return (
-      <div className="relative min-h-screen bg-black">
+    return <div className="relative min-h-screen bg-black">
         <div className="animated-pattern-container"></div>
         <div className="animated-pattern-overlay"></div>
         <Navbar />
         <div className="container mx-auto pt-24 pb-16 px-4 text-center">
           <h2 className="text-xl text-white mb-4">Please sign in to view your profile</h2>
         </div>
-      </div>
-    );
+      </div>;
   }
-
-  const mockCourses = [
-    {
-      id: 1,
-      title: "My JavaScript Course",
-      author: user.name || "You",
-      likes: 45,
-      comments: 12,
-      views: 890
-    },
-    {
-      id: 2,
-      title: "React Basics Tutorial", 
-      author: user.name || "You",
-      likes: 78,
-      comments: 23,
-      views: 1540
-    }
-  ];
-
+  const mockCourses = [{
+    id: 1,
+    title: "My JavaScript Course",
+    author: user.name || "You",
+    likes: 45,
+    comments: 12,
+    views: 890
+  }, {
+    id: 2,
+    title: "React Basics Tutorial",
+    author: user.name || "You",
+    likes: 78,
+    comments: 23,
+    views: 1540
+  }];
   const handleProfilePictureChange = (url: string) => {
     console.log('Profile picture changed:', url);
   };
-
   const handleCoverPictureChange = (url: string) => {
     console.log('Cover picture changed:', url);
   };
-
-  return (
-    <div className="relative bg-black min-h-screen">
+  return <div className="relative bg-black min-h-screen">
       {/* Animated background pattern */}
       <div className="animated-pattern-container"></div>
       <div className="animated-pattern-overlay"></div>
@@ -79,29 +68,23 @@ const Profile = () => {
             </div>
             
             {/* Profile Header */}
-            <div className="container mx-auto px-4 relative">
-              <div className="bg-forest-light/95 backdrop-blur-sm border border-mint/20 rounded-xl -mt-24 relative z-10 p-6 md:p-8 shadow-2xl">
+            <div className="container mx-auto px-4 relative my-px py-px">
+              <div className="bg-forest-light/95 backdrop-blur-sm border border-mint/20 rounded-xl -mt-24 relative z-10 p-6 md:p-8 shadow-2xl py-[25px] my-[10px]">
                 <div className="flex flex-col lg:flex-row gap-6">
                   {/* Profile Info Section */}
                   <div className="flex flex-col md:flex-row gap-6 flex-1">
                     <div className="flex flex-col items-center md:items-start">
                       <Avatar className="h-32 w-32 md:h-36 md:w-36 border-4 border-mint/30 shadow-lg">
-                        {user.avatar ? (
-                          <AvatarImage src={user.avatar} alt={user.name || "User"} />
-                        ) : (
-                          <AvatarFallback className="bg-forest text-mint text-4xl font-bold">
+                        {user.avatar ? <AvatarImage src={user.avatar} alt={user.name || "User"} /> : <AvatarFallback className="bg-forest text-mint text-4xl font-bold">
                             {user.name?.substring(0, 2) || user.email?.substring(0, 2) || "UN"}
-                          </AvatarFallback>
-                        )}
+                          </AvatarFallback>}
                       </Avatar>
                     </div>
                     
-                    <div className="flex-1 text-center md:text-left">
+                    <div className="flex-1 text-center md:text-left my-[15px] py-[14px]">
                       <div className="flex flex-col md:flex-row md:items-center gap-2 mb-3">
                         <h1 className="text-3xl md:text-4xl font-bold text-white">{user.name || "Your Name"}</h1>
-                        {user.verificationStatus === "verified" && (
-                          <VerifiedBadge size="md" />
-                        )}
+                        {user.verificationStatus === "verified" && <VerifiedBadge size="md" />}
                       </div>
                       
                       <p className="text-mint text-xl mb-4">Learning Enthusiast</p>
@@ -138,10 +121,7 @@ const Profile = () => {
                   
                   {/* Action Buttons */}
                   <div className="flex flex-col gap-3 min-w-[220px]">
-                    <Button
-                      onClick={() => setIsEditing(!isEditing)}
-                      className="bg-mint hover:bg-mint/90 text-forest"
-                    >
+                    <Button onClick={() => setIsEditing(!isEditing)} className="bg-mint hover:bg-mint/90 text-violet-50">
                       <Settings className="h-4 w-4 mr-2" />
                       Edit Profile
                     </Button>
@@ -156,16 +136,7 @@ const Profile = () => {
             <div className="grid grid-cols-1 xl:grid-cols-4 gap-8">
               {/* Sidebar */}
               <div className="xl:col-span-1">
-                {isEditing ? (
-                  <ProfileSidebar
-                    selectedGender={selectedGender}
-                    onGenderChange={setSelectedGender}
-                    isEditing={isEditing}
-                    onProfilePictureChange={handleProfilePictureChange}
-                    onCoverPictureChange={handleCoverPictureChange}
-                  />
-                ) : (
-                  <div className="space-y-6">
+                {isEditing ? <ProfileSidebar selectedGender={selectedGender} onGenderChange={setSelectedGender} isEditing={isEditing} onProfilePictureChange={handleProfilePictureChange} onCoverPictureChange={handleCoverPictureChange} /> : <div className="space-y-6">
                     {/* About Section */}
                     <Card className="bg-forest-light/95 backdrop-blur-sm border border-mint/20 p-6">
                       <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
@@ -181,19 +152,12 @@ const Profile = () => {
                     <Card className="bg-forest-light/95 backdrop-blur-sm border border-mint/20 p-6">
                       <h3 className="text-lg font-semibold text-white mb-4">Skills & Expertise</h3>
                       <div className="flex flex-wrap gap-2">
-                        {['JavaScript', 'React', 'Node.js', 'Python', 'CSS'].map((skill, index) => (
-                          <Badge 
-                            key={index} 
-                            variant="secondary" 
-                            className="bg-mint/20 text-mint hover:bg-mint/30 border border-mint/30"
-                          >
+                        {['JavaScript', 'React', 'Node.js', 'Python', 'CSS'].map((skill, index) => <Badge key={index} variant="secondary" className="bg-mint/20 text-mint hover:bg-mint/30 border border-mint/30">
                             {skill}
-                          </Badge>
-                        ))}
+                          </Badge>)}
                       </div>
                     </Card>
-                  </div>
-                )}
+                  </div>}
               </div>
               
               {/* Main Content Area */}
@@ -207,8 +171,6 @@ const Profile = () => {
       
       {/* Mobile Navigation */}
       <MobileNavBar />
-    </div>
-  );
+    </div>;
 };
-
 export default Profile;
