@@ -256,7 +256,7 @@ const Settings = () => {
               <Label className="text-white">Email Notifications</Label>
               <p className="text-sm text-white/60">Receive notifications via email</p>
             </div>
-            <Switch checked={preferences.emailNotifications} onCheckedChange={checked => handlePreferenceChange("emailNotifications", checked)} />
+            <Switch checked={preferences.emailNotifications} onCheckedChange={checked => handlePreferenceChange("emailNotifications", checked)} className="text-violet-100" />
           </div>
           <div className="flex items-center justify-between">
             <div>
